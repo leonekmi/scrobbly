@@ -1,0 +1,39 @@
+{
+ "manifest_version": 2,
+ "name": "Anime Scrobbler for AniList",
+ "description": "Scrobble your animes to AniList",
+ "version": "1.0",
+ "permissions": [
+  "http://www.crunchyroll.com/*",
+  "https://www.crunchyroll.com/*",
+  "https://leonekmi.twittolabel.fr/*",
+  "http://leonekmi.twittolabel.fr/*",
+  "tabs",
+  "storage"
+ ],
+ "browser_action": {
+  "default_icon" : "img/logo_al.png",
+  "default_popup": "popup.html"
+ },
+ "content_scripts": [
+  {
+    "matches": ["https://leonekmi.twittolabel.fr/anilist_scrobbler/*", "http://leonekmi.twittolabel.fr/anilist_scrobbler/*"],
+    "js": ["jquery.js", "auth.js"]
+  },
+  {
+    "matches": ["http://www.crunchyroll.com/*", "https://www.crunchyroll.com/*"],
+    "js": ["jquery.js", "crunchyroll.js"]
+  },
+  {
+  "matches": ["http://www.wakanim.tv/*", "https://www.wakanim.tv/*"],
+  "js": ["jquery.js", "wakanim.js"]
+  },
+  {
+  "matches": ["http://animedigitalnetwork.fr/*", "https://animedigitalnetwork.fr/*"],
+  "js": ["jquery.js", "adn.js"]
+  }
+ ],
+ "icons": {
+  "172" : "img/logo_al.png"
+ }
+}
