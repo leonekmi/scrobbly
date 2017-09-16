@@ -3,7 +3,7 @@ Get Metadata from an episode of Crunchyroll with Anilist Scrobbler
 (c) leonekmi 2017
 
 TODO lIST :
-Nothing for now
+Line 42
 */
 
 function sleep(ms) {
@@ -39,6 +39,7 @@ async function main() {
             }
             $.get("http://www.crunchyroll.com/xml?req=RpcApiVideoPlayer_GetMediaMetadata&media_id=" + episodeId, function ( data ) {
                 var series_title = data.getElementsByTagName('series_title')[0].innerHTML;
+                // TODO : Crunchyroll add Season 1/2/3/whatever to series title, which makes impossible search for series on Anilist
                 var episode_number = data.getElementsByTagName('episode_number')[0].innerHTML;
                 var query = `
                 query ($id: Int, $page: Int, $search: String) {
@@ -84,7 +85,7 @@ async function main() {
                                 var temp_str = '\n[' + index + '] ' + item.title.romaji;
                                 prompt_message = prompt_message.concat(temp_str);
                             });
-                            var anime_choose = prompt (prompt_message);
+                            var anime_choose = prompt(prompt_message);
                             var duration = result.data.Page.media[anime_choose].duration;
                             $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : Démarrage...</div></div></div>');
                         } else {
