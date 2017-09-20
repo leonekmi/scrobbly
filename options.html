@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
+    <title>Anilist Scrobbler - Options</title>
+</head>
+<body>
+
+    <br/>
+    <div class="ui center container">
+        <h2 class="ui center aligned icon header">
+            <i class="settings icon"></i>
+            Paramètres
+        </h2>
+
+        <form class="ui form">
+            Préférences pour les titres :<br/>
+            <select id="titles" class="ui dropdown">
+                <option value="english">Noms anglais</option>
+                <option value="romaji">Noms en romaji</option>
+                <option value="native">Noms natifs (日本語)</option>
+            </select>
+            <br/><br/>
+            <div class="ui checkbox">
+                <input id="ignore_adn" type="checkbox" tabindex="0" class="hidden">
+                <label>Ignorer Anime Digital Network</label>
+            </div><br/>
+            <div class="ui checkbox">
+                <input id="ignore_cr" type="checkbox" tabindex="0" class="hidden">
+                <label>Ignorer Crunchyroll</label>
+            </div><br/>
+            <div class="ui checkbox">
+                <input id="ignore_wk" type="checkbox" tabindex="0" class="hidden">
+                <label>Ignorer Wakanim</label>
+            </div>
+            <br/>
+            <div class="ui info message">
+                Si l'anime n'a pas de nom anglais, le nom romaji sera affiché.<br/>
+                Un site <em>"ignoré"</em> rendra l'extension inactive sur ce site.
+            </div>
+            <br/>
+            <div id="status"></div><br/>
+        </form>
+        <button class="ui labeled icon teal button" id="save">
+            <i class="save icon"></i>
+            Sauvegarder
+        </button>
+        <button class="ui labeled icon red button" id="delete">
+            <i class="delete icon"></i>
+            Supprimer la connexion
+        </button>
+    </div>
+
+    <div class="ui basic modal">
+      <div class="ui icon header">
+        <i class="delete icon"></i>
+        Supprimer la connexion
+      </div>
+      <div class="content">
+        <p>La connexion au compte Anilist sera rompue et une reconnexion sera nécessaire.</p>
+      </div>
+      <div class="actions">
+        <div class="ui red basic cancel inverted button">
+          <i class="remove icon"></i>
+          Annuler
+        </div>
+        <div class="ui green ok inverted button">
+          <i class="checkmark icon"></i>
+          Oui
+        </div>
+      </div>
+    </div>
+
+<script src="jquery.js"></script>
+<script src="Semantic-UI-CSS-master/semantic.min.js"></script>
+<script src="options.js"></script>
+</body>
+</html>

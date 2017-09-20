@@ -51,6 +51,7 @@ async function main() {
                       title {
                         romaji
                         english
+                        native
                       }
                       genres
                     }
@@ -79,17 +80,26 @@ async function main() {
                     var jsonresponse = response.json();
                     jsonresponse.then(function (result) {
                         var anime_choose = 0;
+                        var duration;
                         if (result.data.Page.media.length > 1) {
-                            var prompt_message = "La base de données d'Anilist a retourné plusieurs résultats, merci de choisir l'anime que vous regardez actuellement :"
-                            result.data.Page.media.forEach(function (item, index) {
-                                var temp_str = '\n[' + index + '] ' + item.title.romaji;
-                                prompt_message = prompt_message.concat(temp_str);
+                            var prompt_message = "La base de données d'Anilist a retourné plusieurs résultats, merci de choisir l'anime que vous regardez actuellement :";
+                            var titlePreference = getTitlePreferencesHelper();
+                            titlePreference.then(function (titlePreference) {
+                                result.data.Page.media.forEach(function (item, index) {
+                                    var temp_str;
+                                    if (item.title[titlePreference] != null) {
+                                        temp_str = '\n[' + index + '] ' + item.title[titlePreference];
+                                    } else {
+                                        temp_str = '\n[' + index + '] ' + item.title.romaji;
+                                    }
+                                    prompt_message = prompt_message.concat(temp_str);
+                                });
+                                anime_choose = prompt(prompt_message);
+                                duration = result.data.Page.media[anime_choose].duration;
+                                $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : Démarrage...</div></div></div>');
                             });
-                            var anime_choose = prompt(prompt_message);
-                            var duration = result.data.Page.media[anime_choose].duration;
-                            $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : Démarrage...</div></div></div>');
                         } else {
-                            var duration = result.data.Page.media[0].duration;
+                            duration = result.data.Page.media[0].duration;
                             $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : Démarrage...</div></div></div>');
                         };
                         var temp_response = getAnimeProgress(result.data.Page.media[anime_choose].id);
@@ -136,4 +146,10 @@ async function main() {
     }
 }
 
-main();
+chrome.storage.local.get({
+    ignore_cr: false
+}, function (items) {
+    if (items.ignore_cr == false) {
+        main();
+    }
+});

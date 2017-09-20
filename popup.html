@@ -2,18 +2,33 @@
 <html>
 <head>
 <meta charset="utf-8">
+<link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
 <style>
  h1,p{
      text-align:center
     }
 html,body{
-    height: 5cm
+    height: 4cm
 }
 </style>
 </head>
 <body>
-<h1>Connectez-vous !</h1>
-<p><a target="_blank" href='https://anilist.co/api/v2/oauth/authorize?client_id=65&redirect_uri=https%3A%2F%2Fleonekmi.twittolabel.fr%2Fanilist_scrobbler%2Fcallback&response_type=code'>Login with AniList</a></p>
-<p><em>Si vous vous êtes déjà connecté une fois, laissez l'extension vous prévenir si votre connexion aurait expiré.</em></p>
+<h1>Anilist Scrobbler</h1>
+<p>
+<a target="_blank" href='https://anilist.co/api/v2/oauth/authorize?client_id=65&redirect_uri=https%3A%2F%2Fleonekmi.twittolabel.fr%2Fanilist_scrobbler%2Fcallback&response_type=code'>
+<button class="ui labeled icon blue button">
+  <i class="external square icon"></i>
+  <div id="label">Se connecter avec Anilist</div>
+</button>
+</a><br/><br/>
+<a target="_blank" href='options.html'>
+<button class="ui labeled icon button">
+  <i class="settings icon"></i>
+  Paramètres
+</button>
+</a>
+</p>
+<script src="jquery.js"></script>
+<script src="popup.js"></script>
 </body>
 </html>

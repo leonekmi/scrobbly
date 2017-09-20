@@ -108,4 +108,18 @@ async function getAnimeProgress(animeId) {
     result = await getAnimeProgressHelper(animeId);
     return result;
 }
+function getTitlePreferencesHelper() {
+    return new Promise(resolve => {
+        chrome.storage.sync.get({
+            title: "romaji"
+        }, function (items) {
+            resolve(items.title);
+        });
+    });
+}
+async function getTitlePreferences() {
+    var result;
+    result = await getTitlePreferencesHelper();
+    return result;
+}
 console.log('Anilist Scrobbler init done');
