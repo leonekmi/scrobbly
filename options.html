@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" type="text/css" href="Semantic-UI-CSS-master/semantic.min.css">
-    <title>Anilist Scrobbler - Options</title>
+    <title>Anilist Scrobbler - __MSG_settings_header__</title>
 </head>
 <body>
 
@@ -11,63 +11,62 @@
     <div class="ui center container">
         <h2 class="ui center aligned icon header">
             <i class="settings icon"></i>
-            Paramètres
+            __MSG_settings_header__
         </h2>
 
         <form class="ui form">
-            Préférences pour les titres :<br/>
+            __MSG_title_pref__<br/>
             <select id="titles" class="ui dropdown">
-                <option value="english">Noms anglais</option>
-                <option value="romaji">Noms en romaji</option>
-                <option value="native">Noms natifs (日本語)</option>
+                <option value="english">__MSG_title_english__</option>
+                <option value="romaji">__MSG_title_romaji__</option>
+                <option value="native">__MSG_title_native__</option>
             </select>
             <br/><br/>
-            <div class="ui checkbox">
+            <div id="adn_ignore" class="ui checkbox">
                 <input id="ignore_adn" type="checkbox" tabindex="0" class="hidden">
                 <label>Ignorer Anime Digital Network</label>
             </div><br/>
-            <div class="ui checkbox">
+            <div id="cr_ignore" class="ui checkbox">
                 <input id="ignore_cr" type="checkbox" tabindex="0" class="hidden">
                 <label>Ignorer Crunchyroll</label>
             </div><br/>
-            <div class="ui checkbox">
+            <div id="wk_ignore" class="ui checkbox">
                 <input id="ignore_wk" type="checkbox" tabindex="0" class="hidden">
                 <label>Ignorer Wakanim</label>
             </div>
             <br/>
             <div class="ui info message">
-                Si l'anime n'a pas de nom anglais, le nom romaji sera affiché.<br/>
-                Un site <em>"ignoré"</em> rendra l'extension inactive sur ce site.
+                __MSG_settings_notice__
             </div>
             <br/>
             <div id="status"></div><br/>
         </form>
         <button class="ui labeled icon teal button" id="save">
             <i class="save icon"></i>
-            Sauvegarder
+            __MSG_settings_save__
         </button>
         <button class="ui labeled icon red button" id="delete">
             <i class="delete icon"></i>
-            Supprimer la connexion
+            __MSG_settings_delete_login__
         </button>
     </div>
 
     <div class="ui basic modal">
       <div class="ui icon header">
         <i class="delete icon"></i>
-        Supprimer la connexion
+        __MSG_settings_delete_login__
       </div>
       <div class="content">
-        <p>La connexion au compte Anilist sera rompue et une reconnexion sera nécessaire.</p>
+        <p>__MSG_settings_delete_login_modal__</p>
       </div>
       <div class="actions">
         <div class="ui red basic cancel inverted button">
           <i class="remove icon"></i>
-          Annuler
+          __MSG_settings_cancel__
         </div>
         <div class="ui green ok inverted button">
           <i class="checkmark icon"></i>
-          Oui
+          __MSG_settings_yes__
         </div>
       </div>
     </div>

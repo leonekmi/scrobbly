@@ -1,6 +1,4 @@
-$('.checkbox')
-    .checkbox()
-;
+
 
 // Saves options to chrome.storage
 function save_options() {
@@ -16,10 +14,10 @@ function save_options() {
   }, function() {
     // Update status to let user know options were saved.
     var status = document.getElementById('status');
-    status.textContent = 'Options enregistrées.';
+    status.textContent = chrome.i18n.getMessage("settings_saved");
     setTimeout(function() {
       status.textContent = '';
-    }, 750);
+    }, 1250);
   });
 }
 
@@ -49,19 +47,49 @@ function restore_options() {
       $('#titles')
           .dropdown('set selected', items.title)
       ;
-      console.log(items.ignore_adn);
+      console.log(items.ignore_cr);
       if (items.ignore_adn == true) {
-          console.log('slt');
-          $('#ignore_adn').checkbox('set checked').attr( 'checked', 'checked' );
+          $('#ignore_adn').attr( 'checked', 'checked' );
       }
       if (items.ignore_cr == true) {
-          $('#ignore_cr').checkbox('set checked').attr( 'checked', 'checked' );
+          $('#ignore_cr').attr( 'checked', 'checked' );
       }
       if (items.ignore_wk == true) {
-          $('#ignore_wk').checkbox('set checked').attr( 'checked', 'checked' );
+          $('#ignore_wk').attr( 'checked', 'checked' );
       }
+	  $('.checkbox')
+		.checkbox()
+	  ;
   });
 }
+var adn_message = chrome.i18n.getMessage("settings_ignore", ["Anime Digital Network"]);
+$('#adn_ignore label').text(adn_message);
+var cr_message = chrome.i18n.getMessage("settings_ignore", ["Crunchyroll"]);
+$('#cr_ignore label').text(cr_message);
+var wk_message = chrome.i18n.getMessage("settings_ignore", ["Wakanim"]);
+$('#wk_ignore label').text(wk_message);
+function localizeHtmlPage()
+{
+    //Localize by replacing __MSG_***__ meta tags
+    var objects = document.getElementsByTagName('html');
+    for (var j = 0; j < objects.length; j++)
+    {
+        var obj = objects[j];
+
+        var valStrH = obj.innerHTML.toString();
+        var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function(match, v1)
+        {
+            return v1 ? chrome.i18n.getMessage(v1) : "";
+        });
+
+        if(valNewH != valStrH)
+        {
+            obj.innerHTML = valNewH;
+        }
+    }
+}
+
+localizeHtmlPage();
 document.addEventListener('DOMContentLoaded', restore_options);
 document.getElementById('save').addEventListener('click',
     save_options);

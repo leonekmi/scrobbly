@@ -1,8 +1,9 @@
 {
  "manifest_version": 2,
- "name": "Anime Scrobbler for AniList",
- "description": "Scrobble your animes to AniList",
- "version": "1.5",
+ "name": "__MSG_appName__",
+ "description": "__MSG_appDesc__",
+ "author": "@leonekmi",
+ "version": "1.6",
  "permissions": [
   "*://www.crunchyroll.com/*",
   "*://www.wakanim.tv/*",
@@ -14,6 +15,7 @@
   "notifications"
  ],
  "options_page": "options.html",
+ "default_locale": "fr",
  "applications": {
   "gecko": {
     "id": "anilist_scrobbler@leonekmi.twittolabel.fr",

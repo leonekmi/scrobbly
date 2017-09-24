@@ -81,31 +81,31 @@ async function main() {
                             });
                             anime_choose = prompt(prompt_message);
                             duration = result.data.Page.media[anime_choose].duration;
-                            $( '.border-list' ).prepend('<li class="border-list_item"><span class="border-list_title">Anilist Scrobbler</span><span id="anilist_scrobbler_notice" class="border-list_text">Démarrage...</span></li>');
+                            $( '.border-list' ).prepend('<li class="border-list_item"><span class="border-list_title">Anilist Scrobbler</span><span id="anilist_scrobbler_notice" class="border-list_text">'+ chrome.i18n.getMessage("starting") +'</span></li>');
                         });
                     } else {
                         duration = result.data.Page.media[0].duration;
-                        $( '.border-list' ).prepend('<li class="border-list_item"><span class="border-list_title">Anilist Scrobbler</span><span id="anilist_scrobbler_notice" class="border-list_text">Démarrage...</span></li>');
+                        $( '.border-list' ).prepend('<li class="border-list_item"><span class="border-list_title">Anilist Scrobbler</span><span id="anilist_scrobbler_notice" class="border-list_text">'+ chrome.i18n.getMessage("starting") +'</span></li>');
                     };
                     var temp_response = getAnimeProgress(result.data.Page.media[anime_choose].id);
                     temp_response.then(function (data) {
                         var jsonresponse2 = data.json();
                         jsonresponse2.then(function (result2) {
                             if (result2.data.Page.media[0].mediaListEntry == null) {
-                                $( '#anilist_scrobbler_notice' ).text('Cet anime ne se trouve pas dans votre animelist, il sera automatiquement ajouté au bout de ' + (duration / 4 * 3) + ' minutes (au 3/4 de l\'épisode).');
+                                $( '#anilist_scrobbler_notice' ).text(''+ chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration /4 * 3)]));
                                 setTimeout(function() {
                                     scrobbleAnime(result.data.Page.media[anime_choose].id, episode_number);
                                 }, duration / 4 * 3 * 60 * 1000);
                             } else {
                                 if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
-                                    $( '#anilist_scrobbler_notice' ).text('Cet épisode est déjà marqué comme vu, nous ne changeons rien.');
+                                    $( '#anilist_scrobbler_notice' ).text(''+ chrome.i18n.getMessage("already_watched"));
                                 } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                    $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : Cet épisode sera automatiquement ajouté au bout de ' + (duration / 4 * 3) + ' minutes (au 3/4 de l\'épisode).');
+                                    $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_normal", [(duration /4 * 3)]));
                                     setTimeout(function() {
                                         scrobbleAnime(result.data.Page.media[anime_choose].id, episode_number);
                                     }, duration / 4 * 3 * 60 * 1000);
                                 } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                    $( '#anilist_scrobbler_notice' ).text('Cet épisode sera automatiquement ajouté au bout de ' + (duration / 4 * 3) + ' minutes (au 3/4 de l\'épisode, attention : vous avez sauté un ou plusieurs épisodes selon votre liste).');
+                                    $( '#anilist_scrobbler_notice' ).text(''+ chrome.i18n.getMessage("scrobbling_in_jumped", [(duration /4 * 3)]));
                                     setTimeout(function() {
                                         scrobbleAnime(result.data.Page.media[anime_choose].id, episode_number);
                                     }, duration / 4 * 3 * 60 * 1000);
@@ -119,7 +119,7 @@ async function main() {
             };
             function handleError(e) {
                     console.error(e);
-                    window.alert("L'API d'Anilist semble down, impossible de chercher votre anime");
+                    window.alert(chrome.i18n.getMessage("api_error"));
             };
 
             fetch(url, options).then(handleResponse)
@@ -128,7 +128,7 @@ async function main() {
     }
 }
 
-chrome.storage.local.get({
+chrome.storage.sync.get({
     ignore_wk: false
 }, function (items) {
     if (items.ignore_wk == false) {
