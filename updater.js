@@ -1,6 +1,6 @@
 // Update Checker
 var version = "1.6\n";
-$.get( "https://leonekmi.twittolabel.fr/anilist-scrobble/version.txt" , function (data) {
+$.get( {url: "https://leonekmi.twittolabel.fr/anilist-scrobble/version.txt", cache: false} , function (data) {
     console.log("Version " + data);
     if (version != data) {
         console.log("Update available");

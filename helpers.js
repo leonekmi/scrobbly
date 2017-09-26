@@ -122,4 +122,37 @@ async function getTitlePreferences() {
     result = await getTitlePreferencesHelper();
     return result;
 }
+function promptAnime(prompt_message) {
+    return new Promise (resolve => {
+        resolve(prompt(prompt_message));
+    });
+}
+function chooseAnime(result) {
+    return new Promise (resolve => {
+        console.log(result);
+        var anime_choose;
+        if (result.data.Page.media.length > 1) {
+            var prompt_message = chrome.i18n.getMessage("multiple_entries");
+            var titlePreference = getTitlePreferencesHelper();
+            titlePreference.then(function (titlePreference) {
+                result.data.Page.media.forEach(function (item, index) {
+                    var temp_str;
+                    if (item.title[titlePreference] != null) {
+                        temp_str = '\n[' + index + '] ' + item.title[titlePreference];
+                    } else {
+                        temp_str = '\n[' + index + '] ' + item.title.romaji;
+                    }
+                    prompt_message = prompt_message.concat(temp_str);
+                });
+                var temp_choose = promptAnime(prompt_message);
+                temp_choose.then(function (prompt_res) {
+                    console.log(result.data.Page.media[prompt_res].duration);
+                    resolve([prompt_res, result.data.Page.media[prompt_res].duration]);
+                });
+            });
+        } else {
+            resolve([0, result.data.Page.media[0].duration]);
+        };
+    });
+}
 console.log('Anilist Scrobbler init done');

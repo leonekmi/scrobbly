@@ -41,6 +41,7 @@ async function main() {
                 var series_title = data.getElementsByTagName('series_title')[0].innerHTML;
                 // TODO : Crunchyroll add Season 1/2/3/whatever to series title, which makes impossible search for series on Anilist
                 var episode_number = data.getElementsByTagName('episode_number')[0].innerHTML;
+                console.log("Anime detected : " + series_title + " episode " + episode_number);
                 var query = `
                 query ($id: Int, $page: Int, $search: String) {
                   Page (page: $page) {
@@ -77,57 +78,38 @@ async function main() {
                     };
 
                 function handleResponse(response) {
+                    $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</div></div></div>');
                     var jsonresponse = response.json();
                     jsonresponse.then(function (result) {
-                        var anime_choose = 0;
-                        var duration;
-                        if (result.data.Page.media.length > 1) {
-                            var prompt_message = chrome.i18n.getMessage("multiple_entries");
-                            var titlePreference = getTitlePreferencesHelper();
-                            titlePreference.then(function (titlePreference) {
-                                result.data.Page.media.forEach(function (item, index) {
-                                    var temp_str;
-                                    if (item.title[titlePreference] != null) {
-                                        temp_str = '\n[' + index + '] ' + item.title[titlePreference];
+                        var choose = chooseAnime(result);
+                        choose.then(function (data_choose) {
+                            var anime_choose = data_choose[0];
+                            var duration = data_choose[1];
+                            var temp_response = getAnimeProgress(result.data.Page.media[anime_choose].id);
+                            temp_response.then(function (data) {
+                                var jsonresponse2 = data.json();
+                                jsonresponse2.then(function (result2) {
+                                    console.log("Anilist Progress :");
+                                    console.log(result2.data.Page.media[0].mediaListEntry.progress);
+                                    console.log(result2.data.Page.media[0].id);
+                                    console.log(duration);
+                                    if (result2.data.Page.media[0].mediaListEntry == null) {
+                                        $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration / 4 * 3)]));
+                                        setTimeout(scrobbleAnime, result.data.Page.media[anime_choose].id, episode_number, duration / 4 * 3 * 60 * 1000);
                                     } else {
-                                        temp_str = '\n[' + index + '] ' + item.title.romaji;
+                                        if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
+                                            $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("already_watched"));
+                                        } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
+                                            $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_normal", [(duration / 4 * 3)]));
+                                            setTimeout(scrobbleAnime, result.data.Page.media[anime_choose].id, episode_number, duration / 4 * 3 * 60 * 1000);
+                                        } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
+                                            $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_jumped", [(duration / 4 * 3)]));
+                                            setTimeout(scrobbleAnime, result.data.Page.media[anime_choose].id, episode_number, duration / 4 * 3 * 60 * 1000);
+                                        } else {
+                                            console.error("Ehhhh....");
+                                        };
                                     }
-                                    prompt_message = prompt_message.concat(temp_str);
                                 });
-                                anime_choose = prompt(prompt_message);
-                                duration = result.data.Page.media[anime_choose].duration;
-                                $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</div></div></div>');
-                            });
-                        } else {
-                            duration = result.data.Page.media[0].duration;
-                            $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</div></div></div>');
-                        };
-                        var temp_response = getAnimeProgress(result.data.Page.media[anime_choose].id);
-                        temp_response.then(function (data) {
-                            var jsonresponse2 = data.json();
-                            jsonresponse2.then(function (result2) {
-                                if (result2.data.Page.media[0].mediaListEntry == null) {
-                                    $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration /4 * 3)]));
-                                    setTimeout(function() {
-                                        scrobbleAnime(result.data.Page.media[anime_choose].id, episode_number);
-                                    }, duration / 4 * 3 * 60 * 1000);
-                                } else {
-                                    if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
-                                        $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("already_watched"));
-                                    } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                        $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_normal", [(duration /4 * 3)]));
-                                        setTimeout(function() {
-                                            scrobbleAnime(result.data.Page.media[anime_choose].id, episode_number);
-                                        }, duration / 4 * 3 * 60 * 1000);
-                                    } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                        $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_jumped", [(duration /4 * 3)]));
-                                        setTimeout(function() {
-                                            scrobbleAnime(result.data.Page.media[anime_choose].id, episode_number);
-                                        }, duration / 4 * 3 * 60 * 1000);
-                                    } else {
-                                        console.error("Ehhhh....");
-                                    };
-                                }
                             });
                         });
 					});
