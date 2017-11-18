@@ -119,11 +119,12 @@ async function main() {
     });
 }
 
-chrome.storage.sync.get({
-    ignore_cr: false
-}, function (items) {
-	console.log(items.ignore_cr);
-    if (items.ignore_cr == false) {
-        main();
-    }
+$( window ).on( "load", function() {
+    chrome.storage.sync.get({
+        ignore_cr: false
+    }, function (items) {
+        if (items.ignore_cr == false) {
+            main();
+        }
+    });
 });

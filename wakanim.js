@@ -100,10 +100,12 @@ async function main() {
     });
 }
 
-chrome.storage.sync.get({
-    ignore_wk: false
-}, function (items) {
-    if (items.ignore_wk == false) {
-        main();
-    }
+$( window ).on( "load", function() {
+    chrome.storage.sync.get({
+        ignore_wk: false
+    }, function (items) {
+        if (items.ignore_wk == false) {
+            main();
+        }
+    });
 });
