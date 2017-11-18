@@ -31,7 +31,7 @@
  },
  "content_scripts": [
   {
-    "matches": ["*://leonekmi.twittolabel.fr/anilist_scrobbler/*"],
+    "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble/*"],
     "js": ["jquery.js", "auth.js"]
   },
   {
