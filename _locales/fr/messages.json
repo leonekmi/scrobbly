@@ -15,6 +15,9 @@
             }
         }
     },
+    "connected": {
+        "message": "Bravo ! Vous êtes connecté, vous n'avez plus rien à faire."
+    },
     "title_native": {
         "message": "Noms natifs (日本語)"
     },

@@ -1,5 +1,3 @@
-$( 'body' ).empty();
-$( 'body' ).append('<p>Veuillez patienter, un popup va apparaître et vous connecter</p>');
 function getParameterByName(name, url) {
     if (!url) url = window.location.href;
     name = name.replace(/[\[\]]/g, "\\$&");
@@ -18,4 +16,4 @@ $.getJSON( "https://leonekmi.twittolabel.fr/anilist_backend/requestToken.php?cod
 chrome.storage.local.get('access_token', function (items) {
     console.log(items['access_token']);
 });
-window.alert('Bravo ! Vous êtes connecté, c\'est bon vous pouvez laisser opérer la magie de l\'extension');
+window.alert(chrome.i18n.getMessage('connected'));

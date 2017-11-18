@@ -15,6 +15,9 @@
             }
         }
     },
+    "connected": {
+        "message": "Nice ! You are connected ! Nothing to do now."
+    },
     "title_native": {
         "message": "Native names (日本語)"
     },
