@@ -64,6 +64,7 @@ async function main() {
             function handleResponse(response) {
                 var jsonresponse = response.json();
                 jsonresponse.then(function (result) {
+                    $( '.border-list' ).prepend('<li class="border-list_item"><span class="border-list_title">Anilist Scrobbler</span><span id="anilist_scrobbler_notice" class="border-list_text">'+ chrome.i18n.getMessage("starting") +'</span></li>');
                     var choose = chooseAnime(result);
                     choose.then(function (data_choose) {
                         var anime_choose = data_choose[0];
