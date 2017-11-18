@@ -89,22 +89,18 @@ async function main() {
                             temp_response.then(function (data) {
                                 var jsonresponse2 = data.json();
                                 jsonresponse2.then(function (result2) {
-                                    console.log("Anilist Progress :");
-                                    console.log(result2.data.Page.media[0].mediaListEntry.progress);
-                                    console.log(result2.data.Page.media[0].id);
-                                    console.log(duration);
                                     if (result2.data.Page.media[0].mediaListEntry == null) {
                                         $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration / 4 * 3)]));
-                                        setTimeout(scrobbleAnime, result.data.Page.media[anime_choose].id, episode_number, duration / 4 * 3 * 60 * 1000);
+                                        setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                     } else {
                                         if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
                                             $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("already_watched"));
                                         } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                             $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_normal", [(duration / 4 * 3)]));
-                                            setTimeout(scrobbleAnime, result.data.Page.media[anime_choose].id, episode_number, duration / 4 * 3 * 60 * 1000);
+                                            setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                         } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                             $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_jumped", [(duration / 4 * 3)]));
-                                            setTimeout(scrobbleAnime, result.data.Page.media[anime_choose].id, episode_number, duration / 4 * 3 * 60 * 1000);
+                                            setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                         } else {
                                             console.error("Ehhhh....");
                                         };
