@@ -126,5 +126,8 @@
 	},
 	"api_error": {
 		"message": "The Anilist API returns an error, cannot scrobble your anime."
-	}
+	},
+    "update":{
+        "message": "Update available !\nClick here to download !"
+    }
 }

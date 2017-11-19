@@ -126,5 +126,8 @@
 	},
 	"api_error": {
 		"message": "L'API d'Anilist renvoie une erreur, impossible de scrobbler."
-	}
+	},
+    "update":{
+        "message": "Mise à jour disponible !\nCliquez pour télécharger la mise à jour"
+    }
 }

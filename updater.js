@@ -1,5 +1,5 @@
 // Update Checker
-var version = "1.7\n";
+var version = "1.8\n";
 $.get( {url: "https://leonekmi.twittolabel.fr/anilist-scrobble/version.txt", cache: false} , function (data) {
     console.log("Version " + data);
     if (version != data) {
@@ -8,7 +8,7 @@ $.get( {url: "https://leonekmi.twittolabel.fr/anilist-scrobble/version.txt", cac
             type: "basic",
             iconUrl: "https://leonekmi.twittolabel.fr/anilist-scrobble/update.png",
             title: "Anilist Scrobbler",
-            message: "Mise à jour disponible !\nCliquez pour télécharger la mise à jour"
+            message: chrome.i18n.getMessage('update')
         }
         chrome.notifications.create('update', options);
         chrome.notifications.onClicked.addListener(function (notifId) {

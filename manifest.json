@@ -3,7 +3,7 @@
  "name": "__MSG_appName__",
  "description": "__MSG_appDesc__",
  "author": "@leonekmi",
- "version": "1.7",
+ "version": "1.8",
  "permissions": [
   "*://www.crunchyroll.com/*",
   "*://www.wakanim.tv/*",
