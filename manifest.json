@@ -11,6 +11,7 @@
   "*://leonekmi.twittolabel.fr/*",
   "*://graphql.anilist.co/*",
   "*://www.hulu.com/*",
+  "*://www.netflix.com/*",
   "tabs",
   "storage",
   "notifications"
@@ -54,6 +55,10 @@
   {
     "matches": ["*://www.hulu.com/*"],
     "js": ["jquery.js", "helpers.js", "hulu.js"]
+  },
+  {
+    "matches": ["*://www.netflix.com/*"],
+    "js": ["jquery.js", "helpers.js", "netflix.js"]
   }
  ],
  "icons": {
