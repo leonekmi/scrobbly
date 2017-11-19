@@ -10,6 +10,7 @@
   "*://animedigitalnetwork.fr/*",
   "*://leonekmi.twittolabel.fr/*",
   "*://graphql.anilist.co/*",
+  "*://www.hulu.com/*",
   "tabs",
   "storage",
   "notifications"
@@ -35,16 +36,24 @@
     "js": ["jquery.js", "auth.js"]
   },
   {
+    "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble-altcallback/*"],
+    "js": ["jquery.js", "auth_alternative.js"]
+  },
+  {
     "matches": ["*://www.crunchyroll.com/*"],
     "js": ["jquery.js", "helpers.js", "crunchyroll.js"]
   },
   {
-  "matches": ["*://www.wakanim.tv/*"],
-  "js": ["jquery.js", "helpers.js", "wakanim.js"]
+    "matches": ["*://www.wakanim.tv/*"],
+    "js": ["jquery.js", "helpers.js", "wakanim.js"]
   },
   {
-  "matches": ["*://animedigitalnetwork.fr/*"],
-  "js": ["jquery.js", "helpers.js", "adn.js"]
+    "matches": ["*://animedigitalnetwork.fr/*"],
+    "js": ["jquery.js", "helpers.js", "adn.js"]
+  },
+  {
+    "matches": ["*://www.hulu.com/*"],
+    "js": ["jquery.js", "helpers.js", "hulu.js"]
   }
  ],
  "icons": {

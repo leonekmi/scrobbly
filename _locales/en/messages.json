@@ -60,9 +60,28 @@
 		"message": "Settings saved",
 		"description": "Settings status displayed when click on save button"
 	},
+    "settings_enablealtauth": {
+        "message": "Activate alternative authentification"
+    },
+    "settings_clientid": {
+        "message": "Client ID"
+    },
+    "settings_clientsecret": {
+        "message": "Client Secret"
+    },
+    "settings_callbackurl": {
+        "message": "Callback URL must be https://leonekmi.twittolabel.fr/anilist-scrobble-altcallback/callback.html"
+    },
+    "altauth_not_configured": {
+        "message": "You don't configured the alternative authentification"
+    },
 	"popup_login": {
 		"message": "Login with AniList",
 		"description": "Login button"
+	},
+    "popup_login_altauth": {
+		"message": "Alternative login",
+		"description": "Alternative login button"
 	},
 	"popup_logged_in": {
 		"message": "Already logged in",

@@ -60,9 +60,28 @@
 		"message": "Paramètres enregistrés",
 		"description": "Statut des paramètres arpès clic sur le bouton Sauvegarder"
 	},
+    "settings_enablealtauth": {
+        "message": "Activer l'authentification alternative"
+    },
+    "settings_clientid": {
+        "message": "ID du client"
+    },
+    "settings_clientsecret": {
+        "message": "Secret du client"
+    },
+    "settings_callbackurl": {
+        "message": "L'adresse de retour (callback) doit être définie sur https://leonekmi.twittolabel.fr/anilist-scrobble-altcallback/callback.html<br/>Vous devez supprimer la connexion si vous vous êtes connecté avec l'authentification normale."
+    },
+    "altauth_not_configured": {
+        "message": "Vous n'avez pas configuré l'authentification alternative"
+    },
 	"popup_login": {
 		"message": "Se connecter avec AniList",
 		"description": "Bouton de connexion"
+	},
+    "popup_login_altauth": {
+		"message": "Connexion alternative",
+		"description": "Bouton de connexion alternative"
 	},
 	"popup_logged_in": {
 		"message": "Vous êtes déjà connecté",

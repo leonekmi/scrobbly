@@ -33,7 +33,33 @@
             <div id="wk_ignore" class="ui checkbox">
                 <input id="ignore_wk" type="checkbox" tabindex="0" class="hidden">
                 <label>Ignorer Wakanim</label>
+            </div><br/>
+            <div id="hulu_ignore" class="ui checkbox">
+                <input id="ignore_hulu" type="checkbox" tabindex="0" class="hidden">
+                <label>Ignorer Hulu</label>
             </div>
+            <br/>
+            <br/>
+            <div id="enable_altauth" class="ui checkbox">
+                <input id="altauth_enable" type="checkbox" tabindex="0" class="hidden">
+                <label>__MSG_settings_enablealtauth__</label>
+            </div>
+            <span style="display: none;" id="altauth_settings">
+                <br/>
+                <br/>
+                <div class="field">
+                    <label>__MSG_settings_clientid__</label>
+                    <input type="text" id="client_id" placeholder="__MSG_settings_clientid__">
+                </div>
+                <div class="field">
+                    <label>__MSG_settings_clientsecret__</label>
+                    <input type="text" id="client_secret" placeholder="__MSG_settings_clientsecret__">
+                </div>
+
+                <div class="ui info message">
+                    __MSG_settings_callbackurl__
+                </div>
+            </span>
             <br/>
             <div class="ui info message">
                 __MSG_settings_notice__
