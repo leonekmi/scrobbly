@@ -12,7 +12,6 @@
   "*://graphql.anilist.co/*",
   "*://www.hulu.com/*",
   "*://www.netflix.com/*",
-  "tabs",
   "storage",
   "notifications"
  ],
