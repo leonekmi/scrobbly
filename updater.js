@@ -1,5 +1,5 @@
 // Update Checker
-var version = "1.8\n";
+var version = "1.9\n";
 $.get( {url: "https://leonekmi.twittolabel.fr/anilist-scrobble/version.txt", cache: false} , function (data) {
     console.log("Version " + data);
     if (version != data) {
