@@ -7,6 +7,7 @@ function save_options() {
   var ignore_cr = document.getElementById('ignore_cr').checked;
   var ignore_wk = document.getElementById('ignore_wk').checked;
   var ignore_hulu = document.getElementById('ignore_hulu').checked;
+  var ignore_nf = document.getElementById('ignore_nf').checked;
   var enable_altauth = document.getElementById('altauth_enable').checked;
   var altauth_clientid = document.getElementById('client_id').value;
   var altauth_clientsecret = document.getElementById('client_secret').value;
@@ -16,6 +17,7 @@ function save_options() {
     ignore_cr: ignore_cr,
     ignore_wk: ignore_wk,
     ignore_hulu: ignore_hulu,
+    ignore_nf: ignore_nf,
     enable_altauth: enable_altauth,
     altauth_clientid: altauth_clientid,
     altauth_clientsecret: altauth_clientsecret,
@@ -52,6 +54,7 @@ function restore_options() {
     ignore_cr: false,
     ignore_wk: false,
     ignore_hulu: false,
+    ignore_nf: false,
     enable_altauth: false,
     altauth_clientid: "",
     altauth_clientsecret: "",
@@ -71,6 +74,9 @@ function restore_options() {
       }
       if (items.ignore_hulu == true) {
           $('#ignore_hulu').attr( 'checked', 'checked' );
+      }
+      if (items.ignore_nf == true) {
+          $('#ignore_nf').attr( 'checked', 'checked' );
       }
       if (items.enable_altauth == true) {
           $('#altauth_enable').attr( 'checked', 'checked' );
@@ -103,6 +109,8 @@ var wk_message = chrome.i18n.getMessage("settings_ignore", ["Wakanim"]);
 $('#wk_ignore label').text(wk_message);
 var hulu_message = chrome.i18n.getMessage("settings_ignore", ["Hulu"]);
 $('#hulu_ignore label').text(hulu_message);
+var nf_message = chrome.i18n.getMessage("settings_ignore", ["Netflix"]);
+$('#nf_ignore label').text(nf_message);
 function localizeHtmlPage()
 {
     //Localize by replacing __MSG_***__ meta tags
