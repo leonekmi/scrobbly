@@ -53,7 +53,7 @@ function checkDOMChange()
             if (items.ignore_nf == false) {
                 $('.player-video-wrapper').on('DOMSubtreeModified', async function(e) {
                     numb = numb + 1;
-                    if(numb === 5) {
+                    if(numb == 5) {
                         console.log("Changed episode");
                         console.log($('.player-status:nth-child(2)').text().split(" ").splice(-1));
                         numb = 0;

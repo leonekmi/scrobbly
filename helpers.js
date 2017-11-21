@@ -42,7 +42,7 @@ function retrieveWindowVariables(variables) {
     var scriptContent = "";
     for (var i = 0; i < variables.length; i++) {
         var currVariable = variables[i];
-        scriptContent += "if (typeof " + currVariable + " !== 'undefined') $('body').attr('tmp_" + currVariable + "', " + currVariable + ");\n";
+        scriptContent += "if (typeof " + currVariable + " !== 'undefined') $('body').attr('tmp_" + currVariable + "', " + currVariable + ");\n"
     }
 
     var script = document.createElement('script');
@@ -136,13 +136,13 @@ function chooseAnime(result) {
             var titlePreference = getTitlePreferencesHelper();
             titlePreference.then(function (titlePreference) {
                 result.data.Page.media.forEach(function (item, index) {
-                    var tempStr;
+                    var temp_str;
                     if (item.title[titlePreference] != null) {
-                        tempStr = '\n[' + index + '] ' + item.title[titlePreference];
+                        temp_str = '\n[' + index + '] ' + item.title[titlePreference];
                     } else {
-                        tempStr = '\n[' + index + '] ' + item.title.romaji;
+                        temp_str = '\n[' + index + '] ' + item.title.romaji;
                     }
-                    prompt_message = prompt_message.concat(tempStr);
+                    prompt_message = prompt_message.concat(temp_str);
                 });
                 var temp_choose = promptAnime(prompt_message);
                 temp_choose.then(function (prompt_res) {
@@ -152,7 +152,7 @@ function chooseAnime(result) {
             });
         } else {
             resolve([0, result.data.Page.media[0].duration]);
-        }
+        };
     });
 }
 function initScrobble(series_title, episode_number, prepend_message) {
@@ -182,8 +182,8 @@ function initScrobble(series_title, episode_number, prepend_message) {
         options = {
             method: 'POST',
             headers: {
-                "Content-Type": "application/json",
-                "Accept": "application/json",
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
             },
             body: JSON.stringify({
                 query: query,
