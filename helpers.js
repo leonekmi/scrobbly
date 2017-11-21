@@ -155,4 +155,81 @@ function chooseAnime(result) {
         };
     });
 }
+function initScrobble(series_title, episode_number, prepend_message) {
+    var query = `
+    query ($id: Int, $page: Int, $search: String) {
+      Page (page: $page) {
+        media (id: $id, search: $search, type: ANIME) {
+          id
+          format
+          duration
+          title {
+            romaji
+            english
+            native
+          }
+          genres
+        }
+      }
+    }
+    `;
+    var variables = {
+        search: series_title,
+        page: 1
+    };
+
+    var url = 'https://graphql.anilist.co',
+        options = {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+            },
+            body: JSON.stringify({
+                query: query,
+                variables: variables
+            })
+        };
+
+    function handleResponse(response) {
+        eval(prepend_message);
+        var jsonresponse = response.json();
+        jsonresponse.then(function (result) {
+            var choose = chooseAnime(result);
+            choose.then(function (data_choose) {
+                var anime_choose = data_choose[0];
+                var duration = data_choose[1];
+                var temp_response = getAnimeProgress(result.data.Page.media[anime_choose].id);
+                temp_response.then(function (data) {
+                    var jsonresponse2 = data.json();
+                    jsonresponse2.then(function (result2) {
+                        if (result2.data.Page.media[0].mediaListEntry == null) {
+                            $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration / 4 * 3)]));
+                            setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                        } else {
+                            if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
+                                $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("already_watched"));
+                            } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
+                                $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_normal", [(duration / 4 * 3)]));
+                                setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                            } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
+                                $( '#anilist_scrobbler_notice' ).text('Anilist Scrobbler : '+ chrome.i18n.getMessage("scrobbling_in_jumped", [(duration / 4 * 3)]));
+                                setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                            } else {
+                                console.error("Ehhhh....");
+                            };
+                        }
+                    });
+                });
+            });
+        });
+    };
+    function handleError(e) {
+            console.error(e);
+            window.alert(chrome.i18n.getMessage("api_error"));
+    };
+
+    fetch(url, options).then(handleResponse)
+                       .catch(handleError);
+}
 console.log('Anilist Scrobbler init done');
