@@ -36,7 +36,10 @@ async function main() {
                     // TODO : Crunchyroll add Season 1/2/3/whatever to series title, which makes impossible search for series on Anilist
                     var episode_number = data.getElementsByTagName('episode_number')[0].innerHTML;
                     console.log("Anime detected : " + series_title + " episode " + episode_number);
-                    var message = "$( '#template_body' ).prepend('<div class=\"message-container cf\"><div class=\"message-list\"><div id=\"anilist_scrobbler_notice\" class=\"message-item clearfix message-type-warning\">Anilist Scrobbler : '+ chrome.i18n.getMessage(\"starting\") +'</div></div></div>');";
+                    function message() {
+                        $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</div></div></div>');
+                        return true;
+                    }
                     initScrobble(series_title, episode_number, message);
                 }, 'xml');
             }

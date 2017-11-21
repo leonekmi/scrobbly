@@ -19,7 +19,10 @@ async function main() {
             if (regex.test(document.documentURI)) {
                 var series_title = $('.adn-big-title h1 a').text().replace('Nouvelle Saison', '');
                 var episode_number = $('.current .adn-playlist-block a').attr('title').replace('Épisode ', '');
-                var message = "$( '.adn-big-title h1 span' ).append('<span id=\"anilist_scrobbler_notice\">Anilist Scrobbler : '+ chrome.i18n.getMessage(\"starting\") +'</span></li>');";
+                function message() {
+                    $( '.adn-big-title h1 span' ).append('<span id="anilist_scrobbler_notice">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</span></li>');
+                    return true;
+                }
                 initScrobble(series_title, episode_number, message);
             }
         }

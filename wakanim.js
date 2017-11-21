@@ -20,7 +20,10 @@ async function main() {
             if (regex.test(document.documentURI)) {
                 var series_title = $('.episode_title').text();
                 var episode_number = $('.episode_subtitle span span').text();
-                var message = "$( '.border-list' ).prepend('<li class=\"border-list_item\"><span class=\"border-list_title\">Anilist Scrobbler</span><span id=\"anilist_scrobbler_notice\" class=\"border-list_text\">'+ chrome.i18n.getMessage(\"starting\") +'</span></li>');";
+                function message() {
+                    $( '.border-list' ).prepend('<li class="border-list_item"><span class="border-list_title">Anilist Scrobbler</span><span id="anilist_scrobbler_notice" class="border-list_text">'+ chrome.i18n.getMessage("starting") +'</span></li>');
+                    return true;
+                }
                 initScrobble(series_title, episode_number, message);
             }
         }

@@ -23,7 +23,10 @@ async function main() {
                 var regex2 = /Episode\s*(.*?)\s*\| Hulu/g;
                 var series_title = regex1.exec(title)[1];
                 var episode_number = regex2.exec(title)[1];
-                var message = "$('h1.video-titles').append('<span id=\"anilist_scrobbler_notice\" style=\"font-family: Flama; font-size: 15px;\">Anilist Scrobbler : '+ chrome.i18n.getMessage(\"starting\") +'</span>');";
+                function message() {
+                    $('h1.video-titles').append('<span id="anilist_scrobbler_notice" style="font-family: Flama; font-size: 15px;">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</span>');
+                    return true;
+                }
                 initScrobble(series_title, episode_number, message);
             }
         }
