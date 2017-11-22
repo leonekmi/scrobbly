@@ -192,7 +192,7 @@ function initScrobble(series_title, episode_number, prepend_message) {
         };
 
     function handleResponse(response) {
-        eval(prepend_message);
+        prepend_message();
         var jsonresponse = response.json();
         jsonresponse.then(function (result) {
             var choose = chooseAnime(result);
