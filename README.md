@@ -41,7 +41,7 @@ _On Firefox (excluding [Firefox Developer and Nightly](https://support.mozilla.o
 
 - `web-ext run` in the clone folder.
 
-###### Using Firefox debugging
+##### Using Firefox debugging
 
 - go to `about:debugging#addons`
 - activate module debugging
