@@ -37,7 +37,7 @@ chrome.runtime.onInstalled.addListener(function(details){
             type: "basic",
             iconUrl: "https://leonekmi.twittolabel.fr/anilist-scrobble/update.png",
             title: "Anilist Scrobbler",
-            message: chrome.i18n.getMessage('updated')
+            message: chrome.i18n.getMessage('updated', thisVersion)
         }
         chrome.notifications.create('update', options);
     }

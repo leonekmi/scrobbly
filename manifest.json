@@ -21,7 +21,8 @@
  "applications": {
   "gecko": {
     "id": "anilist_scrobbler@leonekmi.twittolabel.fr",
-    "strict_min_version": "42.0"
+    "strict_min_version": "42.0",
+    "update_url": "https://leonekmi.twittolabel.fr/anilist-scrobble/updates.json"
   }
  },
  "background": {

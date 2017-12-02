@@ -128,7 +128,7 @@
 		"message": "L'API d'Anilist renvoie une erreur, impossible de scrobbler."
 	},
     "updated": {
-        "message": "La mise à jour $VERSION$ a été installé avec succès !",
+        "message": "La mise à jour $VERSION$ a été installée avec succès !",
         "placeholders": {
             "version": {
                 "content": "$1",
