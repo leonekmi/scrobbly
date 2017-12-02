@@ -16,7 +16,8 @@
   "notifications"
  ],
  "options_page": "options.html",
- "default_locale": "fr",
+ "default_locale": "en",
+ "update_url": "https://leonekmi.twittolabel.fr/anilist-scrobble/updates.xml",
  "applications": {
   "gecko": {
     "id": "anilist_scrobbler@leonekmi.twittolabel.fr",
