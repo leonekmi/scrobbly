@@ -127,7 +127,16 @@
 	"api_error": {
 		"message": "The Anilist API returns an error, cannot scrobble your anime."
 	},
-    "update":{
-        "message": "Update available !\nClick here to download !"
+    "updated": {
+        "message": "The $VERSION$ update was successfully installed !",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1.15"
+            }
+        }
+    },
+    "welcome": {
+        "message": "Welcome to Anilist Srobbler ! Login to Anilist with the popup at the top right corner of the browser !"
     }
 }

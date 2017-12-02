@@ -127,7 +127,16 @@
 	"api_error": {
 		"message": "L'API d'Anilist renvoie une erreur, impossible de scrobbler."
 	},
-    "update":{
-        "message": "Mise à jour disponible !\nCliquez pour télécharger la mise à jour"
+    "updated": {
+        "message": "La mise à jour $VERSION$ a été installé avec succès !",
+        "placeholders": {
+            "version": {
+                "content": "$1",
+                "example": "1.15"
+            }
+        }
+    },
+    "welcome": {
+        "message": "Bienvenue sur Anilist Srobbler ! Connectez-vous à Anilist avec le popup en haut à droite du navigateur !"
     }
 }
