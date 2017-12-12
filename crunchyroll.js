@@ -11,7 +11,7 @@ async function main() {
 
     var isLoggedIn = false;
     var ChromeProcessed = false;
-    chrome.storage.local.get('access_token', function (items) {
+    chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
             isLoggedIn = false;
             ChromeProcessed = true;
@@ -31,13 +31,14 @@ async function main() {
                     episodeId = uri.substr(uri.length - 6);
                     console.log(episodeId);
                 }
-                $.get("http://www.crunchyroll.com/xml?req=RpcApiVideoPlayer_GetMediaMetadata&media_id=" + episodeId, function ( data ) {
+                $.get("http://www.crunchyroll.com/xml?req=RpcApiVideoPlayer_GetMediaMetadata&media_id=" + episodeId, function(data) {
                     var series_title = data.getElementsByTagName('series_title')[0].innerHTML;
                     // TODO : Crunchyroll add Season 1/2/3/whatever to series title, which makes impossible search for series on Anilist
                     var episode_number = data.getElementsByTagName('episode_number')[0].innerHTML;
                     console.log("Anime detected : " + series_title + " episode " + episode_number);
+
                     function message() {
-                        $( '#template_body' ).prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</div></div></div>');
+                        $('#template_body').prepend('<div class="message-container cf"><div class="message-list"><div id="anilist_scrobbler_notice" class="message-item clearfix message-type-warning">Anilist Scrobbler : ' + chrome.i18n.getMessage("starting") + '</div></div></div>');
                         return true;
                     }
                     initScrobble(series_title, episode_number, message);
@@ -47,10 +48,10 @@ async function main() {
     });
 }
 
-$( window ).on( "load", function() {
+$(window).on("load", function() {
     chrome.storage.sync.get({
         ignore_cr: false
-    }, function (items) {
+    }, function(items) {
         if (items.ignore_cr == false) {
             main();
         }

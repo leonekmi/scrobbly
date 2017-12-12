@@ -8,7 +8,7 @@ async function main() {
 
     var isLoggedIn = false;
     var ChromeProcessed = false;
-    chrome.storage.local.get('access_token', function (items) {
+    chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
             isLoggedIn = false;
             ChromeProcessed = true;
@@ -23,8 +23,9 @@ async function main() {
                 var regex2 = /Episode\s*(.*?)\s*\| Hulu/g;
                 var series_title = regex1.exec(title)[1];
                 var episode_number = regex2.exec(title)[1];
+
                 function message() {
-                    $('h1.video-titles').append('<span id="anilist_scrobbler_notice" style="font-family: Flama; font-size: 15px;">Anilist Scrobbler : '+ chrome.i18n.getMessage("starting") +'</span>');
+                    $('h1.video-titles').append('<span id="anilist_scrobbler_notice" style="font-family: Flama; font-size: 15px;">Anilist Scrobbler : ' + chrome.i18n.getMessage("starting") + '</span>');
                     return true;
                 }
                 initScrobble(series_title, episode_number, message);
@@ -33,10 +34,10 @@ async function main() {
     });
 }
 
-$( window ).on( "load", function() {
+$(window).on("load", function() {
     chrome.storage.sync.get({
         ignore_hulu: false
-    }, function (items) {
+    }, function(items) {
         if (items.ignore_hulu == false) {
             main();
             $('title').bind('DOMSubtreeModified', function(e) {

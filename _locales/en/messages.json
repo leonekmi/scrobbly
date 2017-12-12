@@ -1,10 +1,10 @@
 {
-	"appName": {
-		"message": "Anilist Scrobbler"
-	},
-	"appDesc": {
-		"message": "Scrobble your animes on Anilist.co"
-	},
+    "appName": {
+        "message": "Anilist Scrobbler"
+    },
+    "appDesc": {
+        "message": "Scrobble your animes on Anilist.co"
+    },
     "settings_ignore": {
         "message": "Ignore $SITE$",
         "description": "Ignore the website",
@@ -27,39 +27,39 @@
     "title_english": {
         "message": "English names"
     },
-	"title_pref": {
-		"message": "Titles preference :"
-	},
-	"settings_header": {
-		"message": "Settings",
-		"description": "Title of the page and first header in Settings"
-	},
-	"settings_notice": {
-		"message": "If an anime doesn't have an English name, the Romaji name will be displayed.<br/>\nAn <em>\"ignored\"</em> website will make the extension inactive on this website.",
-		"description": "Notice d'information dans les paramètres"
-	},
-	"settings_delete_login": {
-		"message": "Delete login",
-		"description": "Title of the modal and button label"
-	},
-	"settings_delete_login_modal": {
-		"message": "The connection with AniList will be terminated and you will need to relog.",
-		"description": "Modal content"
-	},
-	"settings_cancel": {
-		"message": "Cancel"
-	},
-	"settings_yes": {
-		"message": "Yes"
-	},
-	"settings_save": {
-		"message": "Save settings",
-		"description": "Button label"
-	},
-	"settings_saved": {
-		"message": "Settings saved",
-		"description": "Settings status displayed when click on save button"
-	},
+    "title_pref": {
+        "message": "Titles preference :"
+    },
+    "settings_header": {
+        "message": "Settings",
+        "description": "Title of the page and first header in Settings"
+    },
+    "settings_notice": {
+        "message": "If an anime doesn't have an English name, the Romaji name will be displayed.<br/>\nAn <em>\"ignored\"</em> website will make the extension inactive on this website.",
+        "description": "Notice d'information dans les paramètres"
+    },
+    "settings_delete_login": {
+        "message": "Delete login",
+        "description": "Title of the modal and button label"
+    },
+    "settings_delete_login_modal": {
+        "message": "The connection with AniList will be terminated and you will need to relog.",
+        "description": "Modal content"
+    },
+    "settings_cancel": {
+        "message": "Cancel"
+    },
+    "settings_yes": {
+        "message": "Yes"
+    },
+    "settings_save": {
+        "message": "Save settings",
+        "description": "Button label"
+    },
+    "settings_saved": {
+        "message": "Settings saved",
+        "description": "Settings status displayed when click on save button"
+    },
     "settings_enablealtauth": {
         "message": "Activate alternative authentification"
     },
@@ -75,58 +75,58 @@
     "altauth_not_configured": {
         "message": "You don't configured the alternative authentification"
     },
-	"popup_login": {
-		"message": "Login with AniList",
-		"description": "Login button"
-	},
+    "popup_login": {
+        "message": "Login with AniList",
+        "description": "Login button"
+    },
     "popup_login_altauth": {
-		"message": "Alternative login",
-		"description": "Alternative login button"
-	},
-	"popup_logged_in": {
-		"message": "Already logged in",
-		"description": "Displayed when already logged in"
-	},
-	"multiple_entries": {
-		"message": "The AniList database has returned several results, please choose the anime you are watching :",
-		"description": "window.prompt when AniList returns several entries"
-	},
-	"starting": {
-		"message": "Starting..."
-	},
-	"already_watched": {
-		"message": "This episode is already marked as viewed, will do nothing."
-	},
-	"scrobbling_in_normal": {
-		"message": "This episode will be automatically added in $DURATION$ minutes (3/4 of the episode).",
-		"placeholders": {
-			"duration": {
-				"content": "$1",
-				"example": "15"
-			}
-		}
-	},
-	"scrobbling_in_jumped": {
-		"message": "This episode will be automatically added in $DURATION$ minutes (3/4 of the episode, warning : you have missed one or more episodes according to your list).",
-		"placeholders": {
-			"duration": {
-				"content": "$1",
-				"example": "15"
-			}
-		}
-	},
-	"scrobbling_in_not_in_al": {
-		"message": "This anime is not on your animelist, it will be automatically added in $DURATION$ minutes (3/4 of the episode).",
-		"placeholders": {
-			"duration": {
-				"content": "$1",
-				"example": "15"
-			}
-		}
-	},
-	"api_error": {
-		"message": "The Anilist API returns an error, cannot scrobble your anime."
-	},
+        "message": "Alternative login",
+        "description": "Alternative login button"
+    },
+    "popup_logged_in": {
+        "message": "Already logged in",
+        "description": "Displayed when already logged in"
+    },
+    "multiple_entries": {
+        "message": "The AniList database has returned several results, please choose the anime you are watching :",
+        "description": "window.prompt when AniList returns several entries"
+    },
+    "starting": {
+        "message": "Starting..."
+    },
+    "already_watched": {
+        "message": "This episode is already marked as viewed, will do nothing."
+    },
+    "scrobbling_in_normal": {
+        "message": "This episode will be automatically added in $DURATION$ minutes (3/4 of the episode).",
+        "placeholders": {
+            "duration": {
+                "content": "$1",
+                "example": "15"
+            }
+        }
+    },
+    "scrobbling_in_jumped": {
+        "message": "This episode will be automatically added in $DURATION$ minutes (3/4 of the episode, warning : you have missed one or more episodes according to your list).",
+        "placeholders": {
+            "duration": {
+                "content": "$1",
+                "example": "15"
+            }
+        }
+    },
+    "scrobbling_in_not_in_al": {
+        "message": "This anime is not on your animelist, it will be automatically added in $DURATION$ minutes (3/4 of the episode).",
+        "placeholders": {
+            "duration": {
+                "content": "$1",
+                "example": "15"
+            }
+        }
+    },
+    "api_error": {
+        "message": "The Anilist API returns an error, cannot scrobble your anime."
+    },
     "updated": {
         "message": "The $VERSION$ update was successfully installed !",
         "placeholders": {

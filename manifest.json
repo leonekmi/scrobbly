@@ -1,67 +1,66 @@
 {
- "manifest_version": 2,
- "name": "__MSG_appName__",
- "description": "__MSG_appDesc__",
- "author": "@leonekmi",
- "version": "1.9.4",
- "permissions": [
-  "*://www.crunchyroll.com/*",
-  "*://www.wakanim.tv/*",
-  "*://animedigitalnetwork.fr/*",
-  "*://leonekmi.twittolabel.fr/*",
-  "*://graphql.anilist.co/*",
-  "*://www.hulu.com/*",
-  "*://www.netflix.com/*",
-  "storage",
-  "notifications"
- ],
- "options_page": "options.html",
- "default_locale": "en",
- "applications": {
-  "gecko": {
-    "id": "anilist_scrobbler@leonekmi.twittolabel.fr",
-    "strict_min_version": "42.0",
-    "update_url": "https://leonekmi.twittolabel.fr/anilist-scrobble/updates.json"
-  }
- },
- "background": {
-   "scripts": ["jquery.js", "updater.js"]
- },
- "browser_action": {
-  "default_icon" : "img/logo_al.png",
-  "default_popup": "popup.html"
- },
- "content_scripts": [
-  {
-    "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble/*"],
-    "js": ["jquery.js", "auth.js"]
-  },
-  {
-    "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble-altcallback/*"],
-    "js": ["jquery.js", "auth_alternative.js"]
-  },
-  {
-    "matches": ["*://www.crunchyroll.com/*"],
-    "js": ["jquery.js", "helpers.js", "crunchyroll.js"]
-  },
-  {
-    "matches": ["*://www.wakanim.tv/*"],
-    "js": ["jquery.js", "helpers.js", "wakanim.js"]
-  },
-  {
-    "matches": ["*://animedigitalnetwork.fr/*"],
-    "js": ["jquery.js", "helpers.js", "adn.js"]
-  },
-  {
-    "matches": ["*://www.hulu.com/*"],
-    "js": ["jquery.js", "helpers.js", "hulu.js"]
-  },
-  {
-    "matches": ["*://www.netflix.com/*"],
-    "js": ["jquery.js", "helpers.js", "netflix.js"]
-  }
- ],
- "icons": {
-  "172" : "img/logo_al.png"
- }
+    "manifest_version": 2,
+    "name": "__MSG_appName__",
+    "description": "__MSG_appDesc__",
+    "author": "@leonekmi",
+    "version": "1.9.4",
+    "permissions": [
+        "*://www.crunchyroll.com/*",
+        "*://www.wakanim.tv/*",
+        "*://animedigitalnetwork.fr/*",
+        "*://leonekmi.twittolabel.fr/*",
+        "*://graphql.anilist.co/*",
+        "*://www.hulu.com/*",
+        "*://www.netflix.com/*",
+        "storage",
+        "notifications"
+    ],
+    "options_page": "options.html",
+    "default_locale": "en",
+    "applications": {
+        "gecko": {
+            "id": "anilist_scrobbler@leonekmi.twittolabel.fr",
+            "strict_min_version": "42.0",
+            "update_url": "https://leonekmi.twittolabel.fr/anilist-scrobble/updates.json"
+        }
+    },
+    "background": {
+        "scripts": ["jquery.js", "updater.js"]
+    },
+    "browser_action": {
+        "default_icon": "img/logo_al.png",
+        "default_popup": "popup.html"
+    },
+    "content_scripts": [{
+            "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble/*"],
+            "js": ["jquery.js", "auth.js"]
+        },
+        {
+            "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble-altcallback/*"],
+            "js": ["jquery.js", "auth_alternative.js"]
+        },
+        {
+            "matches": ["*://www.crunchyroll.com/*"],
+            "js": ["jquery.js", "helpers.js", "crunchyroll.js"]
+        },
+        {
+            "matches": ["*://www.wakanim.tv/*"],
+            "js": ["jquery.js", "helpers.js", "wakanim.js"]
+        },
+        {
+            "matches": ["*://animedigitalnetwork.fr/*"],
+            "js": ["jquery.js", "helpers.js", "adn.js"]
+        },
+        {
+            "matches": ["*://www.hulu.com/*"],
+            "js": ["jquery.js", "helpers.js", "hulu.js"]
+        },
+        {
+            "matches": ["*://www.netflix.com/*"],
+            "js": ["jquery.js", "helpers.js", "netflix.js"]
+        }
+    ],
+    "icons": {
+        "172": "img/logo_al.png"
+    }
 }

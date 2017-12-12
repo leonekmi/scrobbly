@@ -1,5 +1,6 @@
 # anilist-scrobbler
-<a rel="license" href="http://creativecommons.org/licenses/by-sa/4.0/"><img alt="Licence Creative Commons" style="border-width:0" src="https://i.creativecommons.org/l/by-sa/4.0/80x15.png" /></a>
+
+[![Licence Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 
 ## Connect to Anilist and "scrobble your animes"
 
@@ -23,8 +24,7 @@ _Create an issue for request websites. We don't accept streaming or illegal webs
 
 ### Install (from git)
 
-Clone this repository :
-`git clone https://github.com/leonekmi/anilist-scrobbler.git`
+Clone this repository : `git clone https://github.com/leonekmi/anilist-scrobbler.git`
 
 #### On Chrome-based browsers (tested for Chrome/Chromium only)
 
