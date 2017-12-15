@@ -56,14 +56,17 @@ function checkDOMChange() {
             ignore_nf: false
         }, function(items) {
             if (items.ignore_nf == false) {
-                $('.player-video-wrapper').on('DOMSubtreeModified', async function(e) {
-                    numb = numb + 1;
-                    if (numb == 5) {
-                        console.log("Changed episode");
-                        console.log($('.player-status:nth-child(2)').text().split(" ").splice(-1));
-                        numb = 0;
-                        checkDOMChange2();
-                    }
+                $('.episode-list-description-container').each(async function(index) {
+                    // checkDOMChange2();
+                    console.log("Bind");
+                    $(this).on('click', async function(e) {
+                        console.log("Click on episode list");
+                        setTimeout(checkDOMChange2, 550);
+                    });
+                });
+                $('.player-next-episode').on('click', async function(e) {
+                    console.log("Next player");
+                    setTimeout(checkDOMChange2, 550);
                 });
                 main();
             }
