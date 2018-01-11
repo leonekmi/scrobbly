@@ -124,6 +124,9 @@
             }
         }
     },
+    "scrobbling_not_in_al": {
+        "message": "Il n'y a aucun résultat dans le répertoire d'Anilist, impossible de scrobbler."
+    },
     "api_error": {
         "message": "L'API d'Anilist renvoie une erreur, impossible de scrobbler."
     },

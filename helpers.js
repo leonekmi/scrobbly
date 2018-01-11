@@ -184,13 +184,13 @@ function chooseAnime(result, series_title) {
     return new Promise(resolve => {
         var cache = getCacheEntry(series_title);
         cache.then(function(cache) {
-            console.log(cache);
             if (cache) {
                 resolve([0, cache.duration]);
             } else {
-                console.log(result);
                 var anime_choose;
-                if (result.data.Page.media.length > 1) {
+                if (result.data.Page.media.length == 0) {
+                    $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_not_in_al"));
+                } else if (result.data.Page.media.length > 1) {
                     var prompt_message = chrome.i18n.getMessage("multiple_entries");
                     var titlePreference = getTitlePreferencesHelper();
                     titlePreference.then(function(titlePreference) {
@@ -205,8 +205,6 @@ function chooseAnime(result, series_title) {
                         });
                         var temp_choose = promptAnime(prompt_message);
                         temp_choose.then(function(prompt_res) {
-                            console.log(setCacheEntry(series_title, result.data.Page.media[prompt_res]));
-                            console.log(result.data.Page.media[prompt_res].duration);
                             resolve([prompt_res, result.data.Page.media[prompt_res].duration]);
                         });
                     });
@@ -267,16 +265,16 @@ function initScrobble(series_title, episode_number, prepend_message) {
                     var jsonresponse2 = data.json();
                     jsonresponse2.then(function(result2) {
                         if (result2.data.Page.media[0].mediaListEntry == null) {
-                            $('#anilist_scrobbler_notice').text('Anilist Scrobbler : ' + chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration / 4 * 3)]));
+                            $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration / 4 * 3)]));
                             setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                         } else {
                             if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
-                                $('#anilist_scrobbler_notice').text('Anilist Scrobbler : ' + chrome.i18n.getMessage("already_watched"));
+                                $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("already_watched"));
                             } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                $('#anilist_scrobbler_notice').text('Anilist Scrobbler : ' + chrome.i18n.getMessage("scrobbling_in_normal", [(duration / 4 * 3)]));
+                                $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_in_normal", [(duration / 4 * 3)]));
                                 setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                             } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                $('#anilist_scrobbler_notice').text('Anilist Scrobbler : ' + chrome.i18n.getMessage("scrobbling_in_jumped", [(duration / 4 * 3)]));
+                                $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_in_jumped", [(duration / 4 * 3)]));
                                 setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                             } else {
                                 console.error("Ehhhh....");

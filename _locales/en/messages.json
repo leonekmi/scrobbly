@@ -124,6 +124,9 @@
             }
         }
     },
+    "scrobbling_not_in_al": {
+        "message": "There is no result for this anime in AniList, cannot scrobble."
+    },
     "api_error": {
         "message": "The Anilist API returns an error, cannot scrobble your anime."
     },
