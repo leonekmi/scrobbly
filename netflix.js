@@ -3,7 +3,7 @@ Get Metadata from an episode of netflix.com with Anilist Scrobbler
 (c) leonekmi 2017
 */
 
-async function main() {
+function main() {
     var regex = /https:\/\/www.netflix.com\/watch\/([a-zA-Z0-9-]+)/;
 
     var isLoggedIn = false;
@@ -56,18 +56,26 @@ function checkDOMChange() {
             ignore_nf: false
         }, function(items) {
             if (items.ignore_nf == false) {
-                $('.episode-list-description-container').each(async function(index) {
+                $('.episode-list-description-container').each(function() {
                     // checkDOMChange2();
-                    console.log("Bind");
-                    $(this).on('click', async function(e) {
-                        console.log("Click on episode list");
+                    console.log('Bind');
+                    $(this).on('click', function() {
+                        console.log('Click on episode list');
                         setTimeout(checkDOMChange2, 550);
                     });
                 });
-                $('.player-next-episode').on('click', async function(e) {
-                    console.log("Next player");
+                $('.player-next-episode').on('click', function() {
+                    console.log('Next player');
                     setTimeout(checkDOMChange2, 550);
                 });
+                /*$('.playRing').each(async function(index) {
+                    // checkDOMChange2();
+                    console.log("Bind");
+                    $(this).on('click', async function(e) {
+                        console.log("Click on a play on index");
+                        setTimeout(checkDOMChange2, 550);
+                    });
+                });*/
                 main();
             }
         });

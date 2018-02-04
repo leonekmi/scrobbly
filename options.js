@@ -22,7 +22,7 @@ function save_options() {
     }, function() {
         // Update status to let user know options were saved.
         var status = document.getElementById('status');
-        status.textContent = chrome.i18n.getMessage("settings_saved");
+        status.textContent = chrome.i18n.getMessage('settings_saved');
         setTimeout(function() {
             status.textContent = '';
         }, 1250);
@@ -46,15 +46,15 @@ function show_modal() {
 
 function restore_options() {
     chrome.storage.sync.get({
-        title: "romaji",
+        title: 'romaji',
         ignore_adn: false,
         ignore_cr: false,
         ignore_wk: false,
         ignore_hulu: false,
         ignore_nf: false,
         enable_altauth: false,
-        altauth_clientid: "",
-        altauth_clientsecret: "",
+        altauth_clientid: '',
+        altauth_clientsecret: '',
     }, function(items) {
         $('#titles')
             .dropdown('set selected', items.title);
@@ -78,10 +78,10 @@ function restore_options() {
             $('#altauth_enable').attr('checked', 'checked');
             $('#altauth_settings').attr('style', '');
         }
-        if (items.altauth_clientid != "") {
+        if (items.altauth_clientid != '') {
             $('#client_id').val(items.altauth_clientid);
         }
-        if (items.altauth_clientsecret != "") {
+        if (items.altauth_clientsecret != '') {
             $('#client_secret').val(items.altauth_clientsecret);
         }
         $('.checkbox')
@@ -96,15 +96,15 @@ function restore_options() {
             });
     });
 }
-var adn_message = chrome.i18n.getMessage("settings_ignore", ["Anime Digital Network"]);
+var adn_message = chrome.i18n.getMessage('settings_ignore', ['Anime Digital Network']);
 $('#adn_ignore label').text(adn_message);
-var cr_message = chrome.i18n.getMessage("settings_ignore", ["Crunchyroll"]);
+var cr_message = chrome.i18n.getMessage('settings_ignore', ['Crunchyroll']);
 $('#cr_ignore label').text(cr_message);
-var wk_message = chrome.i18n.getMessage("settings_ignore", ["Wakanim"]);
+var wk_message = chrome.i18n.getMessage('settings_ignore', ['Wakanim']);
 $('#wk_ignore label').text(wk_message);
-var hulu_message = chrome.i18n.getMessage("settings_ignore", ["Hulu"]);
+var hulu_message = chrome.i18n.getMessage('settings_ignore', ['Hulu']);
 $('#hulu_ignore label').text(hulu_message);
-var nf_message = chrome.i18n.getMessage("settings_ignore", ["Netflix"]);
+var nf_message = chrome.i18n.getMessage('settings_ignore', ['Netflix']);
 $('#nf_ignore label').text(nf_message);
 
 function localizeHtmlPage() {
@@ -115,7 +115,7 @@ function localizeHtmlPage() {
 
         var valStrH = obj.innerHTML.toString();
         var valNewH = valStrH.replace(/__MSG_(\w+)__/g, function(match, v1) {
-            return v1 ? chrome.i18n.getMessage(v1) : "";
+            return v1 ? chrome.i18n.getMessage(v1) : '';
         });
 
         if (valNewH != valStrH) {

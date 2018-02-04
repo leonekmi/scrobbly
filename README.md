@@ -7,17 +7,17 @@
 
 ### Websites support
 
-- ADN : _Anime Digital Network_
-- Crunchyroll
-- Hulu
-- Netflix
-- Wakanim
+-   ADN : _Anime Digital Network_
+-   Crunchyroll
+-   Hulu
+-   Netflix
+-   Wakanim
 
 #### Planned
 
 _Create an issue for request websites. We don't accept streaming or illegal websites_
 
-- None for now
+-   None for now
 
 ### Install (stable)
 
@@ -29,10 +29,10 @@ Clone this repository : `git clone https://github.com/leonekmi/anilist-scrobbler
 
 #### On Chrome-based browsers (tested for Chrome/Chromium only)
 
-- activate Developer mode
-- click "Load unpacked extension"
-- choose the folder
-- `git pull` sometimes :)
+-   activate Developer mode
+-   click "Load unpacked extension"
+-   choose the folder
+-   `git pull` sometimes :)
 
 #### On Firefox
 
@@ -40,10 +40,10 @@ _On Firefox (excluding [Firefox Developer and Nightly](https://support.mozilla.o
 
 ##### Using `web-ext` tool
 
-- `web-ext run` in the clone folder.
+-   `web-ext run` in the clone folder.
 
 ##### Using Firefox debugging
 
-- go to `about:debugging#addons`
-- activate module debugging
-- load the `manifest.json`
+-   go to `about:debugging#addons`
+-   activate module debugging
+-   load the `manifest.json`
