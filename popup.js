@@ -1,3 +1,7 @@
+/*
+Popup page script
+(c) leonekmi 2017-2018
+*/
 chrome.storage.sync.get({
     enable_altauth: false,
     access_token: null,

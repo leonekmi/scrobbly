@@ -1,3 +1,7 @@
+/*
+Authentication script
+(c) leonekmi 2017-2018
+*/
 var url = new URL(document.location.href);
 var c = url.searchParams.get('code');
 if (c !== null) {

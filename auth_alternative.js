@@ -1,3 +1,7 @@
+/*
+Authentication helper for alternative login
+(c) leonekmi 2017-2018
+*/
 chrome.storage.sync.get({
     enable_altauth: false,
     altauth_clientid: '',

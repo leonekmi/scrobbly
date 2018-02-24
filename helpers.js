@@ -1,5 +1,6 @@
 /*
 Global Helpers for Anilist Scrobbler
+(c) leonekmi 2017-2018
 */
 
 function scrobbleAnime(animeId, episode) {

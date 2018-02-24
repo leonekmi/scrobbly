@@ -1,6 +1,6 @@
 /*
 Get Metadata from an episode of Crunchyroll with Anilist Scrobbler
-(c) leonekmi 2017
+(c) leonekmi 2017-2018
 
 TODO lIST :
 Line 42

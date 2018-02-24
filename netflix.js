@@ -1,6 +1,6 @@
 /*
 Get Metadata from an episode of netflix.com with Anilist Scrobbler (beta)
-(c) leonekmi 2017
+(c) leonekmi 2017-2018
 */
 
 function main() {

@@ -1,3 +1,7 @@
+/*
+Updater script
+(c) leonekmi 2017-2018
+*/
 chrome.runtime.onInstalled.addListener(function(details) {
     if (details.reason == 'install') {
         var options = {

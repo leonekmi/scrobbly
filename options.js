@@ -1,3 +1,7 @@
+/*
+Options page script
+(c) leonekmi 2017-2018
+*/
 // Saves options to chrome.storage
 function save_options() {
     var titles = document.getElementById('titles').value;
