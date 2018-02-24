@@ -3,7 +3,7 @@
     "name": "__MSG_appName__",
     "description": "__MSG_appDesc__",
     "author": "@leonekmi",
-    "version": "1.10.1",
+    "version": "1.10.2",
     "permissions": [
         "*://www.crunchyroll.com/*",
         "*://www.wakanim.tv/*",
@@ -31,7 +31,8 @@
         "default_icon": "img/logo_al.png",
         "default_popup": "popup.html"
     },
-    "content_scripts": [{
+    "content_scripts": [
+        {
             "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble/*"],
             "js": ["jquery.js", "auth.js"]
         },
@@ -61,6 +62,6 @@
         }
     ],
     "icons": {
-        "172": "img/logo_al.png"
+        "128": "img/logo_al.png"
     }
 }

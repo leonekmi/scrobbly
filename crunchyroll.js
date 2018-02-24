@@ -10,14 +10,11 @@ function main() {
     var regex = /http:\/\/www.crunchyroll.com\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
 
     var isLoggedIn = false;
-    // var ChromeProcessed = false;
     chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
             isLoggedIn = false;
-            // ChromeProcessed = true;
         } else {
             isLoggedIn = true;
-            // ChromeProcessed = true;
         }
         if (isLoggedIn == true) {
             if (regex.test(document.documentURI)) {

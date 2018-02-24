@@ -1,5 +1,5 @@
 /*
-Get Metadata from an episode of netflix.com with Anilist Scrobbler
+Get Metadata from an episode of netflix.com with Anilist Scrobbler (beta)
 (c) leonekmi 2017
 */
 
@@ -7,14 +7,11 @@ function main() {
     var regex = /https:\/\/www.netflix.com\/watch\/([a-zA-Z0-9-]+)/;
 
     var isLoggedIn = false;
-    var ChromeProcessed = false;
     chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
             isLoggedIn = false;
-            ChromeProcessed = true;
         } else {
             isLoggedIn = true;
-            ChromeProcessed = true;
         }
         if (isLoggedIn == true) {
             if (regex.test(document.documentURI)) {
