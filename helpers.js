@@ -252,26 +252,22 @@ function checkPlayingStatus() {
     console.log("checking playing status now");
 
     //send message to background script so that it can check the playing status of the current tab
-    chrome.runtime.sendMessage({action: "checkPlaying", tabName: document.title});
+    chrome.runtime.sendMessage({action: "checkAudioPlaying", tabName: document.title});
 }
 
 /* Listens for response from background script */
 chrome.runtime.onMessage.addListener(function(request, sender) { 
-    if(request.action == "checkPlayingResponse") {
+    if(request.action == "audioPlayingResponse") {
 
-        var isPlaying = request.response;
+        var audioPlaying = request.response;
 
         /* Pause timer if nothing is playing, and resume it if it started again */
-        if(!isPlaying) {
-            if(!progressionTimer.isPaused()) {
+        if(!audioPlaying && !progressionTimer.isPaused()) {
                 console.log("Timer paused!");
                 progressionTimer.pause();
-            }
-        } else {
-            if(progressionTimer.isPaused()) {
+        } else if(audioPlaying && progressionTimer.isPaused()) {
                 console.log("Timer resumed!");
                 progressionTimer.resume();
-            }
         }
     }
 });
