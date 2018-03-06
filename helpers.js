@@ -35,6 +35,7 @@ function scrobbleAnime(animeId, episode) {
             };
         fetch(url, options);
         $('#anilist_scrobbler_notice').text('Anilist Scrobbler : L\'épisode a été ajouté à votre liste.');
+        clearInterval();
     });
 }
 
@@ -222,18 +223,26 @@ var progressionTimer;
 
 /* Timer class */
 function Timer(callback, delay, ...params) {
-    var timerId, start, remaining = delay;
+    var timerId, start, remaining = delay, paused;
 
     this.pause = function() {
         window.clearTimeout(timerId);
         remaining -= new Date() - start;
+        paused = true;
     };
 
     this.resume = function() {
         start = new Date();
         window.clearTimeout(timerId);
-        timerId = window.setTimeout(callback, remaining, params);
+        timerId = window.setTimeout(callback, remaining, ...params);
+        paused = false;
     };
+
+    this.isPaused = function() { return paused; };
+
+    this.getRemaining = function() { return remaining; };
+
+    this.setRemaining = function(time) { remaining = time; };
 
     this.resume();
 }
@@ -254,11 +263,15 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
 
         /* Pause timer if nothing is playing, and resume it if it started again */
         if(!isPlaying) {
-            console.log("Timer paused!");
-            progressionTimer.pause();
+            if(!progressionTimer.isPaused()) {
+                console.log("Timer paused!");
+                progressionTimer.pause();
+            }
         } else {
-            console.log("Timer resumed!");
-            progressionTimer.resume();
+            if(progressionTimer.isPaused()) {
+                console.log("Timer resumed!");
+                progressionTimer.resume();
+            }
         }
     }
 });
