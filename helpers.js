@@ -255,7 +255,7 @@ function checkPlayingStatus() {
     console.log("checking playing status now");
 
     //send message to background script so that it can check the playing status of the current tab
-    chrome.runtime.sendMessage({action: "checkAudioPlaying", tabName: document.title});
+    chrome.runtime.sendMessage({action: "checkAudioPlaying"});
 }
 
 /* Listens for response from background script */
