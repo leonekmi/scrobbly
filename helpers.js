@@ -328,7 +328,7 @@ function initScrobble(series_title, episode_number, prepend_message) {
                             //instead of setTimeout, create a new Timer object and save it to a variable */
                             progressionTimer = new Timer(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                             //Also set an interval to check periodically if anything is playing
-                            setInterval(checkPlayingStatus, interval_delay);
+                            checkInterval = setInterval(checkPlayingStatus, interval_delay);
                         } else {
                             if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
                                 $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("already_watched"));
