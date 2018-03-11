@@ -34,7 +34,7 @@ function scrobbleAnime(animeId, episode) {
                 })
             };
         fetch(url, options);
-        $('#anilist_scrobbler_notice').text('Anilist Scrobbler : L\'épisode a été ajouté à votre liste.');
+        $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_ok"));
         clearInterval(checkInterval);
     });
 }
