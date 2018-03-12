@@ -11,14 +11,11 @@ function message() {
 function main() {
     var regex = /https:\/\/www.wakanim.tv\/fr\/v2\/catalogue\/episode\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
 
-    var isLoggedIn = false;
     chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
-            isLoggedIn = false;
+            message();
+            $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login'));
         } else {
-            isLoggedIn = true;
-        }
-        if (isLoggedIn == true) {
             if (regex.test(document.documentURI)) {
                 var series_title = $('.episode_title').text();
                 var episode_number = $('.episode_subtitle span span').text();
