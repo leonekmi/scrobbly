@@ -35,6 +35,7 @@ function scrobbleAnime(animeId, episode) {
             };
         fetch(url, options);
         $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_ok"));
+        clearInterval(checkInterval);
     });
 }
 
@@ -217,6 +218,63 @@ function chooseAnime(result, series_title) {
     });
 }
 
+/* Reference to the pausable/resumable timer */
+var progressionTimer;
+/* Reference to the interval used to check the playing status */
+var checkInterval;
+var interval_delay = 5000;
+
+/* Timer class */
+function Timer(callback, delay, ...params) {
+    var timerId, start, remaining = delay, paused;
+
+    this.pause = function() {
+        window.clearTimeout(timerId);
+        remaining -= new Date() - start;
+        paused = true;
+    };
+
+    this.resume = function() {
+        start = new Date();
+        window.clearTimeout(timerId);
+        timerId = window.setTimeout(callback, remaining, ...params);
+        paused = false;
+    };
+
+    this.isPaused = function() { return paused; };
+
+    this.getRemaining = function() { return remaining; };
+
+    this.setRemaining = function(time) { remaining = time; };
+
+    this.resume();
+}
+
+/* Calls background script using this tab's title to check if there is audio playing in it or not */
+function checkPlayingStatus() {
+    console.log("checking playing status now");
+
+    //send message to background script so that it can check the playing status of the current tab
+    chrome.runtime.sendMessage({action: "checkAudioPlaying"});
+}
+
+/* Listens for response from background script */
+chrome.runtime.onMessage.addListener(function(request, sender) { 
+    if(request.action == "audioPlayingResponse") {
+
+        var audioPlaying = request.response;
+
+        /* Pause timer if nothing is playing, and resume it if it started again */
+        if(!audioPlaying && !progressionTimer.isPaused()) {
+                console.log("Timer paused!");
+                progressionTimer.pause();
+        } else if(audioPlaying && progressionTimer.isPaused()) {
+                console.log("Timer resumed!");
+                progressionTimer.resume();
+        }
+    }
+});
+
 function initScrobble(series_title, episode_number, prepend_message) {
     var query = `
     query ($id: Int, $page: Int, $search: String) {
@@ -267,16 +325,21 @@ function initScrobble(series_title, episode_number, prepend_message) {
                     jsonresponse2.then(function(result2) {
                         if (result2.data.Page.media[0].mediaListEntry == null) {
                             $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_in_not_in_al", [(duration / 4 * 3)]));
-                            setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                            //instead of setTimeout, create a new Timer object and save it to a variable */
+                            progressionTimer = new Timer(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                            //Also set an interval to check periodically if anything is playing
+                            checkInterval = setInterval(checkPlayingStatus, interval_delay);
                         } else {
                             if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
                                 $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("already_watched"));
                             } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                 $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_in_normal", [(duration / 4 * 3)]));
-                                setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                                progressionTimer = new Timer(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                                checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                 $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage("appName") + ' : ' + chrome.i18n.getMessage("scrobbling_in_jumped", [(duration / 4 * 3)]));
-                                setTimeout(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                                progressionTimer = new Timer(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                                checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else {
                                 console.error("Ehhhh....");
                             };
