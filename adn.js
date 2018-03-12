@@ -9,14 +9,11 @@ function message() {
 }
 
 function main() {
-    var isLoggedIn = false;
     chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
-            isLoggedIn = false;
+            message();
+            $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login'));
         } else {
-            isLoggedIn = true;
-        }
-        if (isLoggedIn == true) {
             var regex = /http:\/\/animedigitalnetwork.fr\/video\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
             if (regex.test(document.documentURI)) {
                 var series_title = $('.adn-big-title h1 a').text().replace('Nouvelle Saison', '');

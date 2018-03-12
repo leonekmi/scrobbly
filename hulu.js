@@ -11,14 +11,11 @@ function message() {
 function main() {
     var regex = /https:\/\/www.hulu.com\/watch\/([0-9]+)/;
 
-    var isLoggedIn = false;
     chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
-            isLoggedIn = false;
+            message();
+            $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login'));
         } else {
-            isLoggedIn = true;
-        }
-        if (isLoggedIn == true) {
             if (regex.test(document.documentURI)) {
                 var title = $('title').text();
                 var regex1 = /Watch\s*(.*?)\s*Season/g;
