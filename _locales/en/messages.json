@@ -75,6 +75,9 @@
     "altauth_not_configured": {
         "message": "You don't configured the alternative authentification"
     },
+    "please_login": {
+        "message": "You must login to Anilist to use Anilist Scrobbler, login with the extension icon at the right top corner."
+    },
     "popup_login": {
         "message": "Login with AniList",
         "description": "Login button"

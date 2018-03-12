@@ -75,6 +75,9 @@
     "altauth_not_configured": {
         "message": "Vous n'avez pas configuré l'authentification alternative"
     },
+    "please_login": {
+        "message": "Vous devez vous connecter pour utiliser Anilist Scrobbler, connectez-vous avec l'icône de l'extension en haut à droite."
+    },
     "popup_login": {
         "message": "Se connecter avec AniList",
         "description": "Bouton de connexion"
