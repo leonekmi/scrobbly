@@ -31,7 +31,6 @@ function main() {
                     var series_title = data.getElementsByTagName('series_title')[0].innerHTML;
                     series_title = series_title.replace(regex2, '');
                     series_title = series_title.replace(regex3, '');
-                    console.log(series_title);
                     var episode_number = data.getElementsByTagName('episode_number')[0].innerHTML;
 
                     initScrobble(series_title, episode_number, message);
