@@ -1,9 +1,6 @@
 /*
 Get Metadata from an episode of Crunchyroll with Anilist Scrobbler
 (c) leonekmi 2017-2018
-
-TODO lIST :
-Line 42
 */
 
 function message() {
@@ -13,6 +10,8 @@ function message() {
 
 function main() {
     var regex = /http:\/\/www.crunchyroll.com\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
+    var regex2 = /\((Season|Saison) ([0-9])\)/;
+    var regex3 = /(Season|Saison) ([0-9])/;
 
     chrome.storage.local.get('access_token', function(items) {
         if (typeof items['access_token'] == 'undefined') {
@@ -30,7 +29,9 @@ function main() {
                 }
                 $.get('http://www.crunchyroll.com/xml?req=RpcApiVideoPlayer_GetMediaMetadata&media_id=' + episodeId, function(data) {
                     var series_title = data.getElementsByTagName('series_title')[0].innerHTML;
-                    // TODO : Crunchyroll add Season 1/2/3/whatever to series title, which makes impossible search for series on Anilist
+                    series_title = series_title.replace(regex2, '');
+                    series_title = series_title.replace(regex3, '');
+                    console.log(series_title);
                     var episode_number = data.getElementsByTagName('episode_number')[0].innerHTML;
 
                     initScrobble(series_title, episode_number, message);

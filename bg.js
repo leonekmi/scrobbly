@@ -1,3 +1,5 @@
+//Delete cache
+buildCache();
 //Listens for messages from content scripts
 chrome.runtime.onMessage.addListener(function(request, sender) {
     if(request.action == 'checkAudioPlaying') {

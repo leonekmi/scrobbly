@@ -26,7 +26,7 @@
         }
     },
     "background": {
-        "scripts": ["jquery.js", "updater.js", "bg.js"]
+        "scripts": ["jquery.js", "helpers.js", "updater.js", "bg.js"]
     },
     "browser_action": {
         "default_icon": "img/logo_al.png",

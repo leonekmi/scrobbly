@@ -48,6 +48,11 @@ function show_modal() {
         .modal('show');
 }
 
+function delete_cache() {
+    chrome.storage.local.remove('cache_entries');
+    alert(chrome.i18n.getMessage('settings_delete_cache_ok'));
+}
+
 function restore_options() {
     chrome.storage.sync.get({
         title: 'romaji',
@@ -62,7 +67,6 @@ function restore_options() {
     }, function(items) {
         $('#titles')
             .dropdown('set selected', items.title);
-        console.log(items.ignore_cr);
         if (items.ignore_adn == true) {
             $('#ignore_adn').attr('checked', 'checked');
         }
@@ -99,6 +103,12 @@ function restore_options() {
                 }
             });
     });
+    $('#delete_cache')
+        .popup({
+            title   : chrome.i18n.getMessage('settings_delete_cache_popup_title'),
+            content : chrome.i18n.getMessage('settings_delete_cache_popup_content')
+        })
+    ;
 }
 var adn_message = chrome.i18n.getMessage('settings_ignore', ['Anime Digital Network']);
 $('#adn_ignore label').text(adn_message);
@@ -134,3 +144,5 @@ document.getElementById('save').addEventListener('click',
     save_options);
 document.getElementById('delete').addEventListener('click',
     show_modal);
+document.getElementById('delete_cache').addEventListener('click',
+    delete_cache);

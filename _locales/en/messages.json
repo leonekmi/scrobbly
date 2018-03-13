@@ -42,6 +42,20 @@
         "message": "Delete login",
         "description": "Title of the modal and button label"
     },
+    "settings_delete_cache": {
+        "message": "Delete selection cache",
+        "description": "Button label"
+    },
+    "settings_delete_cache_ok": {
+        "message": "Deleted selection cache !",
+        "description": "Message"
+    },
+    "settings_delete_cache_popup_title": {
+        "message": "Selection cache ?"
+    },
+    "settings_delete_cache_popup_content": {
+        "message": "This cache is here to avoid requesting the name of the anime you're watching anytime, he is destroyed at navigator close but you can force delete here."
+    },
     "settings_delete_login_modal": {
         "message": "The connection with AniList will be terminated and you will need to relog.",
         "description": "Modal content"

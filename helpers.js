@@ -45,7 +45,7 @@ function retrieveWindowVariables(variables) {
     var scriptContent = '';
     for (var i = 0; i < variables.length; i++) {
         var currVariable = variables[i];
-        scriptContent += 'if (typeof ' + currVariable + ' !== \'undefined\') $(\'body\').attr(\'tmp_\' + currVariable + \'\', ' + currVariable + ');\n'
+        scriptContent += 'if (typeof ' + currVariable + ' !== \'undefined\') $(\'body\').attr(\'tmp_' + currVariable + '\', ' + currVariable + ');\n'
     }
 
     var script = document.createElement('script');
@@ -164,6 +164,23 @@ function getCacheEntry(series_title) {
     });
 }
 
+function removeCacheEntry(entry_name) {
+    return new Promise(resolve => {
+        chrome.storage.local.get({
+            cache_entries: []
+        }, function(items) {
+            var cache = items.cache_entries;
+            delete cache[entry_name];
+            chrome.storage.local.set({
+                cache_entries: cache
+            }, function() {
+                console.log('Deleted ' + entry_name + ' from cache');
+                resolve(true);
+            });
+        })
+    });
+}
+
 function setCacheEntry(series_title, entry) {
     return new Promise(resolve => {
         chrome.storage.local.get({
@@ -207,6 +224,7 @@ function chooseAnime(result, series_title) {
                         });
                         var temp_choose = promptAnime(prompt_message);
                         temp_choose.then(function(prompt_res) {
+                            setCacheEntry(series_title, result.data.Page.media[prompt_res].duration);
                             resolve([prompt_res, result.data.Page.media[prompt_res].duration]);
                         });
                     });

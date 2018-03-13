@@ -42,6 +42,20 @@
         "message": "Supprimer la connexion",
         "description": "Titre du modal et libellé du bouton"
     },
+    "settings_delete_cache": {
+        "message": "Supprimer le cache de séléction",
+        "description": "Libellé du bouton"
+    },
+    "settings_delete_cache_ok": {
+        "message": "Cache de sélection supprimé !",
+        "description": "Message ok"
+    },
+    "settings_delete_cache_popup_title": {
+        "message": "Cache de sélection ?"
+    },
+    "settings_delete_cache_popup_content": {
+        "message": "Ce cache permet d'éviter de redemander à chaque fois le nom exact de l'anime quand l'extension vous le demande, ce cache s'efface à la fermeture du navigateur mais vous pouvez forcer sa suppression ici."
+    },
     "settings_delete_login_modal": {
         "message": "La connexion au compte Anilist sera rompue et une reconnexion sera nécessaire.",
         "description": "Contenu du modal"
