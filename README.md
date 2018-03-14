@@ -36,7 +36,7 @@ Clone this repository : `git clone https://github.com/leonekmi/anilist-scrobbler
 
 #### On Firefox
 
-_On Firefox (excluding [Firefox Developer and Nightly](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox#w_what-are-my-options-if-i-want-to-use-an-unsigned-add-on-advanced-users)), we cannot load an unpacked/unsigned extension for permanent._
+_On Firefox (except for [Firefox Developer and Nightly](https://support.mozilla.org/en-US/kb/add-on-signing-in-firefox#w_what-are-my-options-if-i-want-to-use-an-unsigned-add-on-advanced-users)), we cannot load an unpacked/unsigned extension for permanent._
 
 ##### Using `web-ext` tool
 
