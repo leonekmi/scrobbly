@@ -43,23 +43,23 @@
         },
         {
             "matches": ["*://www.crunchyroll.com/*"],
-            "js": ["jquery.js", "helpers.js", "crunchyroll.js"]
+            "js": ["jquery.js", "helpers.js", "websites/crunchyroll.js"]
         },
         {
             "matches": ["*://www.wakanim.tv/*"],
-            "js": ["jquery.js", "helpers.js", "wakanim.js"]
+            "js": ["jquery.js", "helpers.js", "websites/wakanim.js"]
         },
         {
             "matches": ["*://animedigitalnetwork.fr/*"],
-            "js": ["jquery.js", "helpers.js", "adn.js"]
+            "js": ["jquery.js", "helpers.js", "websites/adn.js"]
         },
         {
             "matches": ["*://www.hulu.com/*"],
-            "js": ["jquery.js", "helpers.js", "hulu.js"]
+            "js": ["jquery.js", "helpers.js", "websites/hulu.js"]
         },
         {
             "matches": ["*://www.netflix.com/*"],
-            "js": ["jquery.js", "helpers.js", "netflix.js"]
+            "js": ["jquery.js", "helpers.js", "websites/netflix.js"]
         }
     ],
     "icons": {
