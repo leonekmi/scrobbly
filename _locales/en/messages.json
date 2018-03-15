@@ -141,6 +141,9 @@
             }
         }
     },
+    "scrobble_now": {
+        "message": "Scrobble now"
+    },
     "scrobbling_not_in_al": {
         "message": "There is no result for this anime in AniList, cannot scrobble."
     },

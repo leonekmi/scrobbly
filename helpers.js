@@ -241,6 +241,9 @@ var progressionTimer;
 /* Reference to the interval used to check the playing status */
 var checkInterval;
 var interval_delay = 5000;
+/* Reference to the animeId and episode number outside initScrobble for specifig usages */
+var animeId;
+var epNumber;
 
 /* Timer class */
 function Timer(callback, delay, ...params) {
@@ -293,6 +296,15 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
     }
 });
 
+window.addEventListener("message", (event) => {
+    if (event.source == window &&
+        event.data &&
+        event.data.direction == "from-page-script") {
+        console.log('Immediate scrobble');
+        scrobbleAnime(animeId, epNumber);
+    }
+  });
+
 function initScrobble(series_title, episode_number, prepend_message) {
     var query = `
     query ($id: Int, $page: Int, $search: String) {
@@ -337,31 +349,39 @@ function initScrobble(series_title, episode_number, prepend_message) {
             choose.then(function(data_choose) {
                 var anime_choose = data_choose[0];
                 var duration = data_choose[1];
+                animeId = result.data.Page.media[anime_choose].id;
+                epNumber = episode_number;
                 var temp_response = getAnimeProgress(result.data.Page.media[anime_choose].id);
                 temp_response.then(function(data) {
                     var jsonresponse2 = data.json();
                     jsonresponse2.then(function(result2) {
                         if (result2.data.Page.media[0].mediaListEntry == null) {
-                            $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]));
-                            //instead of setTimeout, create a new Timer object and save it to a variable */
+                            $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
+                            //instead of setTimeout, create a new Timer object and save it to a variable
                             progressionTimer = new Timer(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                             //Also set an interval to check periodically if anything is playing
                             checkInterval = setInterval(checkPlayingStatus, interval_delay);
                         } else {
                             if (episode_number <= result2.data.Page.media[0].mediaListEntry.progress) {
-                                $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('already_watched'));
+                                $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('already_watched'));
                             } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_normal', [(duration / 4 * 3)]));
+                                $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_normal', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                 progressionTimer = new Timer(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                 checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
-                                $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_jumped', [(duration / 4 * 3)]));
+                                $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_jumped', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                 progressionTimer = new Timer(scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                 checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else {
                                 console.error('Ehhhh....');
                             };
                         }
+                        $('#al-scrobblenow').click(function () {
+                            window.postMessage({
+                                direction: "from-page-script",
+                                message: "Message from the page"
+                              }, "*");
+                        });
                     });
                 });
             });

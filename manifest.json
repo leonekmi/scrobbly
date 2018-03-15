@@ -16,7 +16,9 @@
         "notifications",
         "tabs"
     ],
-    "options_page": "pages/options.html",
+    "options_ui": {
+        "page" : "pages/options.html"
+    },
     "default_locale": "en",
     "applications": {
         "gecko": {

@@ -141,6 +141,9 @@
             }
         }
     },
+    "scrobble_now": {
+        "message": "Scrobbler maintenant"
+    },
     "scrobbling_not_in_al": {
         "message": "Il n'y a aucun résultat dans le répertoire d'Anilist, impossible de scrobbler."
     },
