@@ -2,6 +2,8 @@
 
 [![Licence Creative Commons](https://i.creativecommons.org/l/by-sa/4.0/80x15.png)](http://creativecommons.org/licenses/by-sa/4.0/)
 [![shields.io](https://img.shields.io/badge/browsers-chromium--based%2C%20firefox-green.svg)](https://shields.io)
+![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gochjbmioibanjdppcempakcjcfaconi.svg)
+
 
 ## Connect to Anilist and "scrobble your animes"
 
