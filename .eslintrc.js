@@ -20,6 +20,9 @@ module.exports = {
     },
     "extends": "eslint:recommended",
     "rules": {
+        "no-console": [
+            "warn"
+        ],
         "indent": [
             "error",
             4
