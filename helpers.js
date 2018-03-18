@@ -78,17 +78,13 @@ function buildCache() {
 
 // TODO : Shit the cache it doesn't remember the animeid
 
-function getCacheEntry(series_title) {
+function getCacheEntry(cache_title, series_title) {
     return new Promise(resolve => {
         chrome.storage.local.get({
             cache_entries: 'empty'
         }, function(items) {
-            if (items.cache_entries == 'empty') {
-                buildCache();
-            }
-            console.log(items.cache_entries);
             if (items.cache_entries[series_title]) {
-                resolve(items.cache_entries[series_title]);
+                resolve(items.cache_entries[cache_title][series_title]);
             } else {
                 resolve(false);
             }
@@ -96,13 +92,13 @@ function getCacheEntry(series_title) {
     });
 }
 
-function removeCacheEntry(entry_name) {
+function removeCacheEntry(cache_title, entry_name) {
     return new Promise(resolve => {
         chrome.storage.local.get({
             cache_entries: []
         }, function(items) {
             var cache = items.cache_entries;
-            delete cache[entry_name];
+            delete cache[cache_title][entry_name];
             chrome.storage.local.set({
                 cache_entries: cache
             }, function() {
@@ -113,13 +109,13 @@ function removeCacheEntry(entry_name) {
     });
 }
 
-function setCacheEntry(series_title, entry) {
+function setCacheEntry(cache_title, series_title, entry) {
     return new Promise(resolve => {
         chrome.storage.local.get({
             cache_entries: 'empty'
         }, function(items) {
             var cache = items.cache_entries;
-            cache[series_title] = entry;
+            cache[cache_title][series_title] = entry;
             console.log(cache);
             chrome.storage.local.set({
                 cache_entries: cache

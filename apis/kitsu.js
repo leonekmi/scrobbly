@@ -69,7 +69,7 @@ function Kitsu(access_token, userid) {
 
     this.chooseAnime = function (result, series_title) {
         return new Promise(resolve => {
-            var cache = getCacheEntry(series_title);
+            var cache = getCacheEntry('kitsu', series_title);
             cache.then(function (cache) {
                 if (cache) {
                     console.log(cache);
@@ -84,23 +84,22 @@ function Kitsu(access_token, userid) {
                         titlePreference.then(function (titlePreference) {
                             result.data.forEach(function (item, index) {
                                 var temp_str;
-                                /*if (item.titles[titlePreference] != null) {
-                                    temp_str = '\n[' + index + '] ' + item.title[titlePreference];
-                                } else {*/
-                                temp_str = '\n[' + index + '] ' + item.attributes.titles.en_jp;
-                                //}
+                                if (item.titles[titlePreference] != null) {
+                                    temp_str = '\n[' + index + '] ' + item.title[titlePreference.replace('english', 'en_en').replace('romaji', 'en_ja').replace('native', 'ja_ja')];
+                                } else {
+                                    temp_str = '\n[' + index + '] ' + item.attributes.titles.en_jp;
+                                }
                                 prompt_message = prompt_message.concat(temp_str);
                             });
                             var temp_choose = promptAnime(prompt_message);
                             temp_choose.then(function (prompt_res) {
-                                console.log(result.data[prompt_res]);
-                                // setCacheEntry(series_title, result.data[prompt_res].attributes.episodeLength);
-                                resolve([prompt_res, result.data[prompt_res].attributes.episodeLength]);
+                                setCacheEntry('kitsu', series_title, [result.data[prompt_res].id, result.data[prompt_res].attributes.episodeLength]);
+                                resolve([prompt_res, [result.data[prompt_res].id, result.data[prompt_res].attributes.episodeLength]]);
                             });
                         });
                     } else {
                         console.log(result.data[0]);
-                        resolve([0, result.data[0].attributes.episodeLength]);
+                        resolve([0, [result.data[prompt_res].id, result.data[prompt_res].attributes.episodeLength]]);
                     };
                 }
             });
@@ -125,10 +124,10 @@ function Kitsu(access_token, userid) {
                 choose.then(function (data_choose) {
                     console.log(data_choose);
                     var anime_choose = data_choose[0];
-                    var duration = data_choose[1];
-                    animeId = result.data[anime_choose].id;
+                    var duration = data_choose[1][1];
+                    animeId = data_choose[1][0];
                     //epNumber = episode_number;
-                    var temp_response = this.kitsuapi.getAnimeProgress(result.data[anime_choose].id);
+                    var temp_response = this.kitsuapi.getAnimeProgress(animeId);
                     temp_response.then(function (data) {
                         var jsonresponse2 = data.json();
                         jsonresponse2.then(function (result2) {
@@ -136,7 +135,7 @@ function Kitsu(access_token, userid) {
                                 $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('kitsu_issue'));
                                 //$('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                 //instead of setTimeout, create a new Timer object and save it to a variable
-                                //progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data[anime_choose].id, episode_number);
+                                //progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId, episode_number);
                                 //Also set an interval to check periodically if anything is playing
                                 //checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else {
@@ -147,7 +146,7 @@ function Kitsu(access_token, userid) {
                                         $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('unknown_duration') + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                     } else {
                                         $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_in_normal', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
-                                        progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data[anime_choose].id, episode_number);
+                                        progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId, episode_number);
                                         checkInterval = setInterval(checkPlayingStatus, interval_delay);
                                     }
                                 } else if (episode_number >= result2.data[0].attributes.progress + 1) {
@@ -155,7 +154,7 @@ function Kitsu(access_token, userid) {
                                         $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('unknown_duration') + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                     } else {
                                         $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_in_jumped', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
-                                        progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data[anime_choose].id, episode_number);
+                                        progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId, episode_number);
                                         checkInterval = setInterval(checkPlayingStatus, interval_delay);
                                     }
                                 } else {
