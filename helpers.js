@@ -181,14 +181,20 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         var audioPlaying = request.response;
 
         /* Pause timer if nothing is playing, and resume it if it started again */
-        if(!audioPlaying && !progressionTimer.isPaused()) {
-                console.log('Timer paused!');
-                progressionTimer.pause();
-                progressionTimer2.pause();
-        } else if(audioPlaying && progressionTimer.isPaused()) {
-                console.log('Timer resumed!');
-                progressionTimer.resume();
-                progressionTimer2.resume();
+        // To avoid some weird conflicts, i split timers, see for fusion
+        if(!audioPlaying && typeof progressionTimer == 'object' && !progressionTimer.isPaused()) {
+            console.log('Anilist Timer paused!');
+            progressionTimer.pause();
+        } else if (audioPlaying && typeof progressionTimer == 'object' && progressionTimer.isPaused()) {
+            console.log('Anilist Timer resumed!');
+            progressionTimer.resume();
+        }
+        if(!audioPlaying && typeof progressionTimer2 == 'object' && !progressionTimer2.isPaused()) {
+            console.log('Kitsu Timer paused!');
+            progressionTimer2.pause();
+        } else if (audioPlaying && typeof progressionTimer2 == 'object' && progressionTimer2.isPaused()) {
+            console.log('Kitsu Timer resumed!');
+            progressionTimer2.resume();
         }
     }
 });
@@ -198,8 +204,14 @@ window.addEventListener("message", (event) => {
         event.data &&
         event.data.direction == "from-page-script") {
         console.log('Immediate scrobble');
-        anilistapi.scrobbleAnime(animeId, epNumber);
-        kitsuapi.scrobbleAnime(animeId, epNumber)
+        if (anilistapi != 'notready') {
+            anilistapi.scrobbleAnime(animeId, epNumber);
+        }
+        //anilistapi.scrobbleAnime(animeId, epNumber);
+        if (kitsuapi != 'notready') {
+            kitsuapi.scrobbleAnime(animeId, epNumber)
+        }
+        //kitsuapi.scrobbleAnime(animeId, epNumber)
     }
   });
 
@@ -208,10 +220,15 @@ function initScrobble(series_title, episode_number, prepend_message) {
     epNumber = episode_number;
     if (anilistapi != 'notready') {
         anilistapi.initScrobble(series_title, episode_number);
+    } else {
+        $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login'));
     }
     //anilistapi.initScrobble(series_title, episode_number);
     if (kitsuapi != 'notready') {
         kitsuapi.initScrobble(series_title, episode_number);
+    } else {
+        $('#anilist_scrobbler_notice').append('<br><div id="anilist_scrobbler_notice_kitsu"></div>');
+        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('please_login'));
     }
     //kitsuapi.initScrobble(series_title, episode_number);
 }

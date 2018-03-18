@@ -11,21 +11,14 @@ function message() {
 function main() {
     var regex = /https:\/\/www.hulu.com\/watch\/([0-9]+)/;
 
-    chrome.storage.local.get('access_token', function(items) {
-        if (typeof items['access_token'] == 'undefined') {
-            message();
-            $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login'));
-        } else {
-            if (regex.test(document.documentURI)) {
-                var title = $('title').text();
-                var regex1 = /Watch\s*(.*?)\s*Season/g;
-                var regex2 = /Episode\s*(.*?)\s*\| Hulu/g;
-                var series_title = regex1.exec(title)[1];
-                var episode_number = regex2.exec(title)[1];
-                initScrobble(series_title, episode_number, message);
-            }
-        }
-    });
+    if (regex.test(document.documentURI)) {
+        var title = $('title').text();
+        var regex1 = /Watch\s*(.*?)\s*Season/g;
+        var regex2 = /Episode\s*(.*?)\s*\| Hulu/g;
+        var series_title = regex1.exec(title)[1];
+        var episode_number = regex2.exec(title)[1];
+        initScrobble(series_title, episode_number, message);
+    }
 }
 
 $(window).on('load', function() {

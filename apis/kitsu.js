@@ -40,7 +40,7 @@ function Kitsu(access_token, userid) {
         };
 
         fetch(url1, options1).then(handleResponse);
-        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_ok'));
+        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_ok'));
         clearInterval(checkInterval);
     };
 
@@ -77,7 +77,7 @@ function Kitsu(access_token, userid) {
                 } else {
                     var anime_choose;
                     if (result.data.length == 0) {
-                        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_not_in_al'));
+                        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_not_in_al'));
                     } else if (result.data.length > 1) {
                         var prompt_message = chrome.i18n.getMessage('multiple_entries');
                         var titlePreference = getTitlePreferencesHelper();
@@ -94,7 +94,7 @@ function Kitsu(access_token, userid) {
                             var temp_choose = promptAnime(prompt_message);
                             temp_choose.then(function (prompt_res) {
                                 console.log(result.data[prompt_res]);
-                                setCacheEntry(series_title, result.data[prompt_res].attributes.episodeLength);
+                                // setCacheEntry(series_title, result.data[prompt_res].attributes.episodeLength);
                                 resolve([prompt_res, result.data[prompt_res].attributes.episodeLength]);
                             });
                         });
