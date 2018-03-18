@@ -87,7 +87,7 @@ function Anilist(access_token) {
             var cache = getCacheEntry(series_title);
             cache.then(function(cache) {
                 if (cache) {
-                    resolve([0, cache.duration]);
+                    resolve([0, cache]);
                 } else {
                     var anime_choose;
                     if (result.data.Page.media.length == 0) {
@@ -159,20 +159,20 @@ function Anilist(access_token) {
             //prepend_message();
             var jsonresponse = response.json();
             jsonresponse.then(function(result) {
-                var choose = this.chooseAnime(result, series_title);
+                var choose = this.anilistapi.chooseAnime(result, series_title);
                 choose.then(function(data_choose) {
                     var anime_choose = data_choose[0];
                     var duration = data_choose[1];
                     animeId = result.data.Page.media[anime_choose].id;
                     //epNumber = episode_number;
-                    var temp_response = this.getAnimeProgress(result.data.Page.media[anime_choose].id);
+                    var temp_response = this.anilistapi.getAnimeProgress(result.data.Page.media[anime_choose].id);
                     temp_response.then(function(data) {
                         var jsonresponse2 = data.json();
                         jsonresponse2.then(function(result2) {
                             if (result2.data.Page.media[0].mediaListEntry == null) {
                                 $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                 //instead of setTimeout, create a new Timer object and save it to a variable
-                                progressionTimer = new Timer(this.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                                progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                 //Also set an interval to check periodically if anything is playing
                                 checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else {
@@ -180,11 +180,11 @@ function Anilist(access_token) {
                                     $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('already_watched'));
                                 } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                     $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_normal', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
-                                    progressionTimer = new Timer(this.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                                    progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                     checkInterval = setInterval(checkPlayingStatus, interval_delay);
                                 } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                     $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_jumped', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
-                                    progressionTimer = new Timer(this.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
+                                    progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, result.data.Page.media[anime_choose].id, episode_number);
                                     checkInterval = setInterval(checkPlayingStatus, interval_delay);
                                 } else {
                                     console.error('Ehhhh....');

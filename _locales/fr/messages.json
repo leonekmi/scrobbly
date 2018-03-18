@@ -153,6 +153,15 @@
     "api_error": {
         "message": "L'API d'Anilist renvoie une erreur, impossible de scrobbler."
     },
+    "kitsu_login": {
+        "message": "Se connecter à Kitsu"
+    },
+    "username": {
+        "message": "Pseudo"
+    },
+    "password": {
+        "message": "Mot de passe"
+    },
     "updated": {
         "message": "La mise à jour $VERSION$ a été installée avec succès !",
         "placeholders": {

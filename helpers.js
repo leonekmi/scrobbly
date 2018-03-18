@@ -7,6 +7,16 @@ var anilistapi;
 chrome.storage.local.get('access_token', function(items) {
     if (typeof items.access_token == 'string') {
         anilistapi = new Anilist(items.access_token);
+    } else {
+        anilistapi = 'notready';
+    }
+});
+var kitsuapi;
+chrome.storage.local.get(['kitsu_at', 'kitsu_userid'], function(items) {
+    if (typeof items.kitsu_at == 'string') {
+        kitsuapi = new Kitsu(items.kitsu_at, items.kitsu_userid);
+    } else {
+        kitsuapi = 'notready';
     }
 });
 
@@ -66,6 +76,8 @@ function buildCache() {
     });
 }
 
+// TODO : Shit the cache it doesn't remember the animeid
+
 function getCacheEntry(series_title) {
     return new Promise(resolve => {
         chrome.storage.local.get({
@@ -120,7 +132,7 @@ function setCacheEntry(series_title, entry) {
 }
 
 /* Reference to the pausable/resumable timer */
-var progressionTimer;
+var progressionTimer, progressionTimer2;
 /* Reference to the interval used to check the playing status */
 var checkInterval;
 var interval_delay = 5000;
@@ -172,9 +184,11 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         if(!audioPlaying && !progressionTimer.isPaused()) {
                 console.log('Timer paused!');
                 progressionTimer.pause();
+                progressionTimer2.pause();
         } else if(audioPlaying && progressionTimer.isPaused()) {
                 console.log('Timer resumed!');
                 progressionTimer.resume();
+                progressionTimer2.resume();
         }
     }
 });
@@ -185,12 +199,20 @@ window.addEventListener("message", (event) => {
         event.data.direction == "from-page-script") {
         console.log('Immediate scrobble');
         anilistapi.scrobbleAnime(animeId, epNumber);
+        kitsuapi.scrobbleAnime(animeId, epNumber)
     }
   });
 
 function initScrobble(series_title, episode_number, prepend_message) {
     prepend_message();
     epNumber = episode_number;
-    anilistapi.initScrobble(series_title, episode_number);
+    if (anilistapi != 'notready') {
+        anilistapi.initScrobble(series_title, episode_number);
+    }
+    //anilistapi.initScrobble(series_title, episode_number);
+    if (kitsuapi != 'notready') {
+        kitsuapi.initScrobble(series_title, episode_number);
+    }
+    //kitsuapi.initScrobble(series_title, episode_number);
 }
 console.log('Anilist Scrobbler init done');
