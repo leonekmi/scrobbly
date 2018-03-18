@@ -1,0 +1,23 @@
+{
+    "data": {
+    	"type": "libraryEntries",
+        "attributes": {
+            "progress": 1,
+            "status": "current"
+        },
+        "relationships": {
+            "anime": {
+                "data": {
+                	"type": "anime",
+                    "id": "12754"
+                }
+            },
+            "user": {
+                "data": {
+                    "type": "users",
+                    "id": "13480"
+                }
+            }
+        }
+    }
+}

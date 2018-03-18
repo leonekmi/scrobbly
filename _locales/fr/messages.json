@@ -2,6 +2,15 @@
     "appName": {
         "message": "Anilist Scrobbler"
     },
+    "otherAppName": {
+        "message": "$SITE$ Scrobbler",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "Kitsu"
+            }
+        }
+    },
     "appDesc": {
         "message": "Scrobblez vos animes sur Anilist.co"
     },
@@ -140,6 +149,12 @@
                 "example": "15"
             }
         }
+    },
+    "kitsu_issue": {
+        "message": "Un problème avec Kitsu empêche de scrobbler sur une série qui n'est pas déjà dans votre liste, merci de l'ajouter manuellement"
+    },
+    "unknown_duration": {
+        "message": "Le temps de l'épisode est inconnu, vous allez devoir cliquer sur Scrobbler maintenant manuellement."
     },
     "scrobble_now": {
         "message": "Scrobbler maintenant"
