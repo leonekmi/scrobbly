@@ -9,12 +9,10 @@
         "*://www.wakanim.tv/*",
         "*://animedigitalnetwork.fr/*",
         "*://leonekmi.twittolabel.fr/*",
-        "*://graphql.anilist.co/*",
         "*://www.hulu.com/*",
         "*://www.netflix.com/*",
         "storage",
-        "notifications",
-        "tabs"
+        "notifications"
     ],
     "options_ui": {
         "page" : "pages/options.html"
