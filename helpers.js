@@ -69,7 +69,8 @@ function promptAnime(prompt_message) {
 function buildCache() {
     chrome.storage.local.set({
         cache_entries: {
-            'empty set': 'first entry'
+            'anilist': {},
+            'kitsu': {}
         }
     }, function() {
         console.log('Cache builded');
@@ -81,9 +82,12 @@ function buildCache() {
 function getCacheEntry(cache_title, series_title) {
     return new Promise(resolve => {
         chrome.storage.local.get({
-            cache_entries: 'empty'
+            cache_entries: {
+                'anilist': {},
+                'kitsu': {}
+            }
         }, function(items) {
-            if (items.cache_entries[series_title]) {
+            if (items.cache_entries[cache_title][series_title]) {
                 resolve(items.cache_entries[cache_title][series_title]);
             } else {
                 resolve(false);
@@ -133,7 +137,7 @@ var progressionTimer, progressionTimer2;
 var checkInterval;
 var interval_delay = 5000;
 /* Reference to the animeId and episode number outside initScrobble for specific usages */
-var animeId;
+var animeId = {};
 var epNumber;
 
 /* Timer class */
@@ -200,14 +204,14 @@ window.addEventListener("message", (event) => {
         event.data &&
         event.data.direction == "from-page-script") {
         console.log('Immediate scrobble');
-        if (anilistapi != 'notready') {
-            anilistapi.scrobbleAnime(animeId, epNumber);
+        console.log(event);
+        console.log(animeId);
+        if (anilistapi != 'notready' && event.data.data == 'anilist') {
+            anilistapi.scrobbleAnime(animeId.anilist, epNumber);
         }
-        //anilistapi.scrobbleAnime(animeId, epNumber);
-        if (kitsuapi != 'notready') {
-            kitsuapi.scrobbleAnime(animeId, epNumber)
+        if (kitsuapi != 'notready' && event.data.data == 'kitsu') {
+            kitsuapi.scrobbleAnime(animeId.kitsu, epNumber)
         }
-        //kitsuapi.scrobbleAnime(animeId, epNumber)
     }
   });
 
@@ -219,13 +223,11 @@ function initScrobble(series_title, episode_number, prepend_message) {
     } else {
         $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login'));
     }
-    //anilistapi.initScrobble(series_title, episode_number);
     if (kitsuapi != 'notready') {
         kitsuapi.initScrobble(series_title, episode_number);
     } else {
-        $('#anilist_scrobbler_notice').append('<br><div id="anilist_scrobbler_notice_kitsu"></div>');
+        $('<div id="anilist_scrobbler_notice_kitsu"></div>').insertAfter($('#anilist_scrobbler_notice'));
         $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('please_login'));
     }
-    //kitsuapi.initScrobble(series_title, episode_number);
 }
 console.log('Anilist Scrobbler init done');

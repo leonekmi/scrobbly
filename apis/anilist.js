@@ -84,6 +84,7 @@ function Anilist(access_token) {
 
     this.chooseAnime = function(result, series_title) {
         return new Promise(resolve => {
+            console.log(result);
             var cache = getCacheEntry('anilist', series_title);
             cache.then(function(cache) {
                 if (cache) {
@@ -107,12 +108,12 @@ function Anilist(access_token) {
                             });
                             var temp_choose = promptAnime(prompt_message);
                             temp_choose.then(function(prompt_res) {
-                                setCacheEntry('anilist', series_title, [result.data.Page.media.id, result.data.Page.media[prompt_res].duration]);
-                                resolve([prompt_res, [result.data.Page.media.id, result.data.Page.media[prompt_res].duration]]);
+                                setCacheEntry('anilist', series_title, [result.data.Page.media[prompt_res].id, result.data.Page.media[prompt_res].duration]);
+                                resolve([prompt_res, [result.data.Page.media[prompt_res].id, result.data.Page.media[prompt_res].duration]]);
                             });
                         });
                     } else {
-                        resolve([0, [result.data.Page.media.id, result.data.Page.media[0].duration]]);
+                        resolve([0, [result.data.Page.media[0].id, result.data.Page.media[0].duration]]);
                     };
                 }
             });
@@ -163,16 +164,16 @@ function Anilist(access_token) {
                 choose.then(function(data_choose) {
                     var anime_choose = data_choose[0];
                     var duration = data_choose[1][1];
-                    animeId = data_choose[1][0];
+                    animeId.anilist = data_choose[1][0];
                     //epNumber = episode_number;
-                    var temp_response = this.anilistapi.getAnimeProgress(animeId);
+                    var temp_response = this.anilistapi.getAnimeProgress(animeId.anilist);
                     temp_response.then(function(data) {
                         var jsonresponse2 = data.json();
                         jsonresponse2.then(function(result2) {
                             if (result2.data.Page.media[0].mediaListEntry == null) {
                                 $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                 //instead of setTimeout, create a new Timer object and save it to a variable
-                                progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId, episode_number);
+                                progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId.anilist, episode_number);
                                 //Also set an interval to check periodically if anything is playing
                                 checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else {
@@ -180,11 +181,11 @@ function Anilist(access_token) {
                                     $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('already_watched'));
                                 } else if (episode_number == result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                     $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_normal', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
-                                    progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId, episode_number);
+                                    progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId.anilist, episode_number);
                                     checkInterval = setInterval(checkPlayingStatus, interval_delay);
                                 } else if (episode_number >= result2.data.Page.media[0].mediaListEntry.progress + 1) {
                                     $('#anilist_scrobbler_notice').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_jumped', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="al-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
-                                    progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId, episode_number);
+                                    progressionTimer = new Timer(this.anilistapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId.anilist, episode_number);
                                     checkInterval = setInterval(checkPlayingStatus, interval_delay);
                                 } else {
                                     console.error('Ehhhh....');
@@ -193,7 +194,8 @@ function Anilist(access_token) {
                             $('#al-scrobblenow').click(function () {
                                 window.postMessage({
                                     direction: "from-page-script",
-                                    message: "Message from the page"
+                                    message: "Message from the page",
+                                    data: "anilist"
                                   }, "*");
                             });
                         });
