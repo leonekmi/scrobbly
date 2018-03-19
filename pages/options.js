@@ -41,7 +41,7 @@ function show_modal() {
                 return true;
             },
             onApprove: function() {
-                chrome.storage.local.remove('access_token');
+                chrome.storage.local.remove(['access_token', 'kitsu_at', 'kitsu_userid']);
                 location.reload();
             }
         })

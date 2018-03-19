@@ -18,8 +18,7 @@ function localizeHtmlPage() {
         }
     }
 }
-localizeHtmlPage();
-$('#submitbtn').click(function() {
+function submitlogin() {
     var url = 'https://kitsu.io/api/oauth/token',
         options = {
             method: 'POST',
@@ -50,7 +49,7 @@ $('#submitbtn').click(function() {
                 function handleResponse2(data2) {
                     data2.json().then(function (data2) {
                         chrome.storage.local.set({'kitsu_at': data.access_token, 'kitsu_userid': data2.data[0].id}, function() {
-                            alert('Login OK');
+                            alert(chrome.i18n.getMessage('connected'));
                         });
                     });
                 }
@@ -61,4 +60,6 @@ $('#submitbtn').click(function() {
     }
 
     fetch(url, options).then(handleResponse);
-});
+}
+localizeHtmlPage();
+$('#submitbtn').click(submitlogin);

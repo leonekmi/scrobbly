@@ -66,7 +66,7 @@
         "message": "Ce cache permet d'éviter de redemander à chaque fois le nom exact de l'anime quand l'extension vous le demande, ce cache s'efface à la fermeture du navigateur mais vous pouvez forcer sa suppression ici."
     },
     "settings_delete_login_modal": {
-        "message": "La connexion au compte Anilist sera rompue et une reconnexion sera nécessaire.",
+        "message": "Les connexions avec vos animelists seront rompues et une reconnexion sera nécessaire.",
         "description": "Contenu du modal"
     },
     "settings_cancel": {

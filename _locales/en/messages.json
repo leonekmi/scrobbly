@@ -2,6 +2,15 @@
     "appName": {
         "message": "Anilist Scrobbler"
     },
+    "otherAppName": {
+        "message": "$SITE$ Scrobbler",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "Kitsu"
+            }
+        }
+    },
     "appDesc": {
         "message": "Scrobble your animes on Anilist.co"
     },
@@ -57,7 +66,7 @@
         "message": "This cache is here to avoid requesting the name of the anime you're watching anytime, he is destroyed at navigator close but you can force delete here."
     },
     "settings_delete_login_modal": {
-        "message": "The connection with AniList will be terminated and you will need to relog.",
+        "message": "The connection with animelist websites will be terminated and you will need to relogin.",
         "description": "Modal content"
     },
     "settings_cancel": {
@@ -141,6 +150,12 @@
             }
         }
     },
+    "kitsu_issue": {
+        "message": "An issue with Kitsu make impossible to add new series to anime list, please add manually for the first time."
+    },
+    "unknown_duration": {
+        "message": "The duration of this episode is unknown, you will have to click on Scrobble now."
+    },
     "scrobble_now": {
         "message": "Scrobble now"
     },
@@ -152,6 +167,9 @@
 	},
     "api_error": {
         "message": "The Anilist API returns an error, cannot scrobble your anime."
+    },
+    "kitsu_login": {
+        "message": "Login with Kitsu"
     },
     "updated": {
         "message": "The $VERSION$ update was successfully installed !",

@@ -15,7 +15,7 @@
             __MSG_settings_header__
             <div class="sub header">__MSG_kitsu_login__</div>
         </h2>
-        <form class="ui form">
+        <form onSubmit="submitlogin();" class="ui form">
             <div class="field">
               <label>__MSG_username__</label>
               <input type="text" id="login" name="login" placeholder="__MSG_username__">
@@ -26,7 +26,7 @@
             </div>
         </form>
         <br/>
-        <button id="submitbtn" class="ui teal button">test</button>
+        <button id="submitbtn" class="ui purple button">__MSG_kitsu_login__</button>
     </div>
     <script src="../jquery.js"></script>
     <script src="../kitsu_auth.js"></script>
