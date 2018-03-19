@@ -151,7 +151,7 @@
         }
     },
     "kitsu_issue": {
-        "message": "Un problème avec Kitsu empêche de scrobbler sur une série qui n'est pas déjà dans votre liste, merci de l'ajouter manuellement"
+        "message": "Un problème avec Kitsu empêche de scrobbler sur une série qui n'est pas déjà dans votre liste, merci de l'ajouter manuellement."
     },
     "unknown_duration": {
         "message": "Le temps de l'épisode est inconnu, vous allez devoir cliquer sur Scrobbler maintenant manuellement."

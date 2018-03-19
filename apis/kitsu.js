@@ -19,8 +19,32 @@ function Kitsu(access_token, userid) {
         function handleResponse(data) {
             data.json().then(function (json) {
                 if (json.data.length == 0) {
-                    // Kitsu API is bogus https://kitsu.io/feedback/bugs/p/create-a-library-entry-is-impossible-via-api
-                    console.warn('Warning ! For some reason, it is impossible to create a library entry with API, see https://kitsu.io/feedback/bugs/p/create-a-library-entry-is-impossible-via-api for details. If you think you have the solution, please open an issue/PR on GitHub.');
+                    var url2 = 'https://kitsu.io/api/edge/library-entries/';
+                    options1.method = 'POST';
+                    options1.body = JSON.stringify({
+                        data: {
+                            type: 'libraryEntries',
+                            attributes: {
+                                status: 'current',
+                                progress: episode
+                            },
+                            relationships: {
+                                anime: {
+                                    data: {
+                                        type: 'anime',
+                                        id: animeId
+                                    }
+                                },
+                                user: {
+                                    data: {
+                                        type: 'users',
+                                        id: userid
+                                    }
+                                }
+                            }
+                        }
+                    });
+                    fetch(url2, options1);
                 } else {
                     var url2 = 'https://kitsu.io/api/edge/library-entries/' + json.data[0].id;
                     options1.method = 'PATCH';
@@ -132,12 +156,11 @@ function Kitsu(access_token, userid) {
                         var jsonresponse2 = data.json();
                         jsonresponse2.then(function (result2) {
                             if (result2.data.length == 0) {
-                                $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('kitsu_issue'));
-                                //$('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="ks-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
+                                $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="ks-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
                                 //instead of setTimeout, create a new Timer object and save it to a variable
-                                //progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId.kitsu, episode_number);
+                                progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId.kitsu, episode_number);
                                 //Also set an interval to check periodically if anything is playing
-                                //checkInterval = setInterval(checkPlayingStatus, interval_delay);
+                                checkInterval = setInterval(checkPlayingStatus, interval_delay);
                             } else {
                                 if (episode_number <= result2.data[0].attributes.progress) {
                                     $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('already_watched'));
