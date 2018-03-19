@@ -12,7 +12,7 @@
         }
     },
     "appDesc": {
-        "message": "Scrobble your animes on Anilist.co"
+        "message": "Scrobble your animes on Anilist.co / Kitsu.io"
     },
     "settings_ignore": {
         "message": "Ignore $SITE$",
@@ -99,11 +99,23 @@
         "message": "You don't configured the alternative authentification"
     },
     "please_login": {
-        "message": "You must login to Anilist to use Anilist Scrobbler, login with the extension icon at the right top corner."
+        "message": "You must login to $SITE$ to use $SITE$ Scrobbler, login with the extension icon at the right top corner.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "Anilist"
+            }
+        }
     },
     "popup_login": {
-        "message": "Login with AniList",
-        "description": "Login button"
+        "message": "Login with $SITE$",
+        "description": "Login button",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "Anilist"
+            }
+        }
     },
     "popup_login_altauth": {
         "message": "Alternative login",
@@ -114,8 +126,14 @@
         "description": "Displayed when already logged in"
     },
     "multiple_entries": {
-        "message": "The AniList database has returned several results, please choose the anime you are watching :",
-        "description": "window.prompt when AniList returns several entries"
+        "message": "The $SITE$ database has returned several results, please choose the anime you are watching :",
+        "description": "window.prompt when $SITE$ returns several entries",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "Anilist"
+            }
+        }
     },
     "starting": {
         "message": "Starting..."
@@ -150,9 +168,6 @@
             }
         }
     },
-    "kitsu_issue": {
-        "message": "An issue with Kitsu make impossible to add new series to anime list, please add manually for the first time."
-    },
     "unknown_duration": {
         "message": "The duration of this episode is unknown, you will have to click on Scrobble now."
     },
@@ -160,16 +175,31 @@
         "message": "Scrobble now"
     },
     "scrobbling_not_in_al": {
-        "message": "There is no result for this anime in AniList, cannot scrobble."
+        "message": "There is no result for this anime in $SITE$ database, cannot scrobble.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "Anilist"
+            }
+        }
     },
 	"scrobbling_ok": {
 		"message": "Episode has been added to your animelist"
 	},
     "api_error": {
-        "message": "The Anilist API returns an error, cannot scrobble your anime."
+        "message": "The $SITE$ API returns an error, cannot scrobble your anime.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "Anilist"
+            }
+        }
     },
-    "kitsu_login": {
-        "message": "Login with Kitsu"
+    "email": {
+        "message": "E-Mail"
+    },
+    "password": {
+        "message": "Password"
     },
     "updated": {
         "message": "The $VERSION$ update was successfully installed !",
@@ -181,6 +211,6 @@
         }
     },
     "welcome": {
-        "message": "Welcome to Anilist Srobbler ! Login to Anilist with the popup at the top right corner of the browser !"
+        "message": "Welcome to Anilist Srobbler ! Login to Anilist or Kitsu.io with the popup at the top right corner of the browser !"
     }
 }
