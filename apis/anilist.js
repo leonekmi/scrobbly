@@ -112,7 +112,7 @@ function Anilist(access_token) {
                             });
                         });
                     } else {
-                        resolve([0, [result.data.Page.media.id, result.data.Page.media[prompt_res].duration]]);
+                        resolve([0, [result.data.Page.media.id, result.data.Page.media[0].duration]]);
                     };
                 }
             });

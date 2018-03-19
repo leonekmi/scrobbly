@@ -99,7 +99,7 @@ function Kitsu(access_token, userid) {
                         });
                     } else {
                         console.log(result.data[0]);
-                        resolve([0, [result.data[prompt_res].id, result.data[prompt_res].attributes.episodeLength]]);
+                        resolve([0, [result.data[prompt_res].id, result.data[0].attributes.episodeLength]]);
                     };
                 }
             });
