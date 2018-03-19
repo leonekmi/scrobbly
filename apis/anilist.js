@@ -84,7 +84,6 @@ function Anilist(access_token) {
 
     this.chooseAnime = function(result, series_title) {
         return new Promise(resolve => {
-            console.log(result);
             var cache = getCacheEntry('anilist', series_title);
             cache.then(function(cache) {
                 if (cache) {

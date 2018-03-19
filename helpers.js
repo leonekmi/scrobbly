@@ -120,7 +120,6 @@ function setCacheEntry(cache_title, series_title, entry) {
         }, function(items) {
             var cache = items.cache_entries;
             cache[cache_title][series_title] = entry;
-            console.log(cache);
             chrome.storage.local.set({
                 cache_entries: cache
             }, function() {
@@ -204,8 +203,6 @@ window.addEventListener("message", (event) => {
         event.data &&
         event.data.direction == "from-page-script") {
         console.log('Immediate scrobble');
-        console.log(event);
-        console.log(animeId);
         if (anilistapi != 'notready' && event.data.data == 'anilist') {
             anilistapi.scrobbleAnime(animeId.anilist, epNumber);
         }

@@ -96,7 +96,6 @@ function Kitsu(access_token, userid) {
             var cache = getCacheEntry('kitsu', series_title);
             cache.then(function (cache) {
                 if (cache) {
-                    console.log(cache);
                     resolve([0, cache]);
                 } else {
                     var anime_choose;
@@ -122,7 +121,6 @@ function Kitsu(access_token, userid) {
                             });
                         });
                     } else {
-                        console.log(result.data[0]);
                         resolve([0, [result.data[prompt_res].id, result.data[0].attributes.episodeLength]]);
                     };
                 }
@@ -146,7 +144,6 @@ function Kitsu(access_token, userid) {
             jsonresponse.then(function (result) {
                 var choose = this.kitsuapi.chooseAnime(result, series_title);
                 choose.then(function (data_choose) {
-                    console.log(data_choose);
                     var anime_choose = data_choose[0];
                     var duration = data_choose[1][1];
                     animeId.kitsu = data_choose[1][0];
