@@ -9,12 +9,10 @@
         "*://www.wakanim.tv/*",
         "*://animedigitalnetwork.fr/*",
         "*://leonekmi.twittolabel.fr/*",
-        "*://graphql.anilist.co/*",
         "*://www.hulu.com/*",
         "*://www.netflix.com/*",
         "storage",
-        "notifications",
-        "tabs"
+        "notifications"
     ],
     "options_ui": {
         "page" : "pages/options.html"
@@ -37,31 +35,31 @@
     "content_scripts": [
         {
             "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble/*"],
-            "js": ["jquery.js", "auth.js"]
+            "js": ["jquery.js", "anilist_auth.js"]
         },
         {
             "matches": ["*://leonekmi.twittolabel.fr/anilist-scrobble-altcallback/*"],
-            "js": ["jquery.js", "auth_alternative.js"]
+            "js": ["jquery.js", "anilist_auth_alternative.js"]
         },
         {
             "matches": ["*://www.crunchyroll.com/*"],
-            "js": ["jquery.js", "apis/anilist.js", "helpers.js", "websites/crunchyroll.js"]
+            "js": ["jquery.js", "apis/anilist.js", "apis/kitsu.js", "helpers.js", "websites/crunchyroll.js"]
         },
         {
             "matches": ["*://www.wakanim.tv/*"],
-            "js": ["jquery.js", "apis/anilist.js", "helpers.js", "websites/wakanim.js"]
+            "js": ["jquery.js", "apis/anilist.js", "apis/kitsu.js", "helpers.js", "websites/wakanim.js"]
         },
         {
             "matches": ["*://animedigitalnetwork.fr/*"],
-            "js": ["jquery.js", "apis/anilist.js", "helpers.js", "websites/adn.js"]
+            "js": ["jquery.js", "apis/anilist.js", "apis/kitsu.js", "helpers.js", "websites/adn.js"]
         },
         {
             "matches": ["*://www.hulu.com/*"],
-            "js": ["jquery.js", "apis/anilist.js", "helpers.js", "websites/hulu.js"]
+            "js": ["jquery.js", "apis/anilist.js", "apis/kitsu.js", "helpers.js", "websites/hulu.js"]
         },
         {
             "matches": ["*://www.netflix.com/*"],
-            "js": ["jquery.js", "apis/anilist.js", "helpers.js", "websites/netflix.js"]
+            "js": ["jquery.js", "apis/anilist.js", "apis/kitsu.js", "helpers.js", "websites/netflix.js"]
         }
     ],
     "icons": {

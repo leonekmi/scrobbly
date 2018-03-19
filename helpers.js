@@ -7,6 +7,16 @@ var anilistapi;
 chrome.storage.local.get('access_token', function(items) {
     if (typeof items.access_token == 'string') {
         anilistapi = new Anilist(items.access_token);
+    } else {
+        anilistapi = 'notready';
+    }
+});
+var kitsuapi;
+chrome.storage.local.get(['kitsu_at', 'kitsu_userid'], function(items) {
+    if (typeof items.kitsu_at == 'string') {
+        kitsuapi = new Kitsu(items.kitsu_at, items.kitsu_userid);
+    } else {
+        kitsuapi = 'notready';
     }
 });
 
@@ -59,24 +69,26 @@ function promptAnime(prompt_message) {
 function buildCache() {
     chrome.storage.local.set({
         cache_entries: {
-            'empty set': 'first entry'
+            'anilist': {},
+            'kitsu': {}
         }
     }, function() {
         console.log('Cache builded');
     });
 }
 
-function getCacheEntry(series_title) {
+// TODO : Shit the cache it doesn't remember the animeid
+
+function getCacheEntry(cache_title, series_title) {
     return new Promise(resolve => {
         chrome.storage.local.get({
-            cache_entries: 'empty'
-        }, function(items) {
-            if (items.cache_entries == 'empty') {
-                buildCache();
+            cache_entries: {
+                'anilist': {},
+                'kitsu': {}
             }
-            console.log(items.cache_entries);
-            if (items.cache_entries[series_title]) {
-                resolve(items.cache_entries[series_title]);
+        }, function(items) {
+            if (items.cache_entries[cache_title][series_title]) {
+                resolve(items.cache_entries[cache_title][series_title]);
             } else {
                 resolve(false);
             }
@@ -84,13 +96,13 @@ function getCacheEntry(series_title) {
     });
 }
 
-function removeCacheEntry(entry_name) {
+function removeCacheEntry(cache_title, entry_name) {
     return new Promise(resolve => {
         chrome.storage.local.get({
             cache_entries: []
         }, function(items) {
             var cache = items.cache_entries;
-            delete cache[entry_name];
+            delete cache[cache_title][entry_name];
             chrome.storage.local.set({
                 cache_entries: cache
             }, function() {
@@ -101,14 +113,13 @@ function removeCacheEntry(entry_name) {
     });
 }
 
-function setCacheEntry(series_title, entry) {
+function setCacheEntry(cache_title, series_title, entry) {
     return new Promise(resolve => {
         chrome.storage.local.get({
             cache_entries: 'empty'
         }, function(items) {
             var cache = items.cache_entries;
-            cache[series_title] = entry;
-            console.log(cache);
+            cache[cache_title][series_title] = entry;
             chrome.storage.local.set({
                 cache_entries: cache
             }, function() {
@@ -120,12 +131,12 @@ function setCacheEntry(series_title, entry) {
 }
 
 /* Reference to the pausable/resumable timer */
-var progressionTimer;
+var progressionTimer, progressionTimer2;
 /* Reference to the interval used to check the playing status */
 var checkInterval;
 var interval_delay = 5000;
 /* Reference to the animeId and episode number outside initScrobble for specific usages */
-var animeId;
+var animeId = {};
 var epNumber;
 
 /* Timer class */
@@ -169,12 +180,20 @@ chrome.runtime.onMessage.addListener(function(request, sender) {
         var audioPlaying = request.response;
 
         /* Pause timer if nothing is playing, and resume it if it started again */
-        if(!audioPlaying && !progressionTimer.isPaused()) {
-                console.log('Timer paused!');
-                progressionTimer.pause();
-        } else if(audioPlaying && progressionTimer.isPaused()) {
-                console.log('Timer resumed!');
-                progressionTimer.resume();
+        // To avoid some weird conflicts, i split timers, see for fusion
+        if(!audioPlaying && typeof progressionTimer == 'object' && !progressionTimer.isPaused()) {
+            console.log('Anilist Timer paused!');
+            progressionTimer.pause();
+        } else if (audioPlaying && typeof progressionTimer == 'object' && progressionTimer.isPaused()) {
+            console.log('Anilist Timer resumed!');
+            progressionTimer.resume();
+        }
+        if(!audioPlaying && typeof progressionTimer2 == 'object' && !progressionTimer2.isPaused()) {
+            console.log('Kitsu Timer paused!');
+            progressionTimer2.pause();
+        } else if (audioPlaying && typeof progressionTimer2 == 'object' && progressionTimer2.isPaused()) {
+            console.log('Kitsu Timer resumed!');
+            progressionTimer2.resume();
         }
     }
 });
@@ -184,13 +203,28 @@ window.addEventListener("message", (event) => {
         event.data &&
         event.data.direction == "from-page-script") {
         console.log('Immediate scrobble');
-        anilistapi.scrobbleAnime(animeId, epNumber);
+        if (anilistapi != 'notready' && event.data.data == 'anilist') {
+            anilistapi.scrobbleAnime(animeId.anilist, epNumber);
+        }
+        if (kitsuapi != 'notready' && event.data.data == 'kitsu') {
+            kitsuapi.scrobbleAnime(animeId.kitsu, epNumber)
+        }
     }
   });
 
 function initScrobble(series_title, episode_number, prepend_message) {
     prepend_message();
     epNumber = episode_number;
-    anilistapi.initScrobble(series_title, episode_number);
+    if (anilistapi != 'notready') {
+        anilistapi.initScrobble(series_title, episode_number);
+    } else {
+        $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login'));
+    }
+    if (kitsuapi != 'notready') {
+        kitsuapi.initScrobble(series_title, episode_number);
+    } else {
+        $('<div id="anilist_scrobbler_notice_kitsu"></div>').insertAfter($('#anilist_scrobbler_notice'));
+        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('please_login'));
+    }
 }
 console.log('Anilist Scrobbler init done');

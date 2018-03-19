@@ -11,11 +11,15 @@ chrome.storage.sync.get({
         $('p').prepend('<a target="_blank" href="https://anilist.co/api/v2/oauth/authorize?client_id=' + items.altauth_clientid + '&redirect_uri=https%3A%2F%2Fleonekmi.twittolabel.fr%2Fanilist-scrobble-altcallback%2Fcallback.html&response_type=code"><button class="ui labeled icon blue button"><i class="external square icon"></i><div classs="lab-anilist">" + chrome.i18n.getMessage("popup_login_altauth") + "</div></button></a><br/><br/>');
     }
 });
-chrome.storage.local.get('access_token', function(items) {
+chrome.storage.local.get(['access_token', 'kitsu_at'], function(items) {
     if (typeof items.access_token == 'string') {
         $('.lab-anilist').text(chrome.i18n.getMessage('popup_logged_in'));
         $('.external.square.icon').attr('class', 'info circle icon');
         $('.ui.labeled.icon.blue.button').attr('class', 'ui labeled icon blue basic button');
+    }
+    if (typeof items.kitsu_at == 'string') {
+        $('.lab-kitsu').text(chrome.i18n.getMessage('popup_logged_in'));
+        $('.ui.labeled.icon.purple.button').attr('class', 'ui labeled icon purple basic button');
     }
 });
 
