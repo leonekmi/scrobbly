@@ -100,9 +100,9 @@ function Kitsu(access_token, userid) {
                 } else {
                     var anime_choose;
                     if (result.data.length == 0) {
-                        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_not_in_al'));
+                        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_not_in_al', 'Kitsu'));
                     } else if (result.data.length > 1) {
-                        var prompt_message = chrome.i18n.getMessage('multiple_entries');
+                        var prompt_message = chrome.i18n.getMessage('multiple_entries', 'Kitsu');
                         var titlePreference = getTitlePreferencesHelper();
                         titlePreference.then(function (titlePreference) {
                             result.data.forEach(function (item, index) {
@@ -196,7 +196,7 @@ function Kitsu(access_token, userid) {
 
         function handleError(e) {
             console.error(e);
-            window.alert(chrome.i18n.getMessage('api_error'));
+            window.alert(chrome.i18n.getMessage('api_error', 'Kitsu'));
         };
 
         fetch(url, options).then(handleResponse)

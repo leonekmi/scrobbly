@@ -184,7 +184,7 @@
         }
     },
 	"scrobbling_ok": {
-		"message": "Episode has been added to your animelist"
+		"message": "Episode has been added to your animelist."
 	},
     "api_error": {
         "message": "The $SITE$ API returns an error, cannot scrobble your anime.",

@@ -91,9 +91,9 @@ function Anilist(access_token) {
                 } else {
                     var anime_choose;
                     if (result.data.Page.media.length == 0) {
-                        $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_not_in_al'));
+                        $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('scrobbling_not_in_al', 'Anilist'));
                     } else if (result.data.Page.media.length > 1) {
-                        var prompt_message = chrome.i18n.getMessage('multiple_entries');
+                        var prompt_message = chrome.i18n.getMessage('multiple_entries', 'Anilist');
                         var titlePreference = getTitlePreferencesHelper();
                         titlePreference.then(function(titlePreference) {
                             result.data.Page.media.forEach(function(item, index) {
@@ -205,7 +205,7 @@ function Anilist(access_token) {
     
         function handleError(e) {
             console.error(e);
-            window.alert(chrome.i18n.getMessage('api_error'));
+            window.alert(chrome.i18n.getMessage('api_error', 'Anilist'));
         };
     
         fetch(url, options).then(handleResponse)

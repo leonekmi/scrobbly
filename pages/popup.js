@@ -4,10 +4,9 @@ Popup page script
 */
 chrome.storage.sync.get({
     enable_altauth: false,
-    access_token: null,
     altauth_clientid: null
 }, function(items) {
-    if (items.enable_altauth == true & items.access_token === null) {
+    if (items.enable_altauth == true) {
         $('p').prepend('<a target="_blank" href="https://anilist.co/api/v2/oauth/authorize?client_id=' + items.altauth_clientid + '&redirect_uri=https%3A%2F%2Fleonekmi.twittolabel.fr%2Fanilist-scrobble-altcallback%2Fcallback.html&response_type=code"><button class="ui labeled icon blue button"><i class="external square icon"></i><div classs="lab-anilist">" + chrome.i18n.getMessage("popup_login_altauth") + "</div></button></a><br/><br/>');
     }
 });
@@ -16,10 +15,14 @@ chrome.storage.local.get(['access_token', 'kitsu_at'], function(items) {
         $('.lab-anilist').text(chrome.i18n.getMessage('popup_logged_in'));
         $('.external.square.icon').attr('class', 'info circle icon');
         $('.ui.labeled.icon.blue.button').attr('class', 'ui labeled icon blue basic button');
+    } else {
+        $('.lab-anilist').text(chrome.i18n.getMessage('popup_login', 'Anilist'));
     }
     if (typeof items.kitsu_at == 'string') {
         $('.lab-kitsu').text(chrome.i18n.getMessage('popup_logged_in'));
         $('.ui.labeled.icon.purple.button').attr('class', 'ui labeled icon purple basic button');
+    } else {
+        $('.lab-kitsu').text(chrome.i18n.getMessage('popup_login', 'Kitsu'));
     }
 });
 

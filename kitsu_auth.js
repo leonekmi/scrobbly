@@ -62,4 +62,6 @@ function submitlogin() {
     fetch(url, options).then(handleResponse);
 }
 localizeHtmlPage();
+$('#submitbtn').text(chrome.i18n.getMessage('popup_login', 'Kitsu'));
+$('.sub.header').text(chrome.i18n.getMessage('popup_login', 'Kitsu'));
 $('#submitbtn').click(submitlogin);
