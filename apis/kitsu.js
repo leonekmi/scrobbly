@@ -150,14 +150,18 @@ function Kitsu(access_token, userid) {
                     //epNumber = episode_number;
                     var temp_response = this.kitsuapi.getAnimeProgress(animeId.kitsu);
                     temp_response.then(function (data) {
-                        var jsonresponse2 = data.json();
-                        jsonresponse2.then(function (result2) {
+                        console.log(duration / 4 * 3 * 60 * 1000);
+                        var jsonresponse2 = data.json().then(function (result2) {
                             if (result2.data.length == 0) {
-                                $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="ks-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
-                                //instead of setTimeout, create a new Timer object and save it to a variable
-                                progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId.kitsu, episode_number);
-                                //Also set an interval to check periodically if anything is playing
-                                checkInterval = setInterval(checkPlayingStatus, interval_delay);
+                                if (duration == null) {
+                                    $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('unknown_duration') + ' <a href="javascript:;" id="ks-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
+                                } else {
+                                    $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('scrobbling_in_not_in_al', [(duration / 4 * 3)]) + ' <a href="javascript:;" id="ks-scrobblenow">' + chrome.i18n.getMessage('scrobble_now') + '</a>');
+                                    //instead of setTimeout, create a new Timer object and save it to a variable
+                                    progressionTimer2 = new Timer(this.kitsuapi.scrobbleAnime, duration / 4 * 3 * 60 * 1000, animeId.kitsu, episode_number);
+                                    //Also set an interval to check periodically if anything is playing
+                                    checkInterval = setInterval(checkPlayingStatus, interval_delay);
+                                }
                             } else {
                                 if (episode_number <= result2.data[0].attributes.progress) {
                                     $('#anilist_scrobbler_notice_kitsu').html(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('already_watched'));
