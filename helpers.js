@@ -4,7 +4,7 @@ Global Helpers for Anilist Scrobbler
 */
 
 var anilistapi;
-chrome.storage.local.get('access_token', function(items) {
+chrome.storage.local.get('access_token', function (items) {
     if (typeof items.access_token == 'string') {
         anilistapi = new Anilist(items.access_token);
     } else {
@@ -12,7 +12,7 @@ chrome.storage.local.get('access_token', function(items) {
     }
 });
 var kitsuapi;
-chrome.storage.local.get(['kitsu_at', 'kitsu_userid'], function(items) {
+chrome.storage.local.get(['kitsu_at', 'kitsu_userid'], function (items) {
     if (typeof items.kitsu_at == 'string') {
         kitsuapi = new Kitsu(items.kitsu_at, items.kitsu_userid);
     } else {
@@ -49,11 +49,12 @@ function getTitlePreferencesHelper() {
     return new Promise(resolve => {
         chrome.storage.sync.get({
             title: 'romaji'
-        }, function(items) {
+        }, function (items) {
             resolve(items.title);
         });
     });
 }
+
 async function getTitlePreferences() {
     var result;
     result = await getTitlePreferencesHelper();
@@ -72,7 +73,7 @@ function buildCache() {
             'anilist': {},
             'kitsu': {}
         }
-    }, function() {
+    }, function () {
         console.log('Cache builded');
     });
 }
@@ -86,7 +87,7 @@ function getCacheEntry(cache_title, series_title) {
                 'anilist': {},
                 'kitsu': {}
             }
-        }, function(items) {
+        }, function (items) {
             if (items.cache_entries[cache_title][series_title]) {
                 resolve(items.cache_entries[cache_title][series_title]);
             } else {
@@ -100,12 +101,12 @@ function removeCacheEntry(cache_title, entry_name) {
     return new Promise(resolve => {
         chrome.storage.local.get({
             cache_entries: []
-        }, function(items) {
+        }, function (items) {
             var cache = items.cache_entries;
             delete cache[cache_title][entry_name];
             chrome.storage.local.set({
                 cache_entries: cache
-            }, function() {
+            }, function () {
                 console.log('Deleted ' + entry_name + ' from cache');
                 resolve(true);
             });
@@ -117,12 +118,12 @@ function setCacheEntry(cache_title, series_title, entry) {
     return new Promise(resolve => {
         chrome.storage.local.get({
             cache_entries: 'empty'
-        }, function(items) {
+        }, function (items) {
             var cache = items.cache_entries;
             cache[cache_title][series_title] = entry;
             chrome.storage.local.set({
                 cache_entries: cache
-            }, function() {
+            }, function () {
                 console.log('Stored in cache');
                 resolve(true);
             });
@@ -143,24 +144,30 @@ var epNumber;
 function Timer(callback, delay, ...params) {
     var timerId, start, remaining = delay, paused;
 
-    this.pause = function() {
+    this.pause = function () {
         window.clearTimeout(timerId);
         remaining -= new Date() - start;
         paused = true;
     };
 
-    this.resume = function() {
+    this.resume = function () {
         start = new Date();
         window.clearTimeout(timerId);
         timerId = window.setTimeout(callback, remaining, ...params);
         paused = false;
     };
 
-    this.isPaused = function() { return paused; };
+    this.isPaused = function () {
+        return paused;
+    };
 
-    this.getRemaining = function() { return remaining; };
+    this.getRemaining = function () {
+        return remaining;
+    };
 
-    this.setRemaining = function(time) { remaining = time; };
+    this.setRemaining = function (time) {
+        remaining = time;
+    };
 
     this.resume();
 }
@@ -174,21 +181,21 @@ function checkPlayingStatus() {
 }
 
 /* Listens for response from background script */
-chrome.runtime.onMessage.addListener(function(request, sender) {
-    if(request.action == 'audioPlayingResponse') {
+chrome.runtime.onMessage.addListener(function (request, sender) {
+    if (request.action == 'audioPlayingResponse') {
 
         var audioPlaying = request.response;
 
         /* Pause timer if nothing is playing, and resume it if it started again */
         // To avoid some weird conflicts, i split timers, see for fusion
-        if(!audioPlaying && typeof progressionTimer == 'object' && !progressionTimer.isPaused()) {
+        if (!audioPlaying && typeof progressionTimer == 'object' && !progressionTimer.isPaused()) {
             console.log('Anilist Timer paused!');
             progressionTimer.pause();
         } else if (audioPlaying && typeof progressionTimer == 'object' && progressionTimer.isPaused()) {
             console.log('Anilist Timer resumed!');
             progressionTimer.resume();
         }
-        if(!audioPlaying && typeof progressionTimer2 == 'object' && !progressionTimer2.isPaused()) {
+        if (!audioPlaying && typeof progressionTimer2 == 'object' && !progressionTimer2.isPaused()) {
             console.log('Kitsu Timer paused!');
             progressionTimer2.pause();
         } else if (audioPlaying && typeof progressionTimer2 == 'object' && progressionTimer2.isPaused()) {
@@ -210,21 +217,21 @@ window.addEventListener("message", (event) => {
             kitsuapi.scrobbleAnime(animeId.kitsu, epNumber)
         }
     }
-  });
+});
 
 function initScrobble(series_title, episode_number, prepend_message) {
-    prepend_message();
-    epNumber = episode_number;
-    if (anilistapi != 'notready') {
-        anilistapi.initScrobble(series_title, episode_number);
-    } else {
+    if (anilistapi !== 'notready' && kitsuapi !== 'notready') {
         $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login', 'Anilist'));
-    }
-    if (kitsuapi != 'notready') {
-        kitsuapi.initScrobble(series_title, episode_number);
     } else {
-        $('<div id="anilist_scrobbler_notice_kitsu"></div>').insertAfter($('#anilist_scrobbler_notice'));
-        $('#anilist_scrobbler_notice_kitsu').text(chrome.i18n.getMessage('otherAppName', ['Kitsu']) + ' : ' + chrome.i18n.getMessage('please_login', 'Kitsu'));
+        prepend_message();
+        epNumber = episode_number;
+        if (anilistapi !== 'notready') {
+            anilistapi.initScrobble(series_title, episode_number);
+        }
+        if (kitsuapi !== 'notready') {
+            kitsuapi.initScrobble(series_title, episode_number);
+        }
     }
 }
+
 console.log('Anilist Scrobbler init done');

@@ -13,6 +13,7 @@
 -   Crunchyroll
 -   Hulu
 -   Netflix
+-   Plex
 -   Wakanim
 
 #### Planned

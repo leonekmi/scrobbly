@@ -99,7 +99,7 @@
         "message": "You don't configured the alternative authentification"
     },
     "please_login": {
-        "message": "You must login to $SITE$ to use $SITE$ Scrobbler, login with the extension icon at the right top corner.",
+        "message": "You must login to a tracking site to scrobble, login with the extension icon at the right top corner.",
         "placeholders": {
             "site": {
                 "content": "$1",
