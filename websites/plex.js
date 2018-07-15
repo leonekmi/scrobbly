@@ -4,7 +4,7 @@ Get Metadata from an episode on Plex.tv
 */
 
 function message() {
-    if(!$('#anilist_scrobbler_notice').length) {
+    if (!$('#anilist_scrobbler_notice').length) {
         $("div[class*='AudioVideoPlayerControlsMetadata-titlesContainer']").append('<span id="anilist_scrobbler_notice" style="font-family: Open Sans Semibold,Helvetica Neue,Helvetica,Arial,sans-serif; font-size: 13px;">Anilist Scrobbler : ' + chrome.i18n.getMessage('starting') + '</span>');
     }
     return true;
@@ -32,6 +32,9 @@ $(window).on('load', function () {
         console.log(items);
         if (items.ignore_plex === false) {
             main();
+            $('title').bind('DOMSubtreeModified', function() {
+                main();
+            });
         }
     });
 });

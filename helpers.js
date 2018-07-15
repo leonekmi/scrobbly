@@ -220,10 +220,10 @@ window.addEventListener("message", (event) => {
 });
 
 function initScrobble(series_title, episode_number, prepend_message) {
+    prepend_message();
     if (anilistapi !== 'notready' && kitsuapi !== 'notready') {
         $('#anilist_scrobbler_notice').text(chrome.i18n.getMessage('appName') + ' : ' + chrome.i18n.getMessage('please_login', 'Anilist'));
     } else {
-        prepend_message();
         epNumber = episode_number;
         if (anilistapi !== 'notready') {
             anilistapi.initScrobble(series_title, episode_number);
