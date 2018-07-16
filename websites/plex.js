@@ -15,7 +15,7 @@ function main() {
 
     if (regex.test(document.documentURI)) {
         var title = $('title').text();
-        var series_episode_regex = /([\w\s]+)\s-\s.*E([\d]+)/;
+        var series_episode_regex = /(.+)\s-\s.*E([\d]+)/;
         var match = series_episode_regex.exec(title);
         if (match) {
             var series_title = match[1];
