@@ -1,2 +1,11 @@
-deploy.sh
+node_modules
 .vscode
+# Personal access keys for easy debugging
+tokens.txt
+# Builds 
+src/*.bundle.js
+src/pages/*.bundle.js
+build/*
+target/*
+# Generated keys by Grunt
+keys/*
