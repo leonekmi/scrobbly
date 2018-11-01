@@ -11,3 +11,4 @@ target/*
 !target/.gitkeep
 # Generated keys by Grunt
 keys/*
+!keys/.gitkeep
