@@ -6,6 +6,8 @@ tokens.txt
 src/*.bundle.js
 src/pages/*.bundle.js
 build/*
+!build/.gitkeep
 target/*
+!target/.gitkeep
 # Generated keys by Grunt
 keys/*
