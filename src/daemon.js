@@ -27,13 +27,35 @@ exports.start = function (storage) {
 	var llibList = [];
 	var workingdb = {};
 	var activeTab = -1;
+	var ready = false;
 	var timer;
+	var activeSettingsTab;
 
 	libraries.forEach(lib => {
 		console.log(lib.isReady());
 		if (lib.isReady()) {
 			lib.init();
 			llibList.push(lib);
+		}
+	});
+
+	if (llibList.length == 0) {
+		browser.notifications.create('firstRun', {
+			type: 'basic',
+			iconUrl: '/logos/logo512.png',
+			title: browser.i18n.getMessage('firstRunTitle'),
+			message: browser.i18n.getMessage('firstRunMessage')
+		});
+	} else {
+		ready = true;
+	}
+
+	browser.notifications.onClicked.addListener(notificationId => {
+		if (notificationId == 'firstRun') {
+			browser.notifications.clear('firstRun');
+			browser.tabs.create({
+				url: browser.runtime.getURL('pages/settings.html')
+			});
 		}
 	});
 
@@ -110,7 +132,7 @@ exports.start = function (storage) {
 	}
 
 	// ?
-	async function listener(message, sender, sendResponse) {
+	async function listener(message, sender) {
 		return new Promise(resolve => {
 			console.log(message);
 			console.log('Runtime event');
@@ -118,18 +140,64 @@ exports.start = function (storage) {
 				case 'start':
 					console.log('Starting !');
 					startScrobble(message.animeName, message.episode, sender.tab.id);
+					resolve(true);
 					break;
 				case 'scrobble':
 					console.log('Scrobbling !');
 					scrobble();
+					resolve(true);
 					break;
 				case 'stop':
 					console.log('Stopping !');
 					stopScrobble();
+					resolve(true);
 					break;
-
+				case 'storage':
+					console.log('Storage request !');
+					switch (message.get) {
+						case 'workingdb':
+							resolve((ready) ? workingdb:'notready');
+							break;
+						default:
+							console.warn('Unknown data element !', message.get, message, sender);
+							resolve(false);
+							break;
+					}
+					if (message.source == 'settings') {
+						activeSettingsTab = sender.tab.id;
+					}
+					break;
+				case 'auth':
+					console.log('Setting (auth) request !');
+					switch (message.service) {
+						case 'anilist':
+							console.log('AniList auth', message.response);
+							browser.tabs.sendMessage(activeSettingsTab, {
+								auth: 'success',
+								service: 'anilist',
+								at: message.response.access_token
+							});
+							resolve(true);
+							break;
+						case 'kitsu':
+							console.log('Kitsu auth', message.username, message.passwd);
+							fetch('https://kitsu.io/api/oauth/token', {method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'}, body: 'grant_type=password&username=' + encodeURIComponent(message.email) + '&password=' + encodeURIComponent(message.passwd)}).then(response => {
+								response.json().then(jsondata => {
+									if (jsondata.error) {
+										resolve({auth: 'error', service: 'kitsu'});
+									} else {
+										resolve({auth: 'success', service: 'kitsu', at: jsondata.access_token});
+									}
+								});
+							});
+					}
+					break;
+				default:
+					console.warn('Unknown request !', message.action, message, sender)
+					resolve(false);
+					break;
 			}
-			resolve(true);
+			//resolve(true);
 		});
 	}
 	async function tabListener(tabId, changeInfo, tab) {

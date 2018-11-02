@@ -16,16 +16,34 @@
 */
 
 var Vue = require('vue/dist/vue');
+var $ = require('jquery');
 var browser = require('webextension-polyfill');
 
-var vm = new Vue({
-    el: 'content',
-    data: {
-
-    },
-    methods: {
-        trans: function(id, ...args) {
-            return browser.i18n.getMessage(id, args);
-        }
-    }
+browser.storage.local.get(null).then(result => {
+    browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(result2 => {
+        new Vue({
+            el: 'content',
+            data: {
+                browserstorage: result,
+                result2: result2,
+                workingdb: []
+            },
+            methods: {
+                trans: function(id, ...args) {
+                    return browser.i18n.getMessage(id, args);
+                }
+            },
+            created: function() {
+                if (typeof this.result2 == 'string') {
+                    this.workingdb = this.result2;
+                    return;
+                }
+                $.each(this.result2, (i, val) => {
+                    val.libname = i;
+                    this.workingdb.push(val);
+                });
+                console.log(this.workingdb);
+            }
+        });
+    });
 });

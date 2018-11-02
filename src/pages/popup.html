@@ -19,6 +19,8 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/button.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/icon.min.css">
 </head>
 <body>
     <content>
@@ -31,10 +33,17 @@
             </div>
         </div>
         <div class="content">
-            <div class="loginmodule" v-if=""></div>
+            <div v-if="workingdb == 'notready'" class="firstrun">
+                <h3>{{ trans('notready') }}</h3>
+                <a href="settings.html" target="_blank" class="ui green button">{{ trans('login') }}</a>
+            </div>
+            <div v-for="status in workingdb">
+                <h3>{{ status.libname }}</h3>
+                <h4>{{ status.anime.title }}</h4>
+                <p v-html="status.anime.synopsis"></p>
+            </div>
         </div>
     </content>
-    
 
     <script src="popup.bundle.js"></script>
 </body>

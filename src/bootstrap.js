@@ -18,16 +18,18 @@
 // Because storage API is promise/callback-based, i prefer to preload all the storage in a global var
 // Due to the execution way of V8, i think that's the best way to not pain with ton of promises
 
+var browser = require('webextension-polyfill');
+
 console.log('Project Scrobbly, bootstrap !');
 
-browser.storage.local.get(null, result => {
+browser.storage.local.get(null).then(result => {
     var daemon = require('./daemon').start(result);
 });
 
 browser.storage.onChanged.addListener((changes, location) => {
     // To avoid problems with not up-to-date storage in backgrond scripts, extension reloads after each change
     // The noReload exception is for development purposes
-    browser.storage.local.get('noReload', result => {
+    browser.storage.local.get('noReload').then(result => {
         if (result.noReload) return;
         if (location == 'local') browser.runtime.reload();
     });

@@ -8,7 +8,18 @@ module.exports = function(grunt) {
                 files: {
                     'build/bootstrap.bundle.js': 'src/bootstrap.js',
                     'build/website.bundle.js': 'src/website.js',
-                    'build/pages/popup.bundle.js': 'src/pages/popup.js'
+                    'build/pages/popup.bundle.js': 'src/pages/popup.js',
+                    'build/pages/settings.bundle.js': 'src/pages/settings.js',
+                    'build/auth/anilist.bundle.js': 'src/auth/anilist.js'
+                }
+            },
+            dev: {
+                files: {
+                    'src/bootstrap.bundle.js': 'src/bootstrap.js',
+                    'src/website.bundle.js': 'src/website.js',
+                    'src/pages/popup.bundle.js': 'src/pages/popup.js',
+                    'src/pages/settings.bundle.js': 'src/pages/settings.js',
+                    'src/auth/anilist.bundle.js': 'src/auth/anilist.js'
                 }
             }
         },
@@ -39,6 +50,12 @@ module.exports = function(grunt) {
                 src: 'target/<%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %>.zip',
                 dest: 'target/'
             }
+        },
+        watch: {
+            js: {
+                files: ['src/*.js', 'src/websites/*.js', 'src/libraries/*.js', 'src/pages/settings.js'],
+                tasks: ['browserify:dev']
+            }
         }
     });
   
@@ -47,6 +64,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-zip-to-crx');
+    grunt.loadNpmTasks('grunt-contrib-watch');
   
     // Default task(s).
     grunt.registerTask('default', ['copy', 'browserify', 'compress', 'zip_to_crx']);

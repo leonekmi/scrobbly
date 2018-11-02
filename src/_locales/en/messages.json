@@ -1,5 +1,56 @@
 {
     "slogan": {
         "message": "Update at the same time multiple anime sites just by watching on your favourite anime website."
+    },
+    "firstRunTitle": {
+        "message": "Welcome to Scrobbly !"
+    },
+    "firstRunMessage": {
+        "message": "Click on me to setup your anime lists !"
+    },
+    "notready": {
+        "message": "Srobbly is not ready !"
+    },
+    "login": {
+        "message": "Login"
+    },
+    "loginProcedure": {
+        "message": "Scrobbly needs a connection to an anime list service, when you have done, click Done to apply and start to use Scrobbly."
+    },
+    "loginWith": {
+        "message": "Login with $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "loginInfoAnilist": {
+        "message": "To login with AniList, you will be redirected to the AniList website to authorize the connection and setup Scrobbly automatically. The AniList website will give us an access token to your account, it will stay on your computer. To learn more, check the Scrobbly privacy policy."
+    },
+    "loginInfoKitsu": {
+        "message": "To login with Kitsu, you need your account's e-mail and password (sidenote: login via Facebook is impossible for now). Your credentials are not stored on your computer and on our servers, they are just exchanged with an access token that are stored only on your computer. To learn more, check the Scrobbly privacy policy."
+    },
+    "save": {
+        "message": "Done"
+    },
+    "youCanClose": {
+        "message": "Congrats ! Your $SITE$ account is linked with Scrobbly. You can close this tab and go back to settings.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "email": {
+        "message": "E-Mail"
+    },
+    "password": {
+        "message": "Password"
+    },
+    "loggedIn": {
+        "message": "Connected !"
     }
 }

@@ -4,7 +4,7 @@ node_modules
 tokens.txt
 # Builds 
 src/*.bundle.js
-src/pages/*.bundle.js
+src/*/*.bundle.js
 build/*
 !build/.gitkeep
 target/*

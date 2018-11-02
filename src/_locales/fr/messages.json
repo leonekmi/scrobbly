@@ -1,5 +1,56 @@
 {
     "slogan": {
         "message": "Mettez à jour en même tous vos sites d'anime list rien qu'en regardant sur votre site préféré."
+    },
+    "firstRunTitle": {
+        "message": "Bienvenue sur Scrobbly !"
+    },
+    "firstRunMessage": {
+        "message": "Cliquez sur moi pour configurer les anime lists !"
+    },
+    "notready": {
+        "message": "Srobbly n'est pas prêt !"
+    },
+    "login": {
+        "message": "Se connecter"
+    },
+    "loginProcedure": {
+        "message": "Scrobbly a besoin d'une connexion à un service d'anime list, lorsque vous avez terminé, appuyez sur Sauvegarder pour commencer à utiliser Scrobbly."
+    },
+    "loginWith": {
+        "message": "Se connecter avec $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "loginInfoAnilist": {
+        "message": "Pour vous connecter avec AniList, vous serez redirigé vers le site d'AniList pour autoriser la connexion et paramétrer Scrobbly automatiquement. Le site d'AniList nous donnera un jeton d'accès à votre compte, nous le stockons uniquement chez vous et n'est pas communiqué. Pour en savoir plus, consultez la politique de confidentialité de Scrobbly."
+    },
+    "loginInfoKitsu": {
+        "message": "Pour vous connecter avec Kitsu, vous devez entrer votre e-mail ainsi que votre mot de passe (NB: la connexion via Facebook n'est pas possible à ce jour). Vos identifiants ne sont pas stockés ni sur votre machine, ni sur nos serveurs, ils sont uniquement communiqués à Kitsu pour obtenir un jeton d'accès à votre compte que nous stockerons chez vous et n'est pas communiqué, pour en savoir plus, consultez la politique de confidentialité de Scrobbly."
+    },
+    "save": {
+        "message": "Sauvegarder"
+    },
+    "youCanClose": {
+        "message": "Bravo ! Votre compte $SITE$ est relié à Scrobbly. Vous pouvez fermer et revenir en arrière",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "email": {
+        "message": "E-Mail"
+    },
+    "password": {
+        "message": "Mot de passe"
+    },
+    "loggedIn": {
+        "message": "Connecté !"
     }
 }

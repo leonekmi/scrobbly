@@ -18,12 +18,11 @@
         "*://www.crunchyroll.com/*",
         "*://www.wakanim.tv/*",
         "*://animedigitalnetwork.fr/*",
-        "*://leonekmi.twittolabel.fr/*",
+        "*://scrobbly.leonekmi.fr/*",
         "*://www.hulu.com/*",
         "*://www.netflix.com/*",
         "storage",
-        "notifications",
-        "tabs"
+        "notifications"
     ],
     "content_security_policy": "script-src 'self' blob: filesystem: 'unsafe-eval'; object-src 'self' blob: filesystem:;",
     "default_locale": "en",
@@ -34,6 +33,10 @@
         {
             "matches": ["*://www.crunchyroll.com/*"],
             "js": ["website.bundle.js"]
+        },
+        {
+            "matches": ["*://scrobbly.leonekmi.fr/anilist/*"],
+            "js": ["auth/anilist.bundle.js"]
         }
     ],
     "browser_action": {

@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'al-icons';
-  src: url('../font/al-icons.eot?77244640');
-  src: url('../font/al-icons.eot?77244640#iefix') format('embedded-opentype'),
-       url('../font/al-icons.woff2?77244640') format('woff2'),
-       url('../font/al-icons.woff?77244640') format('woff'),
-       url('../font/al-icons.ttf?77244640') format('truetype'),
-       url('../font/al-icons.svg?77244640#al-icons') format('svg');
+  src: url('../font/al-icons.eot?57391251');
+  src: url('../font/al-icons.eot?57391251#iefix') format('embedded-opentype'),
+       url('../font/al-icons.woff2?57391251') format('woff2'),
+       url('../font/al-icons.woff?57391251') format('woff'),
+       url('../font/al-icons.ttf?57391251') format('truetype'),
+       url('../font/al-icons.svg?57391251#al-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -15,12 +15,12 @@
 @media screen and (-webkit-min-device-pixel-ratio:0) {
   @font-face {
     font-family: 'al-icons';
-    src: url('../font/al-icons.svg?77244640#al-icons') format('svg');
+    src: url('../font/al-icons.svg?57391251#al-icons') format('svg');
   }
 }
 */
  
- [class^="al-icons-"]:before, [class*=" al-icons-"]:before {
+ [class^="icon-"]:before, [class*=" icon-"]:before {
   font-family: "al-icons";
   font-style: normal;
   font-weight: normal;
@@ -55,4 +55,6 @@
   /* text-shadow: 1px 1px 1px rgba(127, 127, 127, 0.3); */
 }
  
-.al-icons-kitsu:before { content: '\e802'; } /* '' */
+.icon-kitsu:before { content: '\e800'; } /* '' */
+.icon-mal:before { content: '\e805'; } /* '' */
+.icon-anilist:before { content: '\e806'; } /* '' */

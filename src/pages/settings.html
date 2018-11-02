@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <link rel="stylesheet" href="al-icons/css/al-icons.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/semantic.min.css">
+    <style>
+        body {
+            background-color: #af3636;
+        }
+        #title {
+            color: white;
+        }
+    </style>
+    <title>Scrobbly</title>
+</head>
+<body>
+    <content>
+        <div id="header" class="ui hidden transition container">
+            <img id="logo" class="ui centered image" src="../logos/logo256.png">
+            <h1 id="title" class="ui centered header">Scrobbly</h1>
+        </div>
+        <br><br>
+        <div class="ui hidden transition container" id="content">
+            <div class="ui segment">
+                <h2>{{ trans('login') }}</h2>
+                <p>{{ trans('loginProcedure') }}</p>
+                <a href="#" @click="showModal('anilist')" class="ui blue labeled icon button" id="anilist">
+                    <i class="icon-anilist icon"></i>
+                    AniList
+                </a>
+                <a href="#" @click="showModal('kitsu')" class="ui orange labeled icon button" id="kitsu">
+                    <i class="icon-kitsu icon"></i>
+                    Kitsu
+                </a>
+                <a class="ui blue disabled labeled icon button" id="mal">
+                    <i class="icon-mal icon"></i>
+                    MyAnimeList (not supported for now)
+                </a>
+                <br><br>
+                <a href="#" @click="save" class="ui green labeled icon button" id="save">
+                    <i class="save icon"></i>
+                    {{ trans('save') }}
+                </a>
+            </div>
+        </div>
+
+        <div id="anilistmodal" class="ui modal">
+            <div class="header">
+                {{ trans('loginWith', 'AniList') }}
+            </div>
+            <div class="content">
+                <p>
+                    {{ trans('loginInfoAnilist') }}
+                </p>
+            </div>
+            <div class="actions">
+                <a target="_blank" href="https://anilist.co/api/v2/oauth/authorize?client_id=65&redirect_uri=https%3A%2F%2Fscrobbly.leonekmi.fr%2Fanilist%2Fcallback&response_type=code" class="ui positive button">
+                    {{ trans('login') }}
+                </a>
+            </div>
+        </div>
+
+        <div id="kitsumodal" class="ui modal">
+            <div class="header">
+                {{ trans('loginWith', 'Kitsu') }}
+            </div>
+            <div class="content">
+                <p>
+                    {{ trans('loginInfoKitsu') }}
+                </p>
+                <div class="ui form">
+                    <div class="two fields">
+                        <div class="field">
+                            <label>{{ trans('email') }}</label>
+                            <input type="text" :placeholder="trans('email')" id="emailkitsu">
+                        </div>
+                        <div class="field">
+                            <label>{{ trans('password') }}</label>
+                            <input type="text" :placeholder="trans('password')" id="passwordkitsu">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <a href="#" @click="loginKitsu" class="ui positive button">
+                    {{ trans('login') }}
+                </a>
+            </div>
+        </div>
+    </content>
+
+    <script src="settings.bundle.js"></script>
+</body>
+</html>
