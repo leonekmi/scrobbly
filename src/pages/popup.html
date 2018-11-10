@@ -19,8 +19,10 @@
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="al-icons/css/al-icons.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/button.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/icon.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/form.min.css">
 </head>
 <body>
     <content>
@@ -37,11 +39,44 @@
                 <h3>{{ trans('notready') }}</h3>
                 <a href="settings.html" target="_blank" class="ui green button">{{ trans('login') }}</a>
             </div>
-            <div v-for="status in workingdb">
-                <h3>{{ status.libname }}</h3>
-                <h4>{{ status.anime.title }}</h4>
-                <p v-html="status.anime.synopsis"></p>
+            <div v-if="workingdblist.length == 0">
+                <h3>{{ trans('welcome') }}</h3>
+                <p>{{ trans('noactivity') }}</p>
+                <p>{{ trans('compatible') }} :
+                    <ul>
+                        <li>Crunchyroll</li>
+                        <li>Netflix</li>
+                        <li>Plex (only via app.plex.tv)</li>
+                        <li><em>{{ trans('moretocome') }}</em></li>
+                    </ul>
+                </p>
             </div>
+            <div v-else>
+                <center>
+                    <!-- TODO : Learn CSS to know how to center :) -->
+                    <a class="ui icon orange button" @click="stop" :datalib="key"><i class="stop icon" :data-lib="key"></i></a>
+                    <a class="ui icon green button" @click="scrNow" :datalib="key"><i class="fast forward icon" :data-lib="key"></i></a>
+                </center>
+                <br>
+                <div class="ui form">
+                    <div class="field">
+                        <select v-model="libchoose">
+                            <option value="none" selected>{{ trans('libstatus') }}</option>
+                            <option :value="lib" v-for="lib in workingdblist">{{ lib }}</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div v-for="(status, key) in workingdb" :id="key" v-if="libchoose == key">
+                    <center>
+                        <a class="ui labeled icon yellow button" @click="change"><i class="exchange icon"></i> {{ trans('wronganime') }}</a>
+                    </center>
+                    <br>
+                    <img :src="status.anime.cover" width="275">
+                    <h3>{{ status.anime.title }}</h3>
+                    <p v-html="status.anime.synopsis"></p>
+                </div>
+            </div>           
         </div>
     </content>
 

@@ -17,9 +17,11 @@
 
 // import
 var wcrunchyroll = require('./websites/crunchyroll').api;
+var wnetflix = require('./websites/netflix').api;
+var wplex = require('./websites/plex').api;
 //var $ = require('jquery');
 // init
-var libraries = [new wcrunchyroll()];
+var libraries = [new wcrunchyroll(), new wnetflix(), new wplex()];
 var llibList = [];
 
 libraries.forEach(lib => {

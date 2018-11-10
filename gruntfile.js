@@ -67,6 +67,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
   
     // Default task(s).
-    grunt.registerTask('default', ['copy', 'browserify', 'compress', 'zip_to_crx']);
+    grunt.registerTask('default', ['copy', 'browserify:dist', 'compress', 'zip_to_crx']);
   
   };

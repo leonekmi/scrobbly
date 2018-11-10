@@ -15,11 +15,13 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-exports.api = class Crunchyroll {
+exports.api = class Netflix {
     constructor () {
         this.browser = require('webextension-polyfill');
-        this.urlregex = /https:\/\/www.crunchyroll.com\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
+        this.urlregex = /https:\/\/www.netflix.com/;
+        this.urlcheck = /https:\/\/www.netflix.com\/watch\/([a-zA-Z0-9-]+)/;
         this.jquery = require('jquery');
+        this.retry = require('retry');
         return true;
     }
 
@@ -28,18 +30,19 @@ exports.api = class Crunchyroll {
     }
 
     init() {
-        var episodeId = document.documentURI.substr(document.documentURI.length - 6);
-        console.log(episodeId);
-        var url = 'https://www.crunchyroll.com/xml?req=RpcApiVideoPlayer_GetMediaMetadata&media_id=' + episodeId;
-        fetch(url).then(result => {
-            result.text().then(text => {
-                var doc = this.jquery(this.jquery.parseXML(text)).children().children();
-                console.log(this);
-                var message = {action: 'start', animeName: doc[5].innerHTML, episode: doc[7].innerHTML};
-                console.log(message);
-                this.browser.runtime.sendMessage(message);
-            });
+        var operation = this.retry.operation({forever: true});
+
+        operation.attempt(currAtt => {
+            var episodeInfo = this.jquery('div.ellipsize-text');
+            if (episodeInfo.length == 0) {
+                operation.retry({message: 'Netflix is loading', obj: episodeInfo});
+            } else {
+                var seriesTitle = episodeInfo[0].children[0].innerText;
+                var episodeRegex = /S([0-9]+):E([0-9]+)/;
+                var episodeData = episodeRegex.exec(episodeInfo[0].children[1].innerText);
+                var episodeNumber = episodeData[2];
+                this.browser.runtime.sendMessage({action: 'start', animeName: seriesTitle, episode: episodeNumber});
+            }
         });
-        return true;
     }
-}
+};

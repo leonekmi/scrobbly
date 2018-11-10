@@ -129,6 +129,7 @@ exports.start = function (storage) {
 		workingdb = {};
 		timer.stop();
 		timer = null;
+		activeTab = -1;
 	}
 
 	// ?

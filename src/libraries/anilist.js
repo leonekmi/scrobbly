@@ -51,7 +51,7 @@ module.exports = class lanilist {
                         id: el.id,
                         title: el.title.romaji, // title preference will be a setting in a next release
                         episodeDuration: (el.duration) ? el.duration:'none',
-                        cover: (el.bannerImage) ? el.duration:this.browser.runtime.getURL('pages/img/none.png'),
+                        cover: (el.bannerImage) ? el.bannerImage:this.browser.runtime.getURL('pages/img/none.png'),
                         synopsis: el.description
                     });
                 });

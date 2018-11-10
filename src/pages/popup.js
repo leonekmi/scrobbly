@@ -25,24 +25,31 @@ browser.storage.local.get(null).then(result => {
             el: 'content',
             data: {
                 browserstorage: result,
-                result2: result2,
-                workingdb: []
+                workingdb: result2,
+                workingdblist: [],
+                libchoose: 'none'
             },
             methods: {
                 trans: function(id, ...args) {
                     return browser.i18n.getMessage(id, args);
+                },
+                stop: function(e) {
+                    browser.runtime.sendMessage({action: 'stop'});
+                    window.close();
+                },
+                scrNow: function(e) {
+                    browser.runtime.sendMessage({action: 'scrobble'});
+                    window.close();
                 }
             },
             created: function() {
-                if (typeof this.result2 == 'string') {
-                    this.workingdb = this.result2;
+                if (typeof this.workingdb == 'string') {
+                    this.workingdblist = 'none';
                     return;
                 }
-                $.each(this.result2, (i, val) => {
-                    val.libname = i;
-                    this.workingdb.push(val);
+                $.each(this.workingdb, (i, val) => {
+                    this.workingdblist.push(i);
                 });
-                console.log(this.workingdb);
             }
         });
     });

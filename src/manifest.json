@@ -25,13 +25,18 @@
         "notifications"
     ],
     "content_security_policy": "script-src 'self' blob: filesystem: 'unsafe-eval'; object-src 'self' blob: filesystem:;",
+    "applications": {
+        "gecko": {
+            "update_url": "https://scrobbly.leonekmi.fr/firefox/updates.json"
+        }
+    },
     "default_locale": "en",
     "background": {
         "scripts": ["bootstrap.bundle.js"]
     },
     "content_scripts": [
         {
-            "matches": ["*://www.crunchyroll.com/*"],
+            "matches": ["*://www.crunchyroll.com/*", "*://www.netflix.com/*", "*://app.plex.tv/*"],
             "js": ["website.bundle.js"]
         },
         {

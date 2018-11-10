@@ -11,6 +11,24 @@
     "notready": {
         "message": "Srobbly n'est pas prêt !"
     },
+    "welcome": {
+        "message": "Bienvenue !"
+    },
+    "noactivity": {
+        "message": "Scrobbly ne détecte aucune activité. Si vous regardez un anime mais qu'il n'apparaît pas ici, c'est peut-être car le site Internet n'est pas compatible avec Scrobbly."
+    },
+    "compatible": {
+        "message": "Sites compatibles"
+    },
+    "moretocome": {
+        "message": "D'autres à venir !"
+    },
+    "libstatus": {
+        "message": "Statut du site d'anime list"
+    },
+    "wronganime": {
+        "message": "Mauvais anime ?"
+    },
     "login": {
         "message": "Se connecter"
     },

@@ -3,13 +3,31 @@
         "message": "Update at the same time multiple anime sites just by watching on your favourite anime website."
     },
     "firstRunTitle": {
-        "message": "Welcome to Scrobbly !"
+        "message": "Welcome to Scrobbly!"
     },
     "firstRunMessage": {
-        "message": "Click on me to setup your anime lists !"
+        "message": "Click on me to setup your anime lists!"
     },
     "notready": {
-        "message": "Srobbly is not ready !"
+        "message": "Srobbly is not ready!"
+    },
+    "welcome": {
+        "message": "Welcome here!"
+    },
+    "noactivity": {
+        "message": "Scrobbly doesn't detect anime activity. If you are watching anime but doesn't appear here, it might be because the website is not compatible with Scrobbly."
+    },
+    "compatible": {
+        "message": "Comptaible websites"
+    },
+    "moretocome": {
+        "message": "More to come!"
+    },
+    "libstatus": {
+        "message": "Library status"
+    },
+    "wronganime": {
+        "message": "Wrong anime?"
     },
     "login": {
         "message": "Login"
@@ -36,7 +54,7 @@
         "message": "Done"
     },
     "youCanClose": {
-        "message": "Congrats ! Your $SITE$ account is linked with Scrobbly. You can close this tab and go back to settings.",
+        "message": "Congrats! Your $SITE$ account is linked with Scrobbly. You can close this tab and go back to settings.",
         "placeholders": {
             "site": {
                 "content": "$1",
@@ -51,6 +69,6 @@
         "message": "Password"
     },
     "loggedIn": {
-        "message": "Connected !"
+        "message": "Connected!"
     }
 }
