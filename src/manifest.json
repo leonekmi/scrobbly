@@ -12,7 +12,7 @@
     "name": "Scrobbly",
     "description": "__MSG_slogan__",
     "author": "Scrobbly contributors",
-    "version": "0.0.1",
+    "version": "0.0.3",
     "version_name": "pre-release",
     "permissions": [
         "*://www.crunchyroll.com/*",
@@ -27,6 +27,7 @@
     "content_security_policy": "script-src 'self' blob: filesystem: 'unsafe-eval'; object-src 'self' blob: filesystem:;",
     "applications": {
         "gecko": {
+            "id": "scrobbly@leonekmi.fr",
             "update_url": "https://scrobbly.leonekmi.fr/firefox/updates.json"
         }
     },
@@ -36,7 +37,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["*://www.crunchyroll.com/*", "*://www.netflix.com/*", "*://app.plex.tv/*"],
+            "matches": ["*://www.crunchyroll.com/*", "*://www.netflix.com/*", "*://app.plex.tv/*", "*://www.wakanim.tv/*", "*://app.emby.media/*"],
             "js": ["website.bundle.js"]
         },
         {

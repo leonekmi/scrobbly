@@ -1,5 +1,6 @@
 module.exports = function(grunt) {
     var moment = require('moment');
+    var cfgfile = grunt.file.readJSON('secret.json');
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -56,17 +57,29 @@ module.exports = function(grunt) {
                 files: ['src/*.js', 'src/websites/*.js', 'src/libraries/*.js', 'src/pages/settings.js'],
                 tasks: ['browserify:dev']
             }
+        },
+        webext_builder: {
+            dist: {
+                targets: ['firefox-xpi', 'chrome-crx'],
+                privateKey: 'keys/signing.pem',
+                jwtIssuer: cfgfile.issuer,
+                jwtSecret: cfgfile.secret,
+                files: {
+                    dest:['target']
+                }
+            }
         }
     });
   
-    // Load the plugin that provides the "uglify" task.
     grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-zip-to-crx');
     grunt.loadNpmTasks('grunt-contrib-watch');
+    grunt.loadNpmTasks('grunt-webext-builder');
   
     // Default task(s).
     grunt.registerTask('default', ['copy', 'browserify:dist', 'compress', 'zip_to_crx']);
+    grunt.registerTask('build', ['copy', 'browserify:dist', 'compress', 'webext_builder']);
   
   };

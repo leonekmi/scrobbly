@@ -9,6 +9,7 @@ build/*
 !build/.gitkeep
 target/*
 !target/.gitkeep
-# Generated keys by Grunt
+# Config files for Grunt
 keys/*
 !keys/.gitkeep
+secret.json

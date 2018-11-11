@@ -15,23 +15,21 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-// import
-var wcrunchyroll = require('./websites/crunchyroll').api;
-var wnetflix = require('./websites/netflix').api;
-var wplex = require('./websites/plex').api;
-var wwakanim = require('./websites/wakanim').api;
-var wemby = require('./websites/emby').api;
-//var $ = require('jquery');
-// init
-var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby()];
-var llibList = [];
-
-libraries.forEach(lib => {
-    console.log(lib.isUsable());
-    if (lib.isUsable()) {
-        lib.init();
-        llibList.push(lib);
+exports.api = class Wakanim {
+    constructor () {
+        this.browser = require('webextension-polyfill');
+        this.urlregex = /https:\/\/www.wakanim.tv\/fr\/v2\/catalogue\/episode\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
+        this.jquery = require('jquery');
+        return true;
     }
-});
 
-console.log('Project Scrobbly : website init, websites scripts : ', llibList);
+    isUsable() {
+        return this.urlregex.test(document.documentURI);
+    }
+
+    init() {
+        var title = this.jquery('.episode_title').text();
+        var episodeNumber = this.jquery('.episode_subtitle span span').text();
+        this.browser.runtime.sendMessage({action: 'start', animeName: title, episode: episodeNumber});
+    }
+}
