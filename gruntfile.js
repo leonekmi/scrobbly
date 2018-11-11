@@ -65,7 +65,7 @@ module.exports = function(grunt) {
                 jwtIssuer: cfgfile.issuer,
                 jwtSecret: cfgfile.secret,
                 files: {
-                    dest:['target']
+                    'target':['build']
                 }
             }
         }
