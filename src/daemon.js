@@ -21,6 +21,7 @@ exports.start = function (storage) {
 	var lanilist = require('./libraries/anilist');
 	var browser = require('webextension-polyfill');
 	var countdown = require('easytimer.js');
+	var retry = require('retry');
 	//var $ = require('jquery');
 	// init
 	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid), new lanilist(storage.anilist_at)];
@@ -83,8 +84,10 @@ exports.start = function (storage) {
 	}
 
 	function startScrobble(animeName, episode, senderId) {
+		var operation = retry.operation({forever: true});
 		scrobbled = false;
 		var durations = [];
+		var durProcessed = 0;
 		activeTab = senderId;
 		console.log('Tracked tab is now ' + activeTab);
 		llibList.forEach((lib, index) => {
@@ -97,6 +100,7 @@ exports.start = function (storage) {
 					} else {
 						durations.push(result[0].episodeDuration);
 					}
+					durProcessed += 1;
 					/*if (result.episodeDuration == 'none') {
 						//
 					} else {
@@ -111,33 +115,39 @@ exports.start = function (storage) {
 						});
 					}*/
 					if (index == llibList.length - 1) {
-						if (durations.length == 0) {
-							console.log('start countdown');
-							var durationAverage = 0;
-							durations.forEach((duration) => {
-								durationAverage += duration;
-							});
-							durationAverage = durationAverage / durations.length;
-							timer = new countdown();
-							timer.stop();
-							timer.start({
-								target: {
-									minutes: durationAverage / 4 * 3
+						operation.attempt(currAtt => {
+							if (durProcessed != llibList.length) {
+								console.log('Wait for data loop');
+								operation.retry({message: 'Wait for all data', obj: durations});
+							} else {
+								if (durations.length > 0) {
+									console.log('start countdown');
+									var durationAverage = 0;
+									durations.forEach((duration) => {
+										durationAverage += duration;
+									});
+									durationAverage = durationAverage / durations.length;
+									timer = new countdown();
+									timer.stop();
+									timer.start({
+										target: {
+											minutes: durationAverage / 4 * 3
+										}
+									});
+									browser.browserAction.setBadgeText({text: 'OK'});
+									browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
+									timer.addEventListener('targetAchieved', ctimer => {
+										console.log('End of the timer');
+										scrobble();
+									});
+								} else {
+									browser.browserAction.setBadgeText({text: '!'});
+									browser.browserAction.setBadgeBackgroundColor({color: '#dbd700'});
+									console.warn('No duration from all sources, this is a problem, Agent Johnson');
 								}
-							});
-							browser.browserAction.setBadgeText({text: 'OK'});
-							browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
-							timer.addEventListener('targetAchieved', ctimer => {
-								console.log('End of the timer');
-								scrobble();
-							});
-						} else {
-							browser.browserAction.setBadgeText({text: '!'});
-							browser.browserAction.setBadgeText({color: '#dbd700'});
-							console.warn('No duration from all sources, this is a problem, Agent Johnson');
-						}
-
-					}
+							}
+						});
+					};
 				});
 			});
 		});

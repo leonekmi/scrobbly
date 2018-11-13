@@ -21,7 +21,8 @@ exports.api = class Netflix {
         this.urlregex = /https:\/\/www.netflix.com/;
         this.urlcheck = /https:\/\/www.netflix.com\/watch\/([a-zA-Z0-9-]+)/;
         this.jquery = require('jquery');
-        this.retry = require('retry');
+        // this.retry = require('retry');
+        this.storage = {epNumber: null, seriesTitle: null, sent: false};
         return true;
     }
 
@@ -30,19 +31,38 @@ exports.api = class Netflix {
     }
 
     init() {
-        var operation = this.retry.operation({forever: true});
+        /*var operation = this.retry.operation({forever: true});
 
         operation.attempt(currAtt => {
             var episodeInfo = this.jquery('div.ellipsize-text');
             if (episodeInfo.length == 0) {
                 operation.retry({message: 'Netflix is loading', obj: episodeInfo});
+            } else {*/
+        setInterval(() => {
+            var episodeInfo = this.jquery('div.ellipsize-text');
+            console.log('netflix is beta', episodeInfo);
+            if (episodeInfo.length == 0) {
+                if (!this.storage.sent) return;
+                else {
+                    console.log('stop');
+                    this.browser.runtime.sendMessage({action: 'stop'});
+                    this.storage = {epNumber: null, seriesTitle: null, sent: false};
+                }
             } else {
                 var seriesTitle = episodeInfo[0].children[0].innerText;
                 var episodeRegex = /S([0-9]+):E([0-9]+)/;
                 var episodeData = episodeRegex.exec(episodeInfo[0].children[1].innerText);
                 var episodeNumber = episodeData[2];
-                this.browser.runtime.sendMessage({action: 'start', animeName: seriesTitle, episode: episodeNumber});
+                if (seriesTitle == this.storage.seriesTitle && episodeNumber == this.storage.epNumber) return;
+                else {
+                    console.log('new content');
+                    this.browser.runtime.sendMessage({action: 'start', animeName: seriesTitle, episode: episodeNumber});
+                    this.storage = {epNumber: episodeNumber, seriesTitle: seriesTitle, sent: true};
+                    return true;
+                }
             }
-        });
+        }, 6500);
+            /*}
+        });*/
     }
 };
