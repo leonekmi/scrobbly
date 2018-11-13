@@ -29,6 +29,7 @@ exports.start = function (storage) {
 	var activeTab = -1;
 	var ready = false;
 	var timer;
+	var scrobbled;
 	var activeSettingsTab;
 
 	libraries.forEach(lib => {
@@ -67,12 +68,22 @@ exports.start = function (storage) {
 	// Listen
 
 	function scrobble() {
+		if (scrobbled) {
+			return;
+		}
 		llibList.forEach(lib => {
 			lib.updateLibrary(workingdb[lib.info.name]);
 		});
+		timer.stop();
+		timer = null;
+		activeTab = -1;
+		scrobbled = true;
+		browser.browserAction.setBadgeText({text: '+'});
+		browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
 	}
 
 	function startScrobble(animeName, episode, senderId) {
+		scrobbled = false;
 		var durations = [];
 		activeTab = senderId;
 		console.log('Tracked tab is now ' + activeTab);
@@ -81,8 +92,8 @@ exports.start = function (storage) {
 				lib.getProgress(result[0].id).then(progress => {
 					workingdb[lib.info.name] = {anime: result[0], progress: progress, ep: episode};
 					console.log(result);
-					if (result.episodeDuration == 'none') {
-						console.warn('No duration')
+					if (result[0].episodeDuration == 'none') {
+						console.warn('No duration');
 					} else {
 						durations.push(result[0].episodeDuration);
 					}
@@ -100,23 +111,32 @@ exports.start = function (storage) {
 						});
 					}*/
 					if (index == llibList.length - 1) {
-						console.log('start countdown');
-						var durationAverage = 0;
-						durations.forEach((duration) => {
-							durationAverage += duration;
-						});
-						durationAverage = durationAverage / durations.length;
-						timer = new countdown();
-						timer.stop();
-						timer.start({
-							target: {
-								minutes: durationAverage / 4 * 3
-							}
-						});
-						timer.addEventListener('targetAchieved', ctimer => {
-							console.log('End of the timer');
-							scrobble();
-						});
+						if (durations.length == 0) {
+							console.log('start countdown');
+							var durationAverage = 0;
+							durations.forEach((duration) => {
+								durationAverage += duration;
+							});
+							durationAverage = durationAverage / durations.length;
+							timer = new countdown();
+							timer.stop();
+							timer.start({
+								target: {
+									minutes: durationAverage / 4 * 3
+								}
+							});
+							browser.browserAction.setBadgeText({text: 'OK'});
+							browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
+							timer.addEventListener('targetAchieved', ctimer => {
+								console.log('End of the timer');
+								scrobble();
+							});
+						} else {
+							browser.browserAction.setBadgeText({text: '!'});
+							browser.browserAction.setBadgeText({color: '#dbd700'});
+							console.warn('No duration from all sources, this is a problem, Agent Johnson');
+						}
+
 					}
 				});
 			});
@@ -130,6 +150,7 @@ exports.start = function (storage) {
 		timer.stop();
 		timer = null;
 		activeTab = -1;
+		browser.browserAction.setBadgeText({text: ''});
 	}
 
 	// ?

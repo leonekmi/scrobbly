@@ -12,7 +12,7 @@
     "name": "Scrobbly",
     "description": "__MSG_slogan__",
     "author": "Scrobbly contributors",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "version_name": "pre-release",
     "permissions": [
         "*://www.crunchyroll.com/*",

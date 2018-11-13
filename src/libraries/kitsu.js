@@ -49,7 +49,7 @@ var papi = class lkitsu {
                     animes.push({
                         id: el.id,
                         title: el.canonicalTitle,
-                        episodeDuration: (el.episodeLength) ? el.episodeLength:'none',
+                        episodeDuration: (el.episodeLength != 0 && typeof el.episodeLength == 'number') ? el.episodeLength:'none',
                         cover: (el.coverImage) ? el.coverImage.original:this.browser.runtime.getURL('pages/img/none.png'),
                         synopsis: el.synopsis
                     });

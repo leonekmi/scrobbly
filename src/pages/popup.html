@@ -75,8 +75,7 @@
                     </center>
                     <br>
                     <img :src="status.anime.cover" width="275">
-                    <h3>{{ status.anime.title }}</h3>
-                    <p v-html="status.anime.synopsis"></p>
+                    <h2>{{ status.anime.title }} - {{ trans('episode') }} {{ status.ep }}</h2>
                 </div>
             </div>           
         </div>

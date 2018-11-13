@@ -22,6 +22,9 @@ var browser = require('webextension-polyfill');
 
 console.log('Project Scrobbly, bootstrap !');
 
+browser.browserAction.setBadgeText({text: ''});
+browser.browserAction.setBadgeBackgroundColor({color: '#595959'});
+
 browser.storage.local.get(null).then(result => {
     var daemon = require('./daemon').start(result);
 });

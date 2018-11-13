@@ -34,6 +34,7 @@ exports.api = class Emby {
             var title = this.jquery('title').text();
             var osdTitle = this.jquery('.osdTitle').text();
             var parsed = this.titleregex.exec(osdTitle);
+            console.log('emby seems buggy, extension is verbose for feedback', {title, osdTitle}, parsed, this.title);
             if (this.title.title == title && this.title.osdTitle == osdTitle) {
                 return;
             } else if (this.title.title != title && this.title.osdTitle == osdTitle) {

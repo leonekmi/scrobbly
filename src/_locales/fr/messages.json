@@ -70,5 +70,8 @@
     },
     "loggedIn": {
         "message": "Connecté !"
+    },
+    "episode": {
+        "message": "Épisode"
     }
 }
