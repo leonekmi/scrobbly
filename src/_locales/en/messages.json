@@ -8,6 +8,24 @@
     "firstRunMessage": {
         "message": "Click on me to setup your anime lists!"
     },
+    "stopDaemon": {
+        "message": "Stop"
+    },
+    "stopDaemonTitle": {
+        "message": "You stopped Scrobbly!"
+    },
+    "stopDaemonMessage": {
+        "message": "If you need to watch some anime but without publishing it on your anime lists, you can go now!"
+    },
+    "startDaemon": {
+        "message": "Start"
+    },
+    "startDaemonTitle": {
+        "message": "Scrobbly is running again!"
+    },
+    "startDaemonMessage": {
+        "message": "Scrobbly will resume scrobbling now, good session!"
+    },
     "notready": {
         "message": "Srobbly is not ready!"
     },

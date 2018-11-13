@@ -29,7 +29,7 @@ exports.start = function (storage) {
 	var workingdb = {};
 	var activeTab = -1;
 	var ready = false;
-	var timer;
+	var timer = null;
 	var scrobbled;
 	var activeSettingsTab;
 
@@ -63,12 +63,10 @@ exports.start = function (storage) {
 
 	console.log(llibList);
 
-	timer = new countdown();
-	timer.stop();
-
 	// Listen
 
 	function scrobble() {
+		if (workingdb == 'daemonstopped') return;
 		if (scrobbled) {
 			return;
 		}
@@ -84,6 +82,7 @@ exports.start = function (storage) {
 	}
 
 	function startScrobble(animeName, episode, senderId) {
+		if (workingdb == 'daemonstopped') return;
 		var operation = retry.operation({forever: true});
 		scrobbled = false;
 		var durations = [];
@@ -156,8 +155,9 @@ exports.start = function (storage) {
 	}
 
 	function stopScrobble() {
+		if (workingdb == 'daemonstopped') return;
 		workingdb = {};
-		timer.stop();
+		if (timer != null) timer.stop();
 		timer = null;
 		activeTab = -1;
 		browser.browserAction.setBadgeText({text: ''});
@@ -199,6 +199,31 @@ exports.start = function (storage) {
 						activeSettingsTab = sender.tab.id;
 					}
 					break;
+				case 'toggleScrobble':
+					console.log('scrobbling engine manage');
+					if (workingdb == 'daemonstopped') {
+						workingdb = {};
+						browser.notifications.create('startDaemon', {
+							type: 'basic',
+							iconUrl: '/logos/logo512.png',
+							title: browser.i18n.getMessage('startDaemonTitle'),
+							message: browser.i18n.getMessage('startDaemonMessage')
+						});
+						console.log('Scrobbly daemon unlock!');
+						resolve('started');
+					} else {
+						stopScrobble();
+						workingdb = 'daemonstopped';
+						browser.notifications.create('stopDaemon', {
+							type: 'basic',
+							iconUrl: '/logos/logo512.png',
+							title: browser.i18n.getMessage('stopDaemonTitle'),
+							message: browser.i18n.getMessage('stopDaemonMessage')
+						});
+						console.log('Scrobbly daemon lock!');
+						resolve('stopped');
+					}
+					break;
 				case 'auth':
 					console.log('Setting (auth) request !');
 					switch (message.service) {
@@ -222,6 +247,8 @@ exports.start = function (storage) {
 									}
 								});
 							});
+							resolve(true);
+							break;
 					}
 					break;
 				default:

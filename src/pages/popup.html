@@ -32,8 +32,11 @@
             </div>
             <div class="h">
                 <h2>Scrobbly</h2>
+                <button v-if="working" @click="toggleScrobbling" class="circular ui olive labeled icon button"><i class="unlink icon"></i> {{ trans('stopDaemon') }}</button>
+                <button v-else @click="toggleScrobbling" class="circular ui olive labeled icon button"><i class="linkify icon"></i> {{ trans('startDaemon') }}</button>
             </div>
         </div>
+        <br>
         <div class="content">
             <div v-if="workingdb == 'notready'" class="firstrun">
                 <h3>{{ trans('notready') }}</h3>

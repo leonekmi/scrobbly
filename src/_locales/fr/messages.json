@@ -8,6 +8,24 @@
     "firstRunMessage": {
         "message": "Cliquez sur moi pour configurer les anime lists !"
     },
+    "stopDaemon": {
+        "message": "Arrêter"
+    },
+    "stopDaemonTitle": {
+        "message": "Scrobbly s'est arrêté !"
+    },
+    "stopDaemonMessage": {
+        "message": "Parfait pour regarder des anime en toute intimité, l'extension ne mettra pas sur vos listes ce que vous regardez."
+    },
+    "startDaemon": {
+        "message": "Activer"
+    },
+    "startDaemonTitle": {
+        "message": "Scrobbly refonctionne !"
+    },
+    "startDaemonMessage": {
+        "message": "Scrobbly va recommencer à mettre sur vos listes ce que vous regardez."
+    },
     "notready": {
         "message": "Scrobbly n'est pas prêt !"
     },

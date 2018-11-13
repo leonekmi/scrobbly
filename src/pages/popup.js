@@ -27,7 +27,8 @@ browser.storage.local.get(null).then(result => {
                 browserstorage: result,
                 workingdb: result2,
                 workingdblist: [],
-                libchoose: 'none'
+                libchoose: 'none',
+                working: true
             },
             methods: {
                 trans: function(id, ...args) {
@@ -40,6 +41,15 @@ browser.storage.local.get(null).then(result => {
                 scrNow: function(e) {
                     browser.runtime.sendMessage({action: 'scrobble'});
                     window.close();
+                },
+                toggleScrobbling: function(e) {
+                    browser.runtime.sendMessage({action: 'toggleScrobble'}).then(result => {
+                        if (result == 'stopped') {
+                            this.working = false;
+                        } else if (result == 'started') {
+                            this.working = true;
+                        }
+                    });
                 }
             },
             created: function() {
@@ -50,6 +60,9 @@ browser.storage.local.get(null).then(result => {
                 $.each(this.workingdb, (i, val) => {
                     this.workingdblist.push(i);
                 });
+                if (this.workingdb == 'daemonstopped') {
+                    this.working = false;
+                }
             }
         });
     });
