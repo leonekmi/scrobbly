@@ -50,19 +50,32 @@ browser.storage.local.get(null).then(result => {
                             this.working = true;
                         }
                     });
+                },
+                changeScrobbling: function(e) {
+                    var message = 'Choose anime :\n\n';
+                    this.workingdb[e.srcElement.attributes.lib.value].otherResults.forEach((element, index) => {
+                        message += '['+index+'] ' + element.title + '\n';
+                    });
+                    var aid = window.prompt(message);
+                    browser.runtime.sendMessage({action: 'change', lib: e.srcElement.attributes.lib.value, aid: aid}).then(res => {
+                        browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(res => {
+                            this.workingdb = res;
+                        });
+                    });
+                    return;
                 }
             },
             created: function() {
+                if (this.workingdb == 'daemonstopped') {
+                    this.working = false;
+                }
                 if (typeof this.workingdb == 'string') {
-                    this.workingdblist = 'none';
+                    this.workingdblist = [];
                     return;
                 }
                 $.each(this.workingdb, (i, val) => {
                     this.workingdblist.push(i);
                 });
-                if (this.workingdb == 'daemonstopped') {
-                    this.working = false;
-                }
             }
         });
     });

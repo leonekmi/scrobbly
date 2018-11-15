@@ -55,7 +55,6 @@ module.exports = class lanilist {
                         synopsis: el.description
                     });
                 });
-                console.log(ret);
                 resolve(ret);
             });
         });

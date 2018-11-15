@@ -22,7 +22,7 @@ exports.start = function (storage) {
 	var browser = require('webextension-polyfill');
 	var countdown = require('easytimer.js');
 	var retry = require('retry');
-	//var $ = require('jquery');
+	var $ = require('jquery');
 	// init
 	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid), new lanilist(storage.anilist_at)];
 	var llibList = [];
@@ -30,6 +30,7 @@ exports.start = function (storage) {
 	var activeTab = -1;
 	var ready = false;
 	var timer = null;
+	var durationStorage = {};
 	var scrobbled;
 	var activeSettingsTab;
 
@@ -77,8 +78,19 @@ exports.start = function (storage) {
 		timer = null;
 		activeTab = -1;
 		scrobbled = true;
+		durationStorage = {};
 		browser.browserAction.setBadgeText({text: '+'});
 		browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
+	}
+
+	function getLib(libname) {
+		return new Promise(resolve => {
+			llibList.forEach(lib => {
+				if (lib.info.name == libname) {
+					resolve(lib);
+				}
+			});
+		});
 	}
 
 	function startScrobble(animeName, episode, senderId) {
@@ -91,67 +103,89 @@ exports.start = function (storage) {
 		console.log('Tracked tab is now ' + activeTab);
 		llibList.forEach((lib, index) => {
 			lib.getAnimeData(animeName).then(result => {
-				lib.getProgress(result[0].id).then(progress => {
-					workingdb[lib.info.name] = {anime: result[0], progress: progress, ep: episode};
-					console.log(result);
-					if (result[0].episodeDuration == 'none') {
-						console.warn('No duration');
-					} else {
-						durations.push(result[0].episodeDuration);
-					}
+				if (result.length == 0) {
+					console.warn('No lib data for ' + lib.info.name);
 					durProcessed += 1;
-					/*if (result.episodeDuration == 'none') {
-						//
-					} else {
-						timer[lib.info.name] = new countdown();
-						timer[lib.info.name].start({
-							target: {
-								minutes: result.episodeDuration / 4 * 3
-							}
-						});
-						timer[lib.info.name].addEventListener('targetAchieved', ctimer => {
-							scobble();
-						});
-					}*/
-					if (index == llibList.length - 1) {
-						operation.attempt(currAtt => {
-							if (durProcessed != llibList.length) {
-								console.log('Wait for data loop');
-								operation.retry({message: 'Wait for all data', obj: durations});
+				} else {
+					lib.getProgress(result[0].id).then(progress => {
+						workingdb[lib.info.name] = {anime: result[0], progress: progress, ep: episode, otherResults: result};
+						console.log(lib.info.name, result);
+						if (result[0].episodeDuration == 'none') {
+							console.warn('No duration');
+						} else {
+							durations.push(result[0].episodeDuration);
+						}
+						durationStorage[lib.info.name] = result[0].episodeDuration;
+						durProcessed += 1;
+					});	
+				}
+				if (index == llibList.length - 1) {
+					console.log('Processing timer');
+					operation.attempt(currAtt => {
+						if (durProcessed != llibList.length) {
+							console.log('Wait for data loop');
+							operation.retry({message: 'Wait for all data', obj: durations});
+						} else {
+							if (durations.length > 0) {
+								console.log('start countdown');
+								var durationAverage = 0;
+								durations.forEach((duration) => {
+									durationAverage += duration;
+								});
+								durationAverage = durationAverage / durations.length;
+								timer = new countdown();
+								timer.stop();
+								timer.start({
+									target: {
+										minutes: durationAverage / 4 * 3
+									}
+								});
+								browser.browserAction.setBadgeText({text: 'OK'});
+								browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
+								timer.addEventListener('targetAchieved', ctimer => {
+									console.log('End of the timer');
+									scrobble();
+								});
 							} else {
-								if (durations.length > 0) {
-									console.log('start countdown');
-									var durationAverage = 0;
-									durations.forEach((duration) => {
-										durationAverage += duration;
-									});
-									durationAverage = durationAverage / durations.length;
-									timer = new countdown();
-									timer.stop();
-									timer.start({
-										target: {
-											minutes: durationAverage / 4 * 3
-										}
-									});
-									browser.browserAction.setBadgeText({text: 'OK'});
-									browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
-									timer.addEventListener('targetAchieved', ctimer => {
-										console.log('End of the timer');
-										scrobble();
-									});
-								} else {
-									browser.browserAction.setBadgeText({text: '!'});
-									browser.browserAction.setBadgeBackgroundColor({color: '#dbd700'});
-									console.warn('No duration from all sources, this is a problem, Agent Johnson');
-								}
+								browser.browserAction.setBadgeText({text: '!'});
+								browser.browserAction.setBadgeBackgroundColor({color: '#dbd700'});
+								console.warn('No duration from all sources, this is a problem, Agent Johnson');
 							}
-						});
-					};
+						}
+					});
+				};
+			});
+		});
+	}
+
+	function changeScrobbling(lib, aid) {
+		return new Promise(resolve => {
+			var libworkingdb = workingdb[lib];
+			getLib(lib).then(llib => {
+				llib.getProgress(libworkingdb.otherResults[aid].id).then(progress => {
+					workingdb[lib].anime = workingdb[lib].otherResults[aid];
+					workingdb[lib].progress = progress;
+					durationStorage[lib] = workingdb[lib].anime.episodeDuration;
+					var durStg = Object.values(durationStorage);
+					var durationSum = durStg.reduce((acc, curVal) => {
+						if (curVal != 'none') return acc + curVal;
+					}, 0);
+					console.log(durationSum);
+					console.log
+					var durationAvg = durationSum / durStg.length / 4 * 3;
+					var timeValues = timer.getTimeValues();
+					timer.stop();
+					timer.start({
+						target: {
+							minutes: durationAvg
+						},
+						startValues: timeValues
+					});
+					console.log('Change scrobbling success!', {lib, wdb: workingdb[lib], timer, durationAvg});
+					resolve(true);
 				});
 			});
 		});
-
-
 	}
 
 	function stopScrobble() {
@@ -159,6 +193,7 @@ exports.start = function (storage) {
 		workingdb = {};
 		if (timer != null) timer.stop();
 		timer = null;
+		durationStorage = {};
 		activeTab = -1;
 		browser.browserAction.setBadgeText({text: ''});
 	}
@@ -173,6 +208,10 @@ exports.start = function (storage) {
 					console.log('Starting !');
 					startScrobble(message.animeName, message.episode, sender.tab.id);
 					resolve(true);
+					break;
+				case 'change':
+					console.log('Changing !');
+					changeScrobbling(message.lib, message.aid).then(res => resolve(res));
 					break;
 				case 'scrobble':
 					console.log('Scrobbling !');

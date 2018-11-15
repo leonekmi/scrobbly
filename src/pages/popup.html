@@ -59,8 +59,8 @@
             <div v-else>
                 <center>
                     <!-- TODO : Learn CSS to know how to center :) -->
-                    <a class="ui icon orange button" @click="stop" :datalib="key"><i class="stop icon" :data-lib="key"></i></a>
-                    <a class="ui icon green button" @click="scrNow" :datalib="key"><i class="fast forward icon" :data-lib="key"></i></a>
+                    <a class="ui icon orange button" @click="stop"><i class="stop icon"></i></a>
+                    <a class="ui icon green button" @click="scrNow"><i class="fast forward icon"></i></a>
                 </center>
                 <br>
                 <div class="ui form">
@@ -74,7 +74,7 @@
                 <br>
                 <div v-for="(status, key) in workingdb" :id="key" v-if="libchoose == key">
                     <center>
-                        <a class="ui labeled icon yellow button" @click="change"><i class="exchange icon"></i> {{ trans('wronganime') }}</a>
+                        <a class="ui labeled icon yellow button" @click="changeScrobbling" :lib="key"><i class="exchange icon" :lib="key"></i> {{ trans('wronganime') }}</a>
                     </center>
                     <br>
                     <img :src="status.anime.cover" width="275">
