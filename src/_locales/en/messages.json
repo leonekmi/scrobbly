@@ -47,11 +47,14 @@
     "wronganime": {
         "message": "Wrong anime?"
     },
+    "settings": {
+        "message": "Settings"
+    },
     "login": {
         "message": "Login"
     },
     "loginProcedure": {
-        "message": "Scrobbly needs a connection to an anime list service, when you have done, click Done to apply and start to use Scrobbly."
+        "message": "Scrobbly needs a connection to an anime list service, when you have done, click Done to apply and start to use Scrobbly. If you relogin to a service, the old connection will be overwritten."
     },
     "loginWith": {
         "message": "Login with $SITE$",

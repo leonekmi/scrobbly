@@ -63,6 +63,12 @@ browser.storage.local.get(null).then(result => {
                         });
                     });
                     return;
+                },
+                openSettings: function() {
+                    browser.tabs.create({
+                        active: true,
+                        url: browser.runtime.getURL('pages/settings.html')
+                    });
                 }
             },
             created: function() {

@@ -47,11 +47,14 @@
     "wronganime": {
         "message": "Mauvais anime ?"
     },
+    "settings": {
+        "message": "Paramètres"
+    },
     "login": {
         "message": "Se connecter"
     },
     "loginProcedure": {
-        "message": "Scrobbly a besoin d'une connexion à un service d'anime list, lorsque vous avez terminé, appuyez sur Sauvegarder pour commencer à utiliser Scrobbly."
+        "message": "Scrobbly a besoin d'une connexion à un service d'anime list, lorsque vous avez terminé, appuyez sur Sauvegarder pour commencer à utiliser Scrobbly. Si vous vous reconnectez à un service, l'ancienne connexion sera écrasée."
     },
     "loginWith": {
         "message": "Se connecter avec $SITE$",
