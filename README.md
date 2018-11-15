@@ -4,8 +4,11 @@
 [![shields.io](https://img.shields.io/badge/browsers-chromium--based%2C%20firefox-green.svg)](https://shields.io)
 ![Chrome Web Store](https://img.shields.io/chrome-web-store/v/gochjbmioibanjdppcempakcjcfaconi.svg)
 
+# Notice
 
-## Connect to Anilist and "scrobble your animes"
+anilst-scrobbler is gonna die, [Scrobbly](https://github.com/leonekmi/anilist-scrobbler/tree/2.0) will replace it in further days.
+
+## Connect to Anilist / Kitsu and "scrobble your animes"
 
 ### Websites support
 
