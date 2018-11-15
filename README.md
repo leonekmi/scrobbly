@@ -11,6 +11,11 @@
 At the same time, **just by watching** on your favourite VoD website, this WebExtension (Firefox & Chromium-based) can update your Kitsu, AniList and MAL lists (for now, it supports only Kitsu and AniList, but MAL is planned for next releases).
 **Note : this extension is for the moment WIP and might not work at 100% in certain cases.**
 
+### Install
+
+- Chrome, Vivaldi and other Chromium-based browsers : [Scrobbly is available on the Chrome Web Store](https://chrome.google.com/webstore/detail/scrobbly/bghcjdikmfopmhpgcocpgfefjppkfjpn)
+- Firefox (all editions) : [Scrobbly is available on my website](https://scrobbly.leonekmi.fr/firefox/scrobbly-0.0.5-fx.xpi)
+
 ### Roadmap
 
 Here is the roadmap for the first major release :
