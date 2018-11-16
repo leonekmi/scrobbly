@@ -1,0 +1,119 @@
+{
+    "slogan": {
+        "message": "Mettez à jour en même tous vos sites d'anime list rien qu'en regardant sur votre site préféré."
+    },
+    "firstRunTitle": {
+        "message": "Bienvenue sur Scrobbly !"
+    },
+    "firstRunMessage": {
+        "message": "Cliquez sur moi pour configurer les anime lists !"
+    },
+    "stopDaemon": {
+        "message": "Arrêter"
+    },
+    "stopDaemonTitle": {
+        "message": "Scrobbly s'est arrêté !"
+    },
+    "stopDaemonMessage": {
+        "message": "Parfait pour regarder des anime en toute intimité, l'extension ne mettra pas sur vos listes ce que vous regardez."
+    },
+    "startDaemon": {
+        "message": "Activer"
+    },
+    "startDaemonTitle": {
+        "message": "Scrobbly refonctionne !"
+    },
+    "startDaemonMessage": {
+        "message": "Scrobbly va recommencer à mettre sur vos listes ce que vous regardez."
+    },
+    "notready": {
+        "message": "Scrobbly n'est pas prêt !"
+    },
+    "welcome": {
+        "message": "Bienvenue !"
+    },
+    "noactivity": {
+        "message": "Scrobbly ne détecte aucune activité. Si vous regardez un anime mais qu'il n'apparaît pas ici, c'est peut-être car le site Internet n'est pas compatible avec Scrobbly."
+    },
+    "compatible": {
+        "message": "Sites compatibles"
+    },
+    "moretocome": {
+        "message": "D'autres à venir !"
+    },
+    "libstatus": {
+        "message": "Statut du site d'anime list"
+    },
+    "wronganime": {
+        "message": "Mauvais anime ?"
+    },
+    "settings": {
+        "message": "Paramètres"
+    },
+    "delete": {
+        "message": "Supprimer la connexion"
+    },
+    "login": {
+        "message": "Se connecter"
+    },
+    "loginProcedure": {
+        "message": "Scrobbly a besoin d'une connexion à un service d'anime list, lorsque vous avez terminé, appuyez sur Sauvegarder pour commencer à utiliser Scrobbly. Si vous vous reconnectez à un service, l'ancienne connexion sera écrasée."
+    },
+    "loginWith": {
+        "message": "Se connecter avec $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "loginInfoAnilist": {
+        "message": "Pour vous connecter avec AniList, vous serez redirigé vers le site d'AniList pour autoriser la connexion et paramétrer Scrobbly automatiquement. Le site d'AniList nous donnera un jeton d'accès à votre compte, nous le stockons uniquement chez vous et n'est pas communiqué. Pour en savoir plus, consultez la politique de confidentialité de Scrobbly."
+    },
+    "loginInfoKitsu": {
+        "message": "Pour vous connecter avec Kitsu, vous devez entrer votre e-mail ainsi que votre mot de passe (NB: la connexion via Facebook n'est pas possible à ce jour). Vos identifiants ne sont pas stockés ni sur votre machine, ni sur nos serveurs, ils sont uniquement communiqués à Kitsu pour obtenir un jeton d'accès à votre compte que nous stockerons chez vous et n'est pas communiqué, pour en savoir plus, consultez la politique de confidentialité de Scrobbly."
+    },
+    "save": {
+        "message": "Sauvegarder"
+    },
+    "youCanClose": {
+        "message": "Bravo ! Votre compte $SITE$ est relié à Scrobbly. Vous pouvez fermer et revenir en arrière",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalTitle": {
+        "message": "Supprimer la connexion à $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalMessage": {
+        "message": "Une fois déconnecté, votre anime list $SITE$ ne sera plus automatiquement sychrnoisé grâce à Scrobbly. Vous pouvez vous reconnecter à tout moment.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "email": {
+        "message": "E-Mail"
+    },
+    "password": {
+        "message": "Mot de passe"
+    },
+    "loggedIn": {
+        "message": "Connecté !"
+    },
+    "episode": {
+        "message": "Épisode"
+    }
+}

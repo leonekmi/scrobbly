@@ -1,0 +1,119 @@
+{
+    "slogan": {
+        "message": "Update at the same time multiple anime sites just by watching on your favourite anime website."
+    },
+    "firstRunTitle": {
+        "message": "Welcome to Scrobbly!"
+    },
+    "firstRunMessage": {
+        "message": "Click on me to setup your anime lists!"
+    },
+    "stopDaemon": {
+        "message": "Stop"
+    },
+    "stopDaemonTitle": {
+        "message": "You stopped Scrobbly!"
+    },
+    "stopDaemonMessage": {
+        "message": "If you need to watch some anime but without publishing it on your anime lists, you can go now!"
+    },
+    "startDaemon": {
+        "message": "Start"
+    },
+    "startDaemonTitle": {
+        "message": "Scrobbly is running again!"
+    },
+    "startDaemonMessage": {
+        "message": "Scrobbly will resume scrobbling now, good session!"
+    },
+    "notready": {
+        "message": "Srobbly is not ready!"
+    },
+    "welcome": {
+        "message": "Welcome here!"
+    },
+    "noactivity": {
+        "message": "Scrobbly doesn't detect anime activity. If you are watching anime but doesn't appear here, it might be because the website is not compatible with Scrobbly."
+    },
+    "compatible": {
+        "message": "Comptaible websites"
+    },
+    "moretocome": {
+        "message": "More to come!"
+    },
+    "libstatus": {
+        "message": "Library status"
+    },
+    "wronganime": {
+        "message": "Wrong anime?"
+    },
+    "settings": {
+        "message": "Settings"
+    },
+    "login": {
+        "message": "Login"
+    },
+    "delete": {
+        "message": "Delete connection"
+    },
+    "loginProcedure": {
+        "message": "Scrobbly needs a connection to an anime list service, when you have done, click Done to apply and start to use Scrobbly. If you relogin to a service, the old connection will be overwritten."
+    },
+    "loginWith": {
+        "message": "Login with $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "loginInfoAnilist": {
+        "message": "To login with AniList, you will be redirected to the AniList website to authorize the connection and setup Scrobbly automatically. The AniList website will give us an access token to your account, it will stay on your computer. To learn more, check the Scrobbly privacy policy."
+    },
+    "loginInfoKitsu": {
+        "message": "To login with Kitsu, you need your account's e-mail and password (sidenote: login via Facebook is impossible for now). Your credentials are not stored on your computer and on our servers, they are just exchanged with an access token that are stored only on your computer. To learn more, check the Scrobbly privacy policy."
+    },
+    "save": {
+        "message": "Done"
+    },
+    "youCanClose": {
+        "message": "Congrats! Your $SITE$ account is linked with Scrobbly. You can close this tab and go back to settings.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalTitle": {
+        "message": "Delete connection to $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalMessage": {
+        "message": "Once unliked, your $SITE$ anime list will be not automatically updated with Scrobbly. You can relink your account at any time.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "email": {
+        "message": "E-Mail"
+    },
+    "password": {
+        "message": "Password"
+    },
+    "loggedIn": {
+        "message": "Connected!"
+    },
+    "episode": {
+        "message": "Episode"
+    }
+}

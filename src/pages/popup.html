@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<!--
+    This file is part of Scrobbly.
+
+    Scrobbly is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Scrobbly is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
+-->
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="popup.css">
+    <link rel="stylesheet" href="al-icons/css/al-icons.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/button.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/icon.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/form.min.css">
+</head>
+<body>
+    <content>
+        <div class="header">
+            <div class="logo">
+                <img src="../logos/logo128.png" width="78px" height="78px">
+            </div>
+            <div class="h">
+                <h2>Scrobbly</h2>
+                <button v-if="working" @click="toggleScrobbling" class="circular ui olive labeled icon button"><i class="unlink icon"></i> {{ trans('stopDaemon') }}</button>
+                <button v-else @click="toggleScrobbling" class="circular ui olive labeled icon button"><i class="linkify icon"></i> {{ trans('startDaemon') }}</button>
+            </div>
+        </div>
+        <br>
+        <div class="content">
+            <div v-if="workingdb == 'notready'" class="firstrun">
+                <h3>{{ trans('notready') }}</h3>
+                <a href="settings.html" target="_blank" class="ui green button">{{ trans('login') }}</a>
+            </div>
+            <div v-if="workingdblist.length == 0">
+                <h3>{{ trans('welcome') }}</h3>
+                <p>{{ trans('noactivity') }}</p>
+                <p>{{ trans('compatible') }} :
+                    <ul>
+                        <li>Crunchyroll</li>
+                        <li>Netflix</li>
+                        <li>Wakanim</li>
+                        <li>Plex (via app.plex.tv)</li>
+                        <li>Emby (via app.emby.media)</li>
+                        <li><em>{{ trans('moretocome') }}</em></li>
+                    </ul>
+                </p>
+            </div>
+            <div v-else>
+                <center>
+                    <!-- TODO : Learn CSS to know how to center :) -->
+                    <a class="ui icon orange button" @click="stop"><i class="stop icon"></i></a>
+                    <a class="ui icon green button" @click="scrNow"><i class="fast forward icon"></i></a>
+                </center>
+                <br>
+                <div class="ui form">
+                    <div class="field">
+                        <select v-model="libchoose">
+                            <option value="none" selected>{{ trans('libstatus') }}</option>
+                            <option :value="lib" v-for="lib in workingdblist">{{ lib }}</option>
+                        </select>
+                    </div>
+                </div>
+                <br>
+                <div v-for="(status, key) in workingdb" :id="key" v-if="libchoose == key">
+                    <center>
+                        <a class="ui labeled icon yellow button" @click="changeScrobbling" :lib="key"><i class="exchange icon" :lib="key"></i> {{ trans('wronganime') }}</a>
+                    </center>
+                    <br>
+                    <img :src="status.anime.cover" width="275">
+                    <h2>{{ status.anime.title }} - {{ trans('episode') }} {{ status.ep }}</h2>
+                </div>
+            </div>
+            <div>
+                <center>
+                    <a class="ui labeled icon primary button" @click="openSettings()"><i class="settings icon"></i> {{ trans('settings') }}</a>
+                </center>
+            </div>          
+        </div>
+    </content>
+
+    <script src="popup.bundle.js"></script>
+</body>
+</html>
