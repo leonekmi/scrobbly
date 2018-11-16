@@ -53,6 +53,9 @@
     "login": {
         "message": "Login"
     },
+    "delete": {
+        "message": "Delete connection"
+    },
     "loginProcedure": {
         "message": "Scrobbly needs a connection to an anime list service, when you have done, click Done to apply and start to use Scrobbly. If you relogin to a service, the old connection will be overwritten."
     },
@@ -76,6 +79,24 @@
     },
     "youCanClose": {
         "message": "Congrats! Your $SITE$ account is linked with Scrobbly. You can close this tab and go back to settings.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalTitle": {
+        "message": "Delete connection to $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalMessage": {
+        "message": "Once unliked, your $SITE$ anime list will be not automatically updated with Scrobbly. You can relink your account at any time.",
         "placeholders": {
             "site": {
                 "content": "$1",

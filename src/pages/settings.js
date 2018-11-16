@@ -14,7 +14,16 @@ browser.storage.local.get(null).then(result => {
             el: 'content',
             data: {
                 browserstorage: result,
-                workingdb: result2
+                workingdb: result2,
+                deletevar: '',
+                deletemodaltitle: '',
+                deletemodalmessage: ''
+            },
+            watch: {
+                deletevar: function(nvar, ovar) {
+                    this.deletemodaltitle = browser.i18n.getMessage('deleteModalTitle', [nvar]);
+                    this.deletemodalmessage = browser.i18n.getMessage('deleteModalMessage', [nvar]);
+                }
             },
             methods: {
                 trans: function(id, ...args) {
@@ -48,6 +57,25 @@ browser.storage.local.get(null).then(result => {
                             alert('ow...');
                         }
                     });
+                },
+                showDeleteModal: function(service) {
+                    this.deletevar = service;
+                    $('#deletemodal').modal('show');
+                },
+                deleteLogin: function() {
+                    switch (this.deletevar) {
+                        case 'Anilist':
+                            pendingChanges.anilist_at = null;
+                            $('#anilist_delete').addClass('disabled');
+                            break;
+                        case 'Kitsu':
+                            pendingChanges.kitsu_at = null;
+                            pendingChanges.kitsu_uid = null;
+                            $('#kitsu_delete').addClass('disabled');
+                            break;
+                    }
+                    console.log(this.deletevar + 'account deleted!');
+                    console.log(pendingChanges);
                 }
             }
         });

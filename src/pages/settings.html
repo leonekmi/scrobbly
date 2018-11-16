@@ -31,10 +31,20 @@
                     <i class="icon-anilist icon"></i>
                     AniList
                 </a>
+                <a href="#" v-if="browserstorage.anilist_at" @click="showDeleteModal('Anilist')" class="ui red labeled icon button" id="anilist_delete">
+                    <i class="delete icon"></i>
+                    {{ trans('delete') }}
+                </a>
+                <br/><br/>
                 <a href="#" @click="showModal('kitsu')" class="ui orange labeled icon button" id="kitsu">
                     <i class="icon-kitsu icon"></i>
                     Kitsu
                 </a>
+                <a href="#" v-if="browserstorage.kitsu_at && browserstorage.kitsu_uid" @click="showDeleteModal('Kitsu')" class="ui red labeled icon button" id="kitsu_delete">
+                    <i class="delete icon"></i>
+                    {{ trans('delete') }}
+                </a>
+                <br/><br/>
                 <a class="ui blue disabled labeled icon button" id="mal">
                     <i class="icon-mal icon"></i>
                     MyAnimeList (not supported for now)
@@ -87,6 +97,21 @@
             <div class="actions">
                 <a href="#" @click="loginKitsu" class="ui positive button">
                     {{ trans('login') }}
+                </a>
+            </div>
+        </div>
+
+        <div id="deletemodal" class="ui modal">
+            <div class="header">
+                {{ deletemodaltitle }}
+            </div>
+            <div class="content">
+                <p>{{ deletemodalmessage }}</p>
+            </div>
+            <div class="actions">
+                <a href="#" class="ui labeled icon red button" @click="deleteLogin()">
+                    <i class="trash icon"></i>
+                    {{ trans('delete') }}
                 </a>
             </div>
         </div>

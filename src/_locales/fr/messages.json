@@ -50,6 +50,9 @@
     "settings": {
         "message": "Paramètres"
     },
+    "delete": {
+        "message": "Supprimer la connexion"
+    },
     "login": {
         "message": "Se connecter"
     },
@@ -76,6 +79,24 @@
     },
     "youCanClose": {
         "message": "Bravo ! Votre compte $SITE$ est relié à Scrobbly. Vous pouvez fermer et revenir en arrière",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalTitle": {
+        "message": "Supprimer la connexion à $SITE$",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "AniList"
+            }
+        }
+    },
+    "deleteModalMessage": {
+        "message": "Une fois déconnecté, votre anime list $SITE$ ne sera plus automatiquement sychrnoisé grâce à Scrobbly. Vous pouvez vous reconnecter à tout moment.",
         "placeholders": {
             "site": {
                 "content": "$1",
