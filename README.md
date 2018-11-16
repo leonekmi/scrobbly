@@ -18,22 +18,17 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 
 ### Roadmap
 
-Here is the roadmap for the first major release :
-- Kitsu / Anilist support **done**
-- Crunchyroll / Netflix / Wakanim / Plex / Emby support **done**
-- UI rework from v1 **in progress**
-
-**Deadline : 21th November**
-*(Scrobbly will replace Anilist Scrobbler)*
-
-Second major release :
-- MyAnimeList Support **planned**
-- Hulu / HiDive / AnimeOnDemand / ADN support **planned**
-- UI improvments **in progress**
-- Get feedback from first release **it depends on you! give me feedback on Twitter [@leonekmi](https://twitter.com/leonekmi) :)**
-
-Third major release :
-- Manual scrobbling **planned**
-- Title Preference (English / Romaji / Native) **planned**
+| Version             | Function                                              | Status                                                                                                     |
+|---------------------|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
+| v2.0 (revamp!)      | Kitsu / AniList support                               | **done**                                                                                                   |
+| -                   | Crunchyroll / Netflix / Wakanim / Plex / Emby support | **done**                                                                                                   |
+| -                   | UI rework from v1                                     | **in progress**                                                                                            |
+|                     | **Deadline : 21th November**                          |                                                                                                            |
+| v2.1 (more support) | MyAnimeList support                                   | **planned ([when API will be back](https://myanimelist.net/forum/?topicid=1740204&show=400#msg56198138))** |
+| -                   | Hulu / HiDive / AnimeOnDemand / ADN support           | **planned**                                                                                                |
+| -                   | UI improvments                                        | **in progress**                                                                                            |
+| -                   | Get feedback from first release                       | **you can always send me feedback on [Twitter](https://twitter.com/leonekmi)**                             |
+| v2.3 (functions)    | Manual scrobbling                                     | **planned**                                                                                                |
+| -                   | Title Preference (English / Romaji / Native)          | **planned**                                                                                                |
 
 More to come later... stay tuned!

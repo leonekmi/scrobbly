@@ -25,6 +25,9 @@ However, you connect the extension to your anime list account (AniList, Kitsu, e
 - [Wakanim](https://www.wakanim.tv/fr/v2/static/privacypolicy)
 - [ADN (Anime Digital Network)](https://animedigitalnetwork.fr/conditions-generales-d-utilisation)
 - [Hulu](https://secure.hulu.com/privacy)
+- [Plex](https://www.plex.tv/about/privacy-legal/)
+- [Emby](https://emby.media/privacy.html)
+
 
 ## Français (fr)
 
@@ -51,3 +54,5 @@ Cependant, vous vous connectez aux services d'anime list (AniList, Kitsu, etc...
 - [Wakanim](https://www.wakanim.tv/fr/v2/static/privacypolicy)
 - [ADN (Anime Digital Network)](https://animedigitalnetwork.fr/conditions-generales-d-utilisation)
 - [Hulu](https://secure.hulu.com/privacy)
+- [Plex](https://www.plex.tv/about/privacy-legal/)
+- [Emby](https://emby.media/privacy.html)
