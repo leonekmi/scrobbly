@@ -14,7 +14,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 ### Install
 
 - Chrome, Vivaldi and other Chromium-based browsers : [Scrobbly is available on the Chrome Web Store](https://chrome.google.com/webstore/detail/scrobbly/bghcjdikmfopmhpgcocpgfefjppkfjpn)
-- Firefox (all editions) : [Scrobbly is available on my website](https://scrobbly.leonekmi.fr/firefox/scrobbly-0.0.5-fx.xpi)
+- Firefox (all editions) : [Scrobbly is available on my website](https://scrobbly.leonekmi.fr/firefox/scrobbly-2.0.0-fx.xpi)
 
 ### Roadmap
 
@@ -22,8 +22,8 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 |---------------------|-------------------------------------------------------|------------------------------------------------------------------------------------------------------------|
 | v2.0 (revamp!)      | Kitsu / AniList support                               | **done**                                                                                                   |
 | -                   | Crunchyroll / Netflix / Wakanim / Plex / Emby support | **done**                                                                                                   |
-| -                   | UI rework from v1                                     | **in progress**                                                                                            |
-|                     | **Deadline : 21th November**                          |                                                                                                            |
+| -                   | UI rework from v1                                     | **done**                                                                                            |
+|                     | **Deadline : 21th November** [RC is up!](https://github.com/leonekmi/scrobbly/releases/tag/v2.0-rc1)                          |                                                                                                            |
 | v2.1 (more support) | MyAnimeList support                                   | **planned ([when API will be back](https://myanimelist.net/forum/?topicid=1740204&show=400#msg56198138))** |
 | -                   | Hulu / HiDive / AnimeOnDemand / ADN support           | **planned**                                                                                                |
 | -                   | UI improvments                                        | **in progress**                                                                                            |
