@@ -8,7 +8,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+ssh://git@github.com/leonekmi/anilist-scrobbler.git"
+    "url": "git+ssh://git@github.com/leonekmi/scrobbly.git"
   },
   "keywords": [
     "anime",
@@ -18,9 +18,9 @@
   "author": "leonekmi",
   "license": "GPL-3.0-or-later",
   "bugs": {
-    "url": "https://github.com/leonekmi/anilist-scrobbler/issues"
+    "url": "https://github.com/leonekmi/scrobbly/issues"
   },
-  "homepage": "https://github.com/leonekmi/anilist-scrobbler#readme",
+  "homepage": "https://github.com/leonekmi/scrobbly#readme",
   "dependencies": {
     "easytimer.js": "^2.3.0",
     "graphql-request": "^1.8.2",
