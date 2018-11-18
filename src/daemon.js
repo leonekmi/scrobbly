@@ -276,7 +276,7 @@ exports.start = function (storage) {
 							resolve(true);
 							break;
 						case 'kitsu':
-							console.log('Kitsu auth', message.username, message.passwd);
+							console.log('Kitsu auth', message.email, message.passwd);
 							fetch('https://kitsu.io/api/oauth/token', {method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'}, body: 'grant_type=password&username=' + encodeURIComponent(message.email) + '&password=' + encodeURIComponent(message.passwd)}).then(response => {
 								response.json().then(jsondata => {
 									if (jsondata.error) {
@@ -286,7 +286,6 @@ exports.start = function (storage) {
 									}
 								});
 							});
-							resolve(true);
 							break;
 					}
 					break;
