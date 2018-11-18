@@ -32,3 +32,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 | -                   | Title Preference (English / Romaji / Native)          | **planned**                                                                                                |
 
 More to come later... stay tuned!
+
+### Donate
+
+If you like Scrobbly, please consider donating on my [Patreon page](https://patreon.com/leonekmi). Thanks!
