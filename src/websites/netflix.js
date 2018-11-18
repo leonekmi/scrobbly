@@ -31,16 +31,9 @@ exports.api = class Netflix {
     }
 
     init() {
-        /*var operation = this.retry.operation({forever: true});
-
-        operation.attempt(currAtt => {
-            var episodeInfo = this.jquery('div.ellipsize-text');
-            if (episodeInfo.length == 0) {
-                operation.retry({message: 'Netflix is loading', obj: episodeInfo});
-            } else {*/
         setInterval(() => {
             var episodeInfo = this.jquery('div.ellipsize-text');
-            console.log('netflix is beta', episodeInfo);
+            console.log('[scrobbly] netflix support is time-based, some issues can occur', episodeInfo);
             if (episodeInfo.length == 0) {
                 if (!this.storage.sent) return;
                 else {
@@ -62,7 +55,5 @@ exports.api = class Netflix {
                 }
             }
         }, 6500);
-            /*}
-        });*/
     }
 };
