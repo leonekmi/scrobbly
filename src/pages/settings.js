@@ -48,13 +48,8 @@ browser.storage.local.get(null).then(result => {
                                     $('#kitsu').html('<i class="checkmark icon"></i>'+browser.i18n.getMessage('loggedIn'));
                                 });
                             });
-                            /*console.log('token', result.at, result.uid);
-                            pendingChanges.kitsu_at = result.at;
-                            pendingChanges.kitsu_uid = result.uid;
-                            console.log(pendingChanges);
-                            $('#kitsu').html('<i class="checkmark icon"></i>'+browser.i18n.getMessage('loggedIn'));*/
                         } else {
-                            alert('ow...');
+                            alert(browser.i18n.getMessage('badPassword'));
                         }
                     });
                 },

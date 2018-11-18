@@ -56,6 +56,9 @@
     "login": {
         "message": "Se connecter"
     },
+    "badPassword": {
+        "message": "Identifiant ou mot de passe incorrect."
+    },
     "loginProcedure": {
         "message": "Scrobbly a besoin d'une connexion à un service d'anime list, lorsque vous avez terminé, appuyez sur Sauvegarder pour commencer à utiliser Scrobbly. Si vous vous reconnectez à un service, l'ancienne connexion sera écrasée."
     },

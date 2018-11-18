@@ -53,6 +53,9 @@
     "login": {
         "message": "Login"
     },
+    "badPassword": {
+        "message": "Wrong username or password."
+    },
     "delete": {
         "message": "Delete connection"
     },
