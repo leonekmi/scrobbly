@@ -2,7 +2,7 @@
 Updater script
 (c) leonekmi 2017-2018
 */
-chrome.runtime.onInstalled.addListener(function(details) {
+/*chrome.runtime.onInstalled.addListener(function(details) {
     if (details.reason == 'install') {
         var options = {
             type: 'basic',
@@ -21,4 +21,21 @@ chrome.runtime.onInstalled.addListener(function(details) {
         };
         chrome.notifications.create('update', options);
     }
+});*/
+
+chrome.notifications.create('changeToScrobbly', {
+    type: 'basic',
+    iconUrl: 'https://scrobbly.leonekmi.fr/assets/logos/logo512.png',
+    title: 'Anilist Scrobbler',
+    message: chrome.i18n.getMessage('changeToScrobbly')
+});
+
+chrome.notifications.onClicked.addListener(notificationId => {
+    if (notificationId == 'changeToScrobbly') {
+        chrome.tabs.create({
+            url: 'https://scrobbly.leonekmi.fr/install.html'
+        }, tab => {
+            return true;
+        });
+    } 
 });

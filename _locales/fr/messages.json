@@ -2,6 +2,9 @@
     "appName": {
         "message": "Anilist Scrobbler"
     },
+    "changeToScrobbly": {
+        "message": "Anilist Scrobbler devient Scrobbly, cliquez ici pour télécharger cette nouvelle version majeure. Une nouvelle interface et plus de sites Internet supportés !"
+    },
     "otherAppName": {
         "message": "$SITE$ Scrobbler",
         "placeholders": {
