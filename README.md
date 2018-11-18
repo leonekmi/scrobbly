@@ -6,7 +6,7 @@
 
 # Notice
 
-anilst-scrobbler is gonna die, [Scrobbly](https://github.com/leonekmi/anilist-scrobbler/tree/2.0) will replace it in further days.
+anilst-scrobbler is gonna die, [Scrobbly](https://github.com/leonekmi/scrobbly) will replace it in further days.
 
 ## Connect to Anilist / Kitsu and "scrobble your animes"
 
@@ -26,7 +26,8 @@ _Create an issue for request websites. We don't accept streaming or illegal webs
 
 ### Install (stable)
 
-[Click here](https://leonekmi.twittolabel.fr/anilist-scrobble) to download signed packages for Chrome and Firefox.
+~~[Click here](https://leonekmi.twittolabel.fr/anilist-scrobble) to download signed packages for Chrome and Firefox.~~
+[Scrobbly](https://github.com/leonekmi/scrobbly) is replacing Anilist Scrobbler.
 
 ### Install (from git)
 
