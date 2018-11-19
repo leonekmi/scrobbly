@@ -46,11 +46,18 @@ exports.api = class Netflix {
                 var episodeRegex = /S([0-9]+):E([0-9]+)/;
                 var episodeData = episodeRegex.exec(episodeInfo[0].children[1].innerText);
                 var episodeNumber = episodeData[2];
-                if (seriesTitle == this.storage.seriesTitle && episodeNumber == this.storage.epNumber) return;
+                var title;
+                if (episodeData[1] != 1) {
+                    title = seriesTitle + ' ' + episodeData[1];
+                } else {
+                    title = seriesTitle;
+                }
+                if (title == this.storage.seriesTitle && episodeNumber == this.storage.epNumber) return;
                 else {
+                    console.log(title);
                     console.log('new content');
-                    this.browser.runtime.sendMessage({action: 'start', animeName: seriesTitle, episode: episodeNumber});
-                    this.storage = {epNumber: episodeNumber, seriesTitle: seriesTitle, sent: true};
+                    this.browser.runtime.sendMessage({action: 'start', animeName: title, episode: episodeNumber});
+                    this.storage = {epNumber: episodeNumber, seriesTitle: title, sent: true};
                     return true;
                 }
             }

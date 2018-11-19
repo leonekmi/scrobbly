@@ -27,10 +27,12 @@ exports.start = function (storage) {
 	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid), new lanilist(storage.anilist_at)];
 	var llibList = [];
 	var workingdb = {};
+	var cache = {};
 	var activeTab = -1;
 	var ready = false;
 	var timer = null;
 	var durationStorage = {};
+	var lastRequestStorage = {};
 	var scrobbled;
 	var activeSettingsTab;
 
@@ -39,6 +41,7 @@ exports.start = function (storage) {
 		if (lib.isReady()) {
 			lib.init();
 			llibList.push(lib);
+			cache[lib.info.name] = {};
 		}
 	});
 
@@ -94,6 +97,7 @@ exports.start = function (storage) {
 	}
 
 	function startScrobble(animeName, episode, senderId) {
+		lastRequestStorage = {animeName, episode, senderId};
 		if (workingdb == 'daemonstopped') return;
 		var operation = retry.operation({forever: true});
 		scrobbled = false;
@@ -107,17 +111,32 @@ exports.start = function (storage) {
 					console.warn('No lib data for ' + lib.info.name);
 					durProcessed += 1;
 				} else {
-					lib.getProgress(result[0].id).then(progress => {
-						workingdb[lib.info.name] = {anime: result[0], progress: progress, ep: episode, otherResults: result};
-						console.log(lib.info.name, result);
-						if (result[0].episodeDuration == 'none') {
-							console.warn('No duration');
-						} else {
-							durations.push(result[0].episodeDuration);
-						}
-						durationStorage[lib.info.name] = result[0].episodeDuration;
-						durProcessed += 1;
-					});	
+					console.log(lib.info.name + ' cache', cache[lib.info.name]);
+					if (cache[lib.info.name][animeName]) {
+						lib.getProgress(cache[lib.info.name][animeName].id).then(progress => {
+							workingdb[lib.info.name] = {anime: cache[lib.info.name][animeName], progress: progress, ep: episode, otherResults: result};
+							console.log(lib.info.name, result);
+							if (cache[lib.info.name][animeName].episodeDuration == 'none') {
+								console.warn('No duration');
+							} else {
+								durations.push(cache[lib.info.name][animeName].episodeDuration);
+							}
+							durationStorage[lib.info.name] = cache[lib.info.name][animeName].episodeDuration;
+							durProcessed += 1;
+						});	
+					} else {
+						lib.getProgress(result[0].id).then(progress => {
+							workingdb[lib.info.name] = {anime: result[0], progress: progress, ep: episode, otherResults: result};
+							console.log(lib.info.name, result);
+							if (result[0].episodeDuration == 'none') {
+								console.warn('No duration');
+							} else {
+								durations.push(result[0].episodeDuration);
+							}
+							durationStorage[lib.info.name] = result[0].episodeDuration;
+							durProcessed += 1;
+						});	
+					}
 				}
 				if (index == llibList.length - 1) {
 					console.log('Processing timer');
@@ -166,6 +185,7 @@ exports.start = function (storage) {
 					workingdb[lib].anime = workingdb[lib].otherResults[aid];
 					workingdb[lib].progress = progress;
 					durationStorage[lib] = workingdb[lib].anime.episodeDuration;
+					cache[lib][lastRequestStorage.animeName] = libworkingdb.otherResults[aid];
 					var durStg = Object.values(durationStorage);
 					var durationSum = durStg.reduce((acc, curVal) => {
 						if (curVal != 'none') return acc + curVal;
@@ -195,6 +215,7 @@ exports.start = function (storage) {
 		timer = null;
 		durationStorage = {};
 		activeTab = -1;
+		lastRequestStorage = {};
 		browser.browserAction.setBadgeText({text: ''});
 	}
 

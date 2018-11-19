@@ -29,6 +29,11 @@ exports.api = class Wakanim {
 
     init() {
         var title = this.jquery('.episode_title').text();
+        var season = this.jquery('.episode_subtitle span.red').text();
+        season = season[season.length -1];
+        if (parseInt(season) != 1) {
+            title += ' ' + season;
+        }
         var episodeNumber = this.jquery('.episode_subtitle span span').text();
         this.browser.runtime.sendMessage({action: 'start', animeName: title, episode: episodeNumber});
     }

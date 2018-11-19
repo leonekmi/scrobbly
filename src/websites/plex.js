@@ -35,6 +35,9 @@ exports.api = class Plex {
             var title = this.jquery('title').text();
             var parsedTitle = this.titleregex.exec(title);
             if (!parsedTitle) return;
+            if (parsedTitle[3] != 1) {
+                parsedTitle += ' ' + parsedTitle[3];
+            }
             parsedTitle = {animeName: parsedTitle[2], episode: parsedTitle[4]};
             if (parsedTitle.animeName == this.title.animeName) {
                 if (parsedTitle.episode == this.title.episode) {

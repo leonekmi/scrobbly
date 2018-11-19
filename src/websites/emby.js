@@ -35,18 +35,24 @@ exports.api = class Emby {
             var osdTitle = this.jquery('.osdTitle').text();
             var parsed = this.titleregex.exec(osdTitle);
             console.log('[scrobbly] emby support is time-based, some issues can occur', {title, osdTitle}, parsed, this.title);
-            if (this.title.title == title && this.title.osdTitle == osdTitle) {
+            var parsedTitle;
+            if (parsed[1] != 1) {
+                parsedTitle = title + ' ' + parsed[1];
+            } else {
+                parsedTitle = title;
+            }
+            if (this.title.title == parsedTitle && this.title.osdTitle == osdTitle) {
                 return;
-            } else if (this.title.title != title && this.title.osdTitle == osdTitle) {
-                this.title = {title, osdTitle};
+            } else if (this.title.title != parsedTitle && this.title.osdTitle == osdTitle) {
+                this.title = {title: parsedTitle, osdTitle};
                 this.browser.runtime.sendMessage({action: 'stop'});
             } else {
-                this.title = {title, osdTitle};
+                this.title = {title: parsedTitle, osdTitle};
                 if (!parsed) {
                     console.warn('Scrobbly can\'t detect the episode number. Abort.');
                     return;
                 }
-                this.browser.runtime.sendMessage({action: 'start', animeName: title, episode: parsed[2]});
+                this.browser.runtime.sendMessage({action: 'start', animeName: parsedTitle, episode: parsed[2]});
             }
         }, 6500);
     }
