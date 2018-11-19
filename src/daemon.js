@@ -340,6 +340,7 @@ exports.start = function (storage) {
 	}
 	async function removeTabListener(tabId, removeInfo) {
 		if (tabId == activeTab && typeof timer == 'object') {
+			console.log('destroy countdown');
 			stopScrobble();
 		}
 	}
