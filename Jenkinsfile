@@ -4,7 +4,7 @@ pipeline {
     stage('Keys & config') {
       steps {
         sh '''openssl genrsa -out keys/signing.pem 2048
-touch secret.json'''
+echo -n "{}" > secret.json'''
       }
     }
     stage('NPM deps') {
