@@ -27,7 +27,6 @@ var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim()
 var llibList = [];
 
 libraries.forEach(lib => {
-    console.log(lib.isUsable());
     if (lib.isUsable()) {
         lib.init();
         llibList.push(lib);
