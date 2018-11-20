@@ -21,6 +21,7 @@ module.exports = function(grunt) {
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
+        buildTime: grunt.template.today('yyyy-mm-dd HH-MM-ss'),
         browserify: {
             dist: {
                 files: {
@@ -53,7 +54,7 @@ module.exports = function(grunt) {
         compress: {
             dist: {
                 options: {
-                    archive: 'target/<%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %>.zip'
+                    archive: 'target/<%= pkg.name %> <%= pkg.version %> <%= buildTime %>.zip'
                 },
                 files: [
                     {expand: true, cwd: 'build/', src: ['**'], dest: './'} 
@@ -72,7 +73,7 @@ module.exports = function(grunt) {
                 options: {
                     privateKey: 'keys/signing.pem' // openssl genrsa -out keys/signing.pem 2048
                 },
-                src: 'target/<%= pkg.name %> <%= pkg.version %> <%= grunt.template.today("yyyy-mm-dd") %>.zip',
+                src: 'target/<%= pkg.name %> <%= pkg.version %> <%= buildTime %>.zip',
                 dest: 'target/'
             }
         },
