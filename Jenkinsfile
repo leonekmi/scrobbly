@@ -17,6 +17,7 @@ echo -n "{}" > secret.json'''
         stage('Build .zip/.crx') {
           steps {
             sh 'npx grunt'
+            archiveArtifacts(artifacts: 'target/*', excludes: 'target/.gitkeep')
           }
         }
         stage('ESLint') {
@@ -24,11 +25,6 @@ echo -n "{}" > secret.json'''
             sh 'npx grunt lint'
           }
         }
-      }
-    }
-    stage('Artefacts') {
-      steps {
-        archiveArtifacts(artifacts: 'target/*', excludes: 'target/.gitkeep')
       }
     }
   }
