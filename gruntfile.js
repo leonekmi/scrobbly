@@ -60,6 +60,13 @@ module.exports = function(grunt) {
                 ]
             }
         },
+        eslint: {
+            options: {
+                configFile: 'src/.eslintrc.js',
+                failOnError: false
+            },
+            target: ['src/website.js', 'src/daemon.js', 'src/bootstrap.js', 'src/libraries/*.js', 'src/websites/*.js', 'src/pages/popup.js', 'src/pages/settings.js', 'src/auth/anilist.js']
+        },
         zip_to_crx: {
             dist: {
                 options: {
@@ -94,9 +101,11 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-zip-to-crx');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-webext-builder');
+    grunt.loadNpmTasks('grunt-eslint');
   
     // Default task(s).
     grunt.registerTask('default', ['copy', 'browserify:dist', 'compress', 'zip_to_crx']);
+    grunt.registerTask('lint', ['eslint']);
     grunt.registerTask('build', ['copy', 'browserify:dist', 'compress', 'webext_builder']);
   
   };
