@@ -1,6 +1,5 @@
 language: node_js
 node_js:
-  - 'node'
   - '9.9.0'
 addons:
   apt:
@@ -11,6 +10,7 @@ addons:
 before_script:
   - npm install -g grunt
   - openssl genrsa -out keys/signing.pem 2048
+  - touch secret.json
 script:
   - grunt lint
   - grunt
