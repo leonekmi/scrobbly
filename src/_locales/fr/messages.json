@@ -41,6 +41,9 @@
     "moretocome": {
         "message": "D'autres à venir !"
     },
+    "chooseAnime": {
+        "message": "Choissisez un anime :"
+    },
     "libstatus": {
         "message": "Statut du site d'anime list"
     },

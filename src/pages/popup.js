@@ -52,7 +52,7 @@ browser.storage.local.get(null).then(result => {
                     });
                 },
                 changeScrobbling: function(e) {
-                    var message = 'Choose anime :\n\n';
+                    var message = browser.i18n.getMessage('chooseAnime') + '\n\n';
                     this.workingdb[e.srcElement.attributes.lib.value].otherResults.forEach((element, index) => {
                         message += '['+index+'] ' + element.title + '\n';
                     });

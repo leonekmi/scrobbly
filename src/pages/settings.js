@@ -27,7 +27,7 @@ $(function() {
 
 browser.storage.local.get(null).then(result => {
     browser.runtime.sendMessage({action: 'storage', get: 'workingdb', source: 'settings'}).then(result2 => {
-        var vm = new Vue({
+        new Vue({
             el: 'content',
             data: {
                 browserstorage: result,
@@ -37,7 +37,7 @@ browser.storage.local.get(null).then(result => {
                 deletemodalmessage: ''
             },
             watch: {
-                deletevar: function(nvar, ovar) {
+                deletevar: function(nvar) {
                     this.deletemodaltitle = browser.i18n.getMessage('deleteModalTitle', [nvar]);
                     this.deletemodalmessage = browser.i18n.getMessage('deleteModalMessage', [nvar]);
                 }
@@ -100,10 +100,11 @@ browser.storage.local.get(null).then(result => {
                             pendingChanges.anilist_at = message.at;
                             console.log(pendingChanges);
                             $('#anilist').html('<i class="checkmark icon"></i>'+browser.i18n.getMessage('loggedIn'));
+                            resolve(true);
                             break;
                     }
                 }
             });
-        })
+        });
     });
 });

@@ -41,6 +41,9 @@
     "moretocome": {
         "message": "More to come!"
     },
+    "chooseAnime": {
+        "message": "Choose anime:"
+    },
     "libstatus": {
         "message": "Library status"
     },

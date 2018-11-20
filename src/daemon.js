@@ -14,6 +14,7 @@
     You should have received a copy of the GNU General Public License
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
+/* eslint-disable no-console */
 
 exports.start = function (storage) {
 	// import
@@ -22,7 +23,7 @@ exports.start = function (storage) {
 	var browser = require('webextension-polyfill');
 	var countdown = require('easytimer.js');
 	var retry = require('retry');
-	var $ = require('jquery');
+	// var $ = require('jquery');
 	// init
 	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid), new lanilist(storage.anilist_at)];
 	var llibList = [];
@@ -172,7 +173,7 @@ exports.start = function (storage) {
 							}
 						}
 					});
-				};
+				}
 			});
 		});
 	}
@@ -220,7 +221,7 @@ exports.start = function (storage) {
 	}
 
 	// ?
-	async function listener(message, sender) {
+	function listener(message, sender) {
 		return new Promise(resolve => {
 			console.log(message);
 			console.log('Runtime event');
@@ -318,7 +319,7 @@ exports.start = function (storage) {
 			//resolve(true);
 		});
 	}
-	async function tabListener(tabId, changeInfo, tab) {
+	function tabListener(tabId, changeInfo, tab) {
 		if (tabId == activeTab && typeof timer == 'object') {
 			if (typeof changeInfo.url == 'string') {
 				console.log('destroy countdown');
@@ -338,7 +339,7 @@ exports.start = function (storage) {
 			}
 		}
 	}
-	async function removeTabListener(tabId, removeInfo) {
+	function removeTabListener(tabId, removeInfo) {
 		if (tabId == activeTab && typeof timer == 'object') {
 			console.log('destroy countdown');
 			stopScrobble();
