@@ -20,13 +20,16 @@ exports.start = function (storage) {
 	// import
 	var lkitsu = require('./libraries/kitsu');
 	var lanilist = require('./libraries/anilist');
+	var dptvdb = require('./dataproviders/thetvdb');
 	var browser = require('webextension-polyfill');
 	var countdown = require('easytimer.js');
 	var retry = require('retry');
 	// var $ = require('jquery');
 	// init
 	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid), new lanilist(storage.anilist_at)];
+	var dataProviders = [new dptvdb(storage.thetvdb_at)];
 	var llibList = [];
+	var ldpList = [];
 	var workingdb = {};
 	var cache = {};
 	var activeTab = -1;
@@ -43,6 +46,15 @@ exports.start = function (storage) {
 			lib.init();
 			llibList.push(lib);
 			cache[lib.info.name] = {};
+		}
+	});
+
+	dataProviders.forEach(dp => {
+		console.log(dp.isReady());
+		if (dp.isReady()) {
+			dp.init();
+			ldpList.push(dp);
+			cache[dp.info.name] = {};
 		}
 	});
 
@@ -169,7 +181,29 @@ exports.start = function (storage) {
 							} else {
 								browser.browserAction.setBadgeText({text: '!'});
 								browser.browserAction.setBadgeBackgroundColor({color: '#dbd700'});
-								console.warn('No duration from all sources, this is a problem, Agent Johnson');
+								console.warn('No duration from all sources, fallback on data providers');
+								if (ldpList.length == 0) console.warn('No data providers are loaded, manual scrobbling will be necessary!')
+								else {
+									ldpList.forEach(dp => {
+										dp.searchAnime(animeName).then(result => {
+											 dp.getAnime(result[0].id).then(res2 => {
+												timer = new countdown();
+												timer.stop();
+												timer.start({
+													target: {
+														minutes: res2.episodeDuration / 4 * 3
+													}
+												});
+												browser.browserAction.setBadgeText({text: 'OK'});
+												browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
+												timer.addEventListener('targetAchieved', ctimer => {
+													console.log('End of the timer');
+													scrobble();
+												});
+											 });
+										});
+									});
+								}
 							}
 						}
 					});

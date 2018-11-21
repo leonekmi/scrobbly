@@ -15,7 +15,7 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-var papi = class lkitsu {
+module.exports = class Kitsu {
     constructor (at, uid) {
         this.browser = require('webextension-polyfill');
         this.Kitsu = require('kitsu');
@@ -117,5 +117,3 @@ var papi = class lkitsu {
         };
     }
 };
-
-module.exports = papi;

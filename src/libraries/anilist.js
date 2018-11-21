@@ -15,7 +15,7 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-module.exports = class lanilist {
+module.exports = class AniList {
     constructor (atoken) {
         this.atoken = atoken;
         this.aclient = require('graphql-request').GraphQLClient;

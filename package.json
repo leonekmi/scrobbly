@@ -1,6 +1,6 @@
 {
   "name": "scrobbly",
-  "version": "2.0.0",
+  "version": "2.0.2",
   "description": "Scrobble anime from multiple sites to multiple sites.",
   "main": "none",
   "scripts": {
@@ -27,6 +27,7 @@
     "jquery": "^3.3.1",
     "kitsu": "^6.4.0",
     "moment": "^2.22.2",
+    "node-rest-client": "^3.1.0",
     "retry": "^0.12.0",
     "vue": "^2.5.17",
     "webextension-polyfill": "^0.3.1"
