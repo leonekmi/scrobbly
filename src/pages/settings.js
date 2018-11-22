@@ -98,6 +98,10 @@ browser.storage.local.get(null).then(result => {
                             pendingChanges.kitsu_uid = null;
                             $('#kitsu_delete').addClass('disabled');
                             break;
+                        case 'TheTVDB':
+                            pendingChanges.thetvdb_at = null;
+                            $('#thetvdb_delete').addClass('disabled');
+                            break;
                     }
                     console.log(this.deletevar + 'account deleted!');
                     console.log(pendingChanges);
