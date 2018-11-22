@@ -59,6 +59,9 @@
     "badPassword": {
         "message": "Wrong username or password."
     },
+    "badLoginTTD": {
+        "message": "Your credentials are wrong, double check and retry."
+    },
     "delete": {
         "message": "Delete connection"
     },
@@ -78,7 +81,13 @@
         "message": "To login with AniList, you will be redirected to the AniList website to authorize the connection and setup Scrobbly automatically. The AniList website will give us an access token to your account, it will stay on your computer. To learn more, check the Scrobbly privacy policy."
     },
     "loginInfoKitsu": {
-        "message": "To login with Kitsu, you need your account's e-mail and password (sidenote: login via Facebook is impossible for now). Your credentials are not stored on your computer and on our servers, they are just exchanged with an access token that are stored only on your computer. To learn more, check the Scrobbly privacy policy."
+        "message": "To login with Kitsu, you need to type your account's e-mail and password (sidenote: login via Facebook is impossible for now). Your credentials are not stored on your computer and on our servers, they are just exchanged with an access token that are stored only on your computer. To learn more, check the Scrobbly privacy policy."
+    },
+    "loginInfoTheTVDB": {
+        "message": "To login with TheTVDB, you need to type your username and your unique ID, if you ignore it, you can obtain it by going to TheTVDB \"API Access\" page. Your credentials are exchanged with a token that Scrobbly will use to get data directly on TheTVDB. To learn more, check the Scrobbly privacy policy."
+    },
+    "loginLinkTheTVDB" : {
+        "message": "Api :: TheTVDB"
     },
     "save": {
         "message": "Done"
@@ -91,6 +100,21 @@
                 "example": "AniList"
             }
         }
+    },
+    "dataProviderNotice": {
+        "message": "$SITE$ is a data source, Scrobbly doesn't affect the account data, these additional sources can be a fallback if anime lists services cannot provide some details, such as episode duration.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "TheTVDB"
+            }
+        }
+    },
+    "aboutTitle": {
+        "message": "About"
+    },
+    "aboutText": {
+        "message": "Scrobbly is an extension created by a teenager alone in his room, it is open-source thanks to GPLv3 license. Everyone can contribute, ask modifications with the Git technology."
     },
     "deleteModalTitle": {
         "message": "Delete connection to $SITE$",

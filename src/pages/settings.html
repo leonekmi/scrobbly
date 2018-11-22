@@ -61,6 +61,15 @@
                     {{ trans('delete') }}
                 </a>
                 <br/><br/>
+                <a href="#" @click="showModal('thetvdb')" class="ui black labeled icon button" id="thetvdb">
+                    <i class="icon-tvdb icon"></i>
+                    TheTVDB
+                </a>
+                <a href="#" v-if="browserstorage.thetvdb_at" @click="showDeleteModal('TheTVDB')" class="ui red labeled icon button" id="tvdb_delete">
+                    <i class="delete icon"></i>
+                    {{ trans('delete') }}
+                </a>
+                <br/><br/>
                 <a class="ui blue disabled labeled icon button" id="mal">
                     <i class="icon-mal icon"></i>
                     MyAnimeList (not supported for now)
@@ -70,6 +79,11 @@
                     <i class="save icon"></i>
                     {{ trans('save') }}
                 </a>
+            </div>
+            <div class="ui segment">
+                <h3>{{ trans('aboutTitle') }}</h3>
+                <p>{{ trans('aboutText') }}</p>
+                <a href="https://github.com/leonekmi/scrobbly">{{ trans('starRepo') }}</a>
             </div>
         </div>
 
@@ -112,6 +126,38 @@
             </div>
             <div class="actions">
                 <a href="#" @click="loginKitsu" class="ui positive button">
+                    {{ trans('login') }}
+                </a>
+            </div>
+        </div>
+
+        <div id="thetvdbmodal" class="ui modal">
+            <div class="header">
+                {{ trans('loginWith', 'TheTVDB') }}
+            </div>
+            <div class="content">
+                <p>
+                    {{ trans('dataProviderNotice', 'TheTVDB') }}
+                    <br/>
+                    {{ trans('loginInfoTheTVDB') }}
+                    <br/>
+                    <strong><a target="_blank" href="https://www.thetvdb.com/member/api">{{ trans('loginLinkTheTVDB') }}</a></strong>
+                </p>
+                <div class="ui form">
+                    <div class="two fields">
+                        <div class="field">
+                            <label>Username</label>
+                            <input type="text" placeholder="Username" id="usernamethetvdb">
+                        </div>
+                        <div class="field">
+                            <label>Unique ID</label>
+                            <input type="text" placeholder="Unique ID" id="uidthetvdb">
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="actions">
+                <a href="#" @click="loginTheTVDB" class="ui positive button">
                     {{ trans('login') }}
                 </a>
             </div>

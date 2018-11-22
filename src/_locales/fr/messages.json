@@ -62,6 +62,9 @@
     "badPassword": {
         "message": "Identifiant ou mot de passe incorrect."
     },
+    "badLoginTTD": {
+        "message": "Vos identifiants sont incorrects, merci de les vérifier et de réesayer."
+    },
     "loginProcedure": {
         "message": "Scrobbly a besoin d'une connexion à un service d'anime list, lorsque vous avez terminé, appuyez sur Sauvegarder pour commencer à utiliser Scrobbly. Si vous vous reconnectez à un service, l'ancienne connexion sera écrasée."
     },
@@ -80,6 +83,12 @@
     "loginInfoKitsu": {
         "message": "Pour vous connecter avec Kitsu, vous devez entrer votre e-mail ainsi que votre mot de passe (NB: la connexion via Facebook n'est pas possible à ce jour). Vos identifiants ne sont pas stockés ni sur votre machine, ni sur nos serveurs, ils sont uniquement communiqués à Kitsu pour obtenir un jeton d'accès à votre compte que nous stockerons chez vous et n'est pas communiqué, pour en savoir plus, consultez la politique de confidentialité de Scrobbly."
     },
+    "loginInfoTheTVDB": {
+        "message": "Pour vous connecter avec TheTVDB, vous devez entrer votre nom d'utilisateur et votre ID unique, si vous ne le savez pas, vous pouvez les obtenir en accèdant à la page \"API Access\". Vos identifiants sont échangés avec un jeton d'accès que Scrobbly utilisera pour obtenir des données de TheTVDB. Pour en savoir plus, consultez la politique de confidentialité de Scrobbly."
+    },
+    "loginLinkTheTVDB" : {
+        "message": "Api :: TheTVDB"
+    },
     "save": {
         "message": "Sauvegarder"
     },
@@ -91,6 +100,21 @@
                 "example": "AniList"
             }
         }
+    },
+    "dataProviderNotice": {
+        "message": "$SITE$ est une source de données, Scrobbly n'affectera donc pas les données de votre compte, ces sources supplémentaires servent au cas où les services d'anime lists ne peuvent pas fournir certains détails comme la durée des épisodes.",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "TheTVDB"
+            }
+        }
+    },
+    "aboutTitle": {
+        "message": "À propos"
+    },
+    "aboutText": {
+        "message": "Scrobbly est une extension dévelopée par un jeune ado tout seul dans sa chambre, elle est open-source grâce à la licence GPLv3. N'importe qui peut donc y contribuer, demander des modifications grâce à la technologie Git."
     },
     "deleteModalTitle": {
         "message": "Supprimer la connexion à $SITE$",

@@ -226,7 +226,6 @@ exports.start = function (storage) {
 						if (curVal != 'none') return acc + curVal;
 					}, 0);
 					console.log(durationSum);
-					console.log
 					var durationAvg = durationSum / durStg.length / 4 * 3;
 					var timeValues = timer.getTimeValues();
 					timer.stop();
@@ -339,6 +338,18 @@ exports.start = function (storage) {
 										resolve({auth: 'error', service: 'kitsu'});
 									} else {
 										resolve({auth: 'success', service: 'kitsu', at: jsondata.access_token});
+									}
+								});
+							});
+							break;
+						case 'thetvdb':
+							console.log('TheTVDB auth');
+							fetch('https://scrobbly.leonekmi.fr/thetvdb/auth', {method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'}, body: 'uname=' + encodeURIComponent(message.uname) + '&uid=' + encodeURIComponent(message.uid)}).then(response => {
+								response.json().then(jsondata => {
+									if (jsondata.error) {
+										resolve({auth: 'error', service: 'thetvdb'});
+									} else {
+										resolve({auth: 'success', service: 'thetvdb', jwt: jsondata.token});
 									}
 								});
 							});

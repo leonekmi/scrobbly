@@ -70,6 +70,19 @@ browser.storage.local.get(null).then(result => {
                         }
                     });
                 },
+                loginTheTVDB: function(e) {
+                    var uname = $('#usernamethetvdb').val();
+                    var uid = $('#uidthetvdb').val();
+                    browser.runtime.sendMessage({action: 'auth', service: 'thetvdb', uname, uid}).then(result => {
+                        if (result.auth == 'success') {
+                            pendingChanges.thetvdb_at = result.jwt;
+                            console.log(pendingChanges);
+                            $('#thetvdb').html('<i class="checkmark icon"></i>'+browser.i18n.getMessage('loggedIn'));
+                        } else {
+                            alert(browser.i18n.getMessage('badLoginTTD'));
+                        }
+                    });
+                },
                 showDeleteModal: function(service) {
                     this.deletevar = service;
                     $('#deletemodal').modal('show');
