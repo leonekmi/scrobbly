@@ -21,9 +21,11 @@ var wnetflix = require('./websites/netflix').api;
 var wplex = require('./websites/plex').api;
 var wwakanim = require('./websites/wakanim').api;
 var wemby = require('./websites/emby').api;
+var whidive = require('./websites/hidive').api;
+var wadn = require('./websites/adn').api;
 //var $ = require('jquery');
 // init
-var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby()];
+var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby(), new whidive(), new wadn()];
 var llibList = [];
 
 libraries.forEach(lib => {

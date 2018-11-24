@@ -57,6 +57,7 @@ browser.storage.local.get(null).then(result => {
                         message += '['+index+'] ' + element.title + '\n';
                     });
                     var aid = window.prompt(message);
+                    if (!aid) return;
                     browser.runtime.sendMessage({action: 'change', lib: e.srcElement.attributes.lib.value, aid: aid}).then(res => {
                         browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(res => {
                             this.workingdb = res;
