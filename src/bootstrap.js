@@ -26,12 +26,12 @@ browser.browserAction.setBadgeText({text: ''});
 browser.browserAction.setBadgeBackgroundColor({color: '#595959'});
 
 browser.storage.local.get(null).then(result => {
-    var daemon = require('./daemon').start(result);
+    require('./daemon').start(result);
 });
 
 browser.storage.onChanged.addListener((changes, location) => {
     // To avoid problems with not up-to-date storage in backgrond scripts, extension reloads after each change
-    // The noReload exception is for development purposes
+    // The noReload exception is for some exceptions (like the TheTVDB refresh token)
     browser.storage.local.get('noReload').then(result => {
         if (result.noReload) return;
         if (location == 'local') browser.runtime.reload();

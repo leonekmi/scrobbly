@@ -20,7 +20,7 @@ module.exports = class Kitsu {
         this.browser = require('webextension-polyfill');
         this.Kitsu = require('kitsu');
         this.at = at;
-        this.uid = uid
+        this.uid = uid;
         if (at && uid) {
             this.ready = true;
         } else {

@@ -38,6 +38,15 @@ module.exports = class TheTvDB {
         this.api.registerMethod('getSeries', 'https://api.thetvdb.com/series/${id}', 'GET');
         this.api.registerMethod('getEpisodes', 'https://api.thetvdb.com/series/${id}/episodes', 'GET');
         this.api.registerMethod('refreshToken', 'https://api.thetvdb.com/refresh_token', 'GET');
+        this.api.methods.refreshToken({headers: this.headers}, (data, res) => {
+            if (data.Error) {
+                console.warn('TheTVDB failed to refresh token, a relogin will be necessary.');
+                this.ready = false; // TODO : communicate with main daemon to notify unready state : we have no token oshit
+                return false;
+            }
+            this.browser.storage.local.set({noReload: true, thetvdb_at: data.token});
+            this.headers.Authorization = 'Bearer ' + data.token;
+        });
     }
 
     searchAnime(query) {

@@ -1,18 +1,18 @@
 /*
-    This file is part of Scrobbly.
+	This file is part of Scrobbly.
 
-    Scrobbly is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+	Scrobbly is free software: you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation, either version 3 of the License, or
+	(at your option) any later version.
 
-    Scrobbly is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+	Scrobbly is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
+	You should have received a copy of the GNU General Public License
+	along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 /* eslint-disable no-console */
 
@@ -179,14 +179,16 @@ exports.start = function (storage) {
 									scrobble();
 								});
 							} else {
-								browser.browserAction.setBadgeText({text: '!'});
-								browser.browserAction.setBadgeBackgroundColor({color: '#dbd700'});
 								console.warn('No duration from all sources, fallback on data providers');
-								if (ldpList.length == 0) console.warn('No data providers are loaded, manual scrobbling will be necessary!')
-								else {
+								if (ldpList.length == 0) {
+									console.warn('No data providers are loaded, manual scrobbling will be necessary!');
+									browser.browserAction.setBadgeText({text: '!'});
+									browser.browserAction.setBadgeBackgroundColor({color: '#dbd700'});
+								} else {
 									ldpList.forEach(dp => {
 										dp.searchAnime(animeName).then(result => {
 											 dp.getAnime(result[0].id).then(res2 => {
+												console.log(dp.info.name, result, res2);
 												timer = new countdown();
 												timer.stop();
 												timer.start({
@@ -357,7 +359,7 @@ exports.start = function (storage) {
 					}
 					break;
 				default:
-					console.warn('Unknown request !', message.action, message, sender)
+					console.warn('Unknown request !', message.action, message, sender);
 					resolve(false);
 					break;
 			}
@@ -393,6 +395,4 @@ exports.start = function (storage) {
 	browser.runtime.onMessage.addListener(listener);
 	browser.tabs.onUpdated.addListener(tabListener);
 	browser.tabs.onRemoved.addListener(removeTabListener);
-
-	// browser.runtime.sendMessage({action: 'start', animeName: 'aho girl', episode: 1});
-}
+};
