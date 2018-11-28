@@ -15,6 +15,11 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+/*
+ISSUE : fetch api does not take requests when preflight request fails, the no-cors mode doesn't pass headers.
+A request to TheTVDB was made here : https://forums.thetvdb.com/viewtopic.php?f=17&t=52469
+*/
+
 module.exports = class TheTvDB {
     constructor(atoken) {
         this.browser = require('webextension-polyfill');
@@ -47,20 +52,6 @@ module.exports = class TheTvDB {
                 });
             });
         }
-        /*new this.restclient();
-        this.api.registerMethod('searchSeries', 'https://api.thetvdb.com/search/series?name=${query}', 'GET');
-        this.api.registerMethod('getSeries', 'https://api.thetvdb.com/series/${id}', 'GET');
-        this.api.registerMethod('getEpisodes', 'https://api.thetvdb.com/series/${id}/episodes', 'GET');
-        this.api.registerMethod('refreshToken', 'https://api.thetvdb.com/refresh_token', 'GET');
-        this.api.methods.refreshToken({headers: this.headers}, (data, res) => {
-            if (data.Error) {
-                console.warn('TheTVDB failed to refresh token, a relogin will be necessary.');
-                this.ready = false; // TODO : communicate with main daemon to notify unready state : we have no token oshit
-                return false;
-            }
-            this.browser.storage.local.set({noReload: true, thetvdb_at: data.token});
-            this.headers.Authorization = 'Bearer ' + data.token;
-        });*/
         this.api('refresh_token').then(json => {
             if (json.Error) {
                 console.warn('TheTVDB failed to refresh token, a relogin will be necessary.');
@@ -108,21 +99,8 @@ module.exports = class TheTvDB {
                 resolve(json);
                 console.log(json);
             });
-            /*this.api.methods.getEpisodes({path: {id: aid}, headers: this.headers}, (data, res) => {
-                resolve(data);
-                console.log(data);
-            });*/
         });
     }
-
-    /*refreshToken() {
-        return new Promise(resolve => {
-            this.api.methods.refreshToken({headers: this.headers}, (data, res) => {
-                resolve(data);
-                console.log(data);
-            });
-        });
-    }*/
 
     get info() {
         return {
