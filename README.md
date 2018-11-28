@@ -1,6 +1,6 @@
 # Scrobbly (formerly Anilist Scrobbler)
 
-![GitHub](https://img.shields.io/github/license/leonekmi/anilist-scrobbler.svg)
+![GitHub](https://img.shields.io/github/license/leonekmi/scrobbly.svg)
 ![shields.io](https://img.shields.io/badge/browsers-chromium--based%2C%20firefox-green.svg)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/bghcjdikmfopmhpgcocpgfefjppkfjpn.svg)](https://chrome.google.com/webstore/detail/scrobbly/bghcjdikmfopmhpgcocpgfefjppkfjpn)
 
@@ -9,7 +9,6 @@
 ## Update your anime lists
 
 At the same time, **just by watching** on your favourite VoD website, this WebExtension (Firefox & Chromium-based) can update your Kitsu, AniList and MAL lists (for now, it supports only Kitsu and AniList, but MAL is planned for next releases).
-**Note : this extension is for the moment WIP and might not work at 100% in certain cases.**
 
 ### Install
 
@@ -26,7 +25,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 |                           | **[Released!](https://github.com/leonekmi/scrobbly/releases/tag/v2.0-epsilon)** |                                                                                                                                                      |
 | v2.1 (more support)       | MyAnimeList support                                                                                  | **planned ([when API will be back](https://myanimelist.net/forum/?topicid=1740204&show=400#msg56198138), so it can be planned for a later release)** |
 | -                         | Fetch informations from TheTVDB for best details                                                     | **in progress**                                                                                                                                          |
-| -                         | Hulu / HiDive / AnimeOnDemand / ADN support                                                          | **in progress**                                                                                                                                          |
+| -                         | Hulu / HiDive / AnimeOnDemand / ADN support                                                          | **in progress (note: Hulu accounts owners, please contact me)**                                                                                                                                          |
 | -                         | UI improvments                                                                                       | **in progress**                                                                                                                                      |
 | -                         | Get feedback from first release                                                                      | **you can always send me feedback on [Twitter](https://twitter.com/leonekmi)**                                                                       |
 |                           | **Deadline : Mid-December**                                                                          |                                                                                                                                                      |
