@@ -18,7 +18,6 @@
 module.exports = class TheTvDB {
     constructor(atoken) {
         this.browser = require('webextension-polyfill');
-        this.restclient = require('node-rest-client').Client;
         this.atoken = atoken;
         if (atoken) {
             this.ready = true;
@@ -32,8 +31,23 @@ module.exports = class TheTvDB {
     }
 
     init() {
-        this.headers = {Authorization: 'Bearer ' + this.atoken, 'Accept-Language': this.browser.i18n.getUILanguage()};
-        this.api = new this.restclient();
+        this.headers = new Headers({'Authorization': 'Bearer ' + this.atoken, 'Accept-Language': this.browser.i18n.getUILanguage()});
+        this.api = (endpoint, options = {}) => {
+            return new Promise(resolve => {
+                console.log(this);
+                console.log(this.headers.get('Authorization'));
+                var url = 'https://api.thetvdb.com/' + endpoint;
+                if (!options.headers) options.headers = this.headers;
+                options.mode = 'cors';
+                console.log(options);
+                fetch(url, options).then(response => {
+                    console.log(response);
+                    // if (!response.ok) return;
+                    response.json().then(jsondata => resolve(jsondata)).catch(error => {throw new Error('TheTVDB api failed')});
+                });
+            });
+        }
+        /*new this.restclient();
         this.api.registerMethod('searchSeries', 'https://api.thetvdb.com/search/series?name=${query}', 'GET');
         this.api.registerMethod('getSeries', 'https://api.thetvdb.com/series/${id}', 'GET');
         this.api.registerMethod('getEpisodes', 'https://api.thetvdb.com/series/${id}/episodes', 'GET');
@@ -46,14 +60,23 @@ module.exports = class TheTvDB {
             }
             this.browser.storage.local.set({noReload: true, thetvdb_at: data.token});
             this.headers.Authorization = 'Bearer ' + data.token;
+        });*/
+        this.api('refresh_token').then(json => {
+            if (json.Error) {
+                console.warn('TheTVDB failed to refresh token, a relogin will be necessary.');
+                this.ready = false; // TODO : communicate with main daemon to notify unready state : we have no token oshit
+                return false;
+            }
+            this.browser.storage.local.set({noReload: true, thetvdb_at: json.token});
+            this.headers.Authorization = 'Bearer ' + json.token;
         });
     }
 
     searchAnime(query) {
         return new Promise(resolve => {
-            this.api.methods.searchSeries({path: {query}, headers: this.headers}, (data, res) => {
+            this.api('search/series?name=' + query, {}).then(json => {
                 var parsedData = [];
-                data.data.forEach(anime => {
+                json.data.forEach(anime => {
                     parsedData.push({
                         name: anime.seriesName,
                         id: anime.id,
@@ -61,18 +84,17 @@ module.exports = class TheTvDB {
                     });
                 });
                 resolve(parsedData);
-                console.log(parsedData);
             });
         });
     }
 
     getAnime(aid) {
         return new Promise(resolve => {
-            this.api.methods.getSeries({path: {id: aid}, headers: this.headers}, (data, res) => {
+            this.api('series/' + aid).then(json => {
                 var ret = {
-                    episodeDuration: data.data.runtime,
-                    synopsis: data.data.overview,
-                    genres: data.data.genre
+                    episodeDuration: json.data.runtime,
+                    synopsis: json.data.overview,
+                    genres: json.data.genre
                 };
                 resolve(ret);
                 console.log(ret);
@@ -82,21 +104,25 @@ module.exports = class TheTvDB {
 
     getAnimeEpisodes(aid) {
         return new Promise(resolve => {
-            this.api.methods.getEpisodes({path: {id: aid}, headers: this.headers}, (data, res) => {
+            this.api('series/' + aid + '/episodes').then(json => {
+                resolve(json);
+                console.log(json);
+            });
+            /*this.api.methods.getEpisodes({path: {id: aid}, headers: this.headers}, (data, res) => {
                 resolve(data);
                 console.log(data);
-            });
+            });*/
         });
     }
 
-    refreshToken() {
+    /*refreshToken() {
         return new Promise(resolve => {
             this.api.methods.refreshToken({headers: this.headers}, (data, res) => {
                 resolve(data);
                 console.log(data);
             });
         });
-    }
+    }*/
 
     get info() {
         return {
