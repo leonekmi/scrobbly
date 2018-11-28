@@ -14,7 +14,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 ### Install
 
 - Chrome, Vivaldi and other Chromium-based browsers : [Scrobbly is available on the Chrome Web Store](https://chrome.google.com/webstore/detail/scrobbly/bghcjdikmfopmhpgcocpgfefjppkfjpn)
-- Firefox (all editions) : [Scrobbly is available on my website](https://scrobbly.leonekmi.fr/firefox/scrobbly-2.0.0-fx.xpi)
+- Firefox (all editions) : [Scrobbly is available on my website](https://scrobbly.leonekmi.fr/firefox/scrobbly-2.0.2-fx.xpi)
 
 ### Roadmap
 
