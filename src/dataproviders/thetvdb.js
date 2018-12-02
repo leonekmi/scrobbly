@@ -41,7 +41,7 @@ module.exports = class TheTvDB {
             return new Promise(resolve => {
                 console.log(this);
                 console.log(this.headers.get('Authorization'));
-                var url = 'https://api.thetvdb.com/' + endpoint;
+                var url = 'https://tvdbapiproxy.leonekmi.fr/' + endpoint;
                 if (!options.headers) options.headers = this.headers;
                 options.mode = 'cors';
                 console.log(options);
