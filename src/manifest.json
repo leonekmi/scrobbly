@@ -24,6 +24,9 @@
         "*://www.hidive.com/*",
         "*://app.emby.media/*",
         "*://app.plex.tv/*",
+        "*://tvdbapiproxy.leonekmi.fr/*",
+        "*://kitsu.io/*",
+        "*://graphql.anilist.co/*",
         "storage",
         "notifications"
     ],
