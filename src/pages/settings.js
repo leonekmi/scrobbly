@@ -18,7 +18,7 @@
 var $ = require('../Semantic-UI-CSS/semantic');
 var Vue = require('vue/dist/vue');
 var browser = require('webextension-polyfill');
-var pendingChanges = {};
+var pendingChanges = {noReload: false};
 
 $(function() {
     $('#header').transition('fade up');

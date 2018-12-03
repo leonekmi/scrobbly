@@ -31,7 +31,8 @@ browser.storage.local.get(null).then(result => {
 
 browser.storage.onChanged.addListener((changes, location) => {
     // To avoid problems with not up-to-date storage in backgrond scripts, extension reloads after each change
-    // The noReload exception is for some exceptions (like the TheTVDB refresh token)
+    // The noReload exception is for some cases (like the TheTVDB refresh token)
+    console.log('[storage] storage is modified', changes);
     browser.storage.local.get('noReload').then(result => {
         if (result.noReload) return;
         if (location == 'local') browser.runtime.reload();

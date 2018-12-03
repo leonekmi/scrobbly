@@ -39,15 +39,12 @@ module.exports = class TheTvDB {
         this.headers = new Headers({'Authorization': 'Bearer ' + this.atoken, 'Accept-Language': this.browser.i18n.getUILanguage()});
         this.api = (endpoint, options = {}) => {
             return new Promise(resolve => {
-                console.log(this);
-                console.log(this.headers.get('Authorization'));
-                var url = 'https://api.thetvdb.com/' + endpoint;
+                // var url = 'https://api.thetvdb.com/' + endpoint;
+                // It's a reverse proxy that is CORS-friendly. It should be good
+                var url = 'https://tvdbapiproxy.leonekmi.fr/' + endpoint;
                 if (!options.headers) options.headers = this.headers;
                 options.mode = 'cors';
-                console.log(options);
                 fetch(url, options).then(response => {
-                    console.log(response);
-                    // if (!response.ok) return;
                     response.json().then(jsondata => resolve(jsondata)).catch(error => {throw new Error('TheTVDB api failed')});
                 });
             });
