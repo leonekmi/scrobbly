@@ -113,9 +113,12 @@ exports.start = function (storage) {
 		lastRequestStorage = {animeName, episode, senderId};
 		if (workingdb == 'daemonstopped') return;
 		var operation = retry.operation({forever: true});
+		var operation2 = retry.operation({forever: true});
 		scrobbled = false;
 		var durations = [];
 		var durProcessed = 0;
+		var dpDurations = [];
+		var dpProcessed = 0;
 		activeTab = senderId;
 		console.log('Tracked tab is now ' + activeTab);
 		llibList.forEach((lib, index) => {
@@ -185,25 +188,42 @@ exports.start = function (storage) {
 									browser.browserAction.setBadgeText({text: '!'});
 									browser.browserAction.setBadgeBackgroundColor({color: '#dbd700'});
 								} else {
-									ldpList.forEach(dp => {
+									ldpList.forEach((dp, index) => {
+										console.log(dp, index);
 										dp.searchAnime(animeName).then(result => {
-											 dp.getAnime(result[0].id).then(res2 => {
+											dp.getAnime(result[0].id).then(res2 => {
 												console.log(dp.info.name, result, res2);
-												timer = new countdown();
-												timer.stop();
-												timer.start({
-													target: {
-														minutes: res2.episodeDuration / 4 * 3
-													}
-												});
-												browser.browserAction.setBadgeText({text: 'OK'});
-												browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
-												timer.addEventListener('targetAchieved', ctimer => {
-													console.log('End of the timer');
-													scrobble();
-												});
-											 });
+												dpDurations.push(res2.episodeDuration);
+												dpProcessed += 1;
+											});
 										});
+										if (index == ldpList.length - 1) {
+											console.log('Processing fallback timer');
+											operation2.attempt(currAtt => {
+												if (dpProcessed != ldpList.length) {
+													operation2.retry({message: 'Wait for dataproviders dataloop', obj: dpDurations});
+												} else {
+													var durationAverage = 0;
+													durations.forEach((duration) => {
+														durationAverage += duration;
+													});
+													durationAverage = durationAverage / durations.length;
+													timer = new countdown();
+													timer.stop();
+													timer.start({
+														target: {
+															minutes: durationAverage / 4 * 3
+														}
+													});
+													browser.browserAction.setBadgeText({text: 'OK'});
+													browser.browserAction.setBadgeBackgroundColor({color: '#167000'});
+													timer.addEventListener('targetAchieved', ctimer => {
+														console.log('End of the timer');
+														scrobble();
+													});
+												}
+											});
+										}
 									});
 								}
 							}
