@@ -10,11 +10,16 @@ _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the 
 ### Added
 - Anime Digital Network support
 - HiDive support
-- Privacy policy updates
+- AnimeOnDemand support
 - TheTVDB support
+- Diagnostic system to detect auth issues
+
+### Changed
+- Privacy policy updates
 
 ### Fixed
 - Wrong anime? button is aborting when user clicks Cancel.
+- Crunchyroll main anime page is not detected as a player page.
 
 ## [2.0.2] (release 2.0-epsilon)
 ### Added
