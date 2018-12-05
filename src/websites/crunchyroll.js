@@ -24,7 +24,8 @@ exports.api = class Crunchyroll {
     }
 
     isUsable() {
-        return this.urlregex.test(document.documentURI);
+        if (document.documentURI) return false;
+        else return this.urlregex.test(document.documentURI);
     }
 
     init() {

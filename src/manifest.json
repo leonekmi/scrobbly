@@ -24,6 +24,7 @@
         "*://www.hidive.com/*",
         "*://app.emby.media/*",
         "*://app.plex.tv/*",
+        "*://www.anime-on-demand.de/*",
         "*://tvdbapiproxy.leonekmi.fr/*",
         "*://graphql.anilist.co/*",
         "*://kitsu.io/*",
@@ -43,7 +44,7 @@
     },
     "content_scripts": [
         {
-            "matches": ["*://www.crunchyroll.com/*", "*://www.netflix.com/*", "*://app.plex.tv/*", "*://www.wakanim.tv/*", "*://app.emby.media/*", "*://www.hidive.com/*", "*://animedigitalnetwork.fr/*"],
+            "matches": ["*://www.crunchyroll.com/*", "*://www.netflix.com/*", "*://app.plex.tv/*", "*://www.wakanim.tv/*", "*://app.emby.media/*", "*://www.hidive.com/*", "*://animedigitalnetwork.fr/*", "*://www.anime-on-demand.de/*"],
             "js": ["website.bundle.js"]
         },
         {

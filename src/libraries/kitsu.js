@@ -16,11 +16,12 @@
 */
 
 module.exports = class Kitsu {
-    constructor (at, uid) {
+    constructor (at, uid, rt = null) {
         this.browser = require('webextension-polyfill');
         this.Kitsu = require('kitsu');
         this.at = at;
         this.uid = uid;
+        this.rt = rt;
         if (at && uid) {
             this.ready = true;
         } else {
@@ -35,6 +36,37 @@ module.exports = class Kitsu {
     init() {
         this.api = new this.Kitsu({headers: {Authorization: 'Bearer '+this.at}});
         return true;
+    }
+
+    diag() {
+        return new Promise((resolve, reject) => {
+            this.api.get('users', {
+                filter: {
+                    self: true
+                }
+            }).then(data => {
+                if (data.ok) resolve(true);
+            }).catch(data => {
+                console.warn('Kitsu API issue', data);
+                if (!this.rt) {
+                    resolve(false);
+                } else {
+                    fetch('https://kitsu.io/api/oauth/token', {method: 'POST', headers: {'Content-Type': 'application/x-www-form-urlencoded', Accept: 'application/json'}, body: 'grant_type=refresh_token&refresh_token=' + encodeURIComponent(this.rt)}).then(data => {
+                        data.json().then(jsondata => {
+                            if (jsondata.error) {
+                                resolve(false);
+                            } else {
+                                this.browser.storage.local.set({noReload: true, kitsu_at: jsondata.access_token, kitsu_rt: jsondata.refresh_token});
+                                this.at = jsondata.access_token;
+                                this.rt = jsondata.refresh_token;
+                                this.init();
+                                resolve(true);
+                            }
+                        });
+                    });
+                }
+            });
+        });
     }
 
     getAnimeData(text) {

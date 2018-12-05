@@ -44,7 +44,20 @@ exports.start = function (storage) {
 		console.log(lib.isReady());
 		if (lib.isReady()) {
 			lib.init();
-			llibList.push(lib);
+			if (lib.diag) lib.diag().then(res => {
+				if (!res) {
+					browser.notifications.create('authIssue', {
+						type: 'basic',
+						iconUrl: '/logos/logo512.png',
+						title: browser.i18n.getMessage('authIssueTitle'),
+						message: browser.i18n.getMessage('authIssueMessage', [lib.info.name])
+					});
+				} else {
+					llibList.push(lib);
+				}
+				console.log('diag', res);
+			});
+			else llibList.push(lib);
 			cache[lib.info.name] = {};
 		}
 	});
@@ -359,7 +372,7 @@ exports.start = function (storage) {
 									if (jsondata.error) {
 										resolve({auth: 'error', service: 'kitsu'});
 									} else {
-										resolve({auth: 'success', service: 'kitsu', at: jsondata.access_token});
+										resolve({auth: 'success', service: 'kitsu', at: jsondata.access_token, rt: jsondata.refresh_token});
 									}
 								});
 							});

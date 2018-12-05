@@ -101,6 +101,18 @@
             }
         }
     },
+    "authIssueTitle": {
+        "message": "An anime list website failed"
+    },
+    "authIssueMessage": {
+        "message": "$SITE$ failed, please relogin in settings to reuse that website. If this issue is frequent, please contact me (@leonekmi).",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "kitsu"
+            }
+        }
+    },
     "dataProviderNotice": {
         "message": "$SITE$ is a data source, Scrobbly doesn't affect the account data, these additional sources can be a fallback if anime lists services cannot provide some details, such as episode duration.",
         "placeholders": {

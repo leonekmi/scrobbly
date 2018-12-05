@@ -60,6 +60,7 @@ browser.storage.local.get(null).then(result => {
                             fetch('https://kitsu.io/api/edge/users?filter[self]=true', {method: 'GET', headers: {'Content-Type': 'application/vnd.api+json', Accept: 'application/vnd.api+json', Authorization: 'Bearer ' + result.at}}).then(data => {
                                 data.json().then(userdata => {
                                     pendingChanges.kitsu_at = result.at;
+                                    pendingChanges.kitsu_rt = result.rt;
                                     pendingChanges.kitsu_uid = userdata.data[0].id;
                                     console.log(pendingChanges);
                                     $('#kitsu').html('<i class="checkmark icon"></i>'+browser.i18n.getMessage('loggedIn'));

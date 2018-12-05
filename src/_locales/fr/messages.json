@@ -101,6 +101,18 @@
             }
         }
     },
+    "authIssueTitle": {
+        "message": "Une connexion a été rompue"
+    },
+    "authIssueMessage": {
+        "message": "$SITE$ ne peut plus être utilisé, merci de vous reconnecter dans l'onglet des paramètres, si le problème se reproduit fréquemment, merci de me contacter (@leonekmi).",
+        "placeholders": {
+            "site": {
+                "content": "$1",
+                "example": "kitsu"
+            }
+        }
+    },
     "dataProviderNotice": {
         "message": "$SITE$ est une source de données, Scrobbly n'affectera donc pas les données de votre compte, ces sources supplémentaires servent au cas où les services d'anime lists ne peuvent pas fournir certains détails comme la durée des épisodes.",
         "placeholders": {
