@@ -24,7 +24,7 @@ exports.api = class Crunchyroll {
     }
 
     isUsable() {
-        if (document.documentURI) return false;
+        if (document.documentURI == 'https://www.crunchyroll.com/videos/anime') return false;
         else return this.urlregex.test(document.documentURI);
     }
 
