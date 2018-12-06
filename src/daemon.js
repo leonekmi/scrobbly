@@ -41,8 +41,9 @@ exports.start = function (storage) {
 	var activeSettingsTab;
 
 	libraries.forEach(lib => {
-		console.log(lib.isReady());
 		if (lib.isReady()) {
+			console.log(lib.info.name + ' init');
+			ready = true;
 			lib.init();
 			if (lib.diag) lib.diag().then(res => {
 				if (!res) {
@@ -55,7 +56,7 @@ exports.start = function (storage) {
 				} else {
 					llibList.push(lib);
 				}
-				console.log('diag', res);
+				console.log(lib.info.name + ' diag', res);
 			});
 			else llibList.push(lib);
 			cache[lib.info.name] = {};
@@ -63,23 +64,35 @@ exports.start = function (storage) {
 	});
 
 	dataProviders.forEach(dp => {
-		console.log(dp.isReady());
 		if (dp.isReady()) {
+			console.log(dp.info.name + ' init');
+			ready = true;
 			dp.init();
-			ldpList.push(dp);
+			if (dp.diag) dp.diag().then(res => {
+				if (!res) {
+					browser.notifications.create('authIssue', {
+						type: 'basic',
+						iconUrl: '/logos/logo512.png',
+						title: browser.i18n.getMessage('authIssueTitle'),
+						message: browser.i18n.getMessage('authIssueMessage', [dp.info.name])
+					});
+				} else {
+					ldpList.push(dp);
+				}
+				console.log(dp.info.name + ' diag', res);
+			});
+			else ldpList.push(dp);
 			cache[dp.info.name] = {};
 		}
 	});
 
-	if (llibList.length == 0) {
+	if (!ready) {
 		browser.notifications.create('firstRun', {
 			type: 'basic',
 			iconUrl: '/logos/logo512.png',
 			title: browser.i18n.getMessage('firstRunTitle'),
 			message: browser.i18n.getMessage('firstRunMessage')
 		});
-	} else {
-		ready = true;
 	}
 
 	browser.notifications.onClicked.addListener(notificationId => {

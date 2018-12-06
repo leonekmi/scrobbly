@@ -48,15 +48,21 @@ module.exports = class TheTvDB {
                     response.json().then(jsondata => resolve(jsondata)).catch(error => {throw new Error('TheTVDB api failed')});
                 });
             });
-        }
-        this.api('refresh_token').then(json => {
-            if (json.Error) {
-                console.warn('TheTVDB failed to refresh token, a relogin will be necessary.');
-                this.ready = false; // TODO : communicate with main daemon to notify unready state : we have no token oshit
-                return false;
-            }
-            this.browser.storage.local.set({noReload: true, thetvdb_at: json.token});
-            this.headers.Authorization = 'Bearer ' + json.token;
+        };
+    }
+
+    diag() {
+        return new Promise(resolve => {
+            this.api('refresh_token').then(json => {
+                if (json.Error) {
+                    console.warn('TheTVDB failed to refresh token, a relogin will be necessary.');
+                    resolve(false);
+                } else {
+                    this.browser.storage.local.set({noReload: true, thetvdb_at: json.token});
+                    this.headers.Authorization = 'Bearer ' + json.token;
+                    resolve(true);
+                }
+            });
         });
     }
 

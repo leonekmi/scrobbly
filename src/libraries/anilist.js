@@ -39,6 +39,22 @@ module.exports = class AniList {
         });
         return true;
     }
+    
+    diag() {
+        return new Promise(resolve => {
+            var query = `query {
+                Viewer {
+                    id
+                }
+            }`;
+            this.api.request(query, {}).then(result => {
+                console.log(result);
+                resolve(true);
+            }).catch(error => {
+                resolve(false);
+            });
+        });
+    }
 
     getAnimeData(text) {
         return new Promise(resolve => {

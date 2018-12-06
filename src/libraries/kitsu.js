@@ -44,8 +44,8 @@ module.exports = class Kitsu {
                 filter: {
                     self: true
                 }
-            }).then(data => {
-                if (data.ok) resolve(true);
+            }).then(res => {
+                if (res.data.length == 1) resolve(true);
             }).catch(data => {
                 console.warn('Kitsu API issue', data);
                 if (!this.rt) {
