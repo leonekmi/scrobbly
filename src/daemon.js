@@ -352,6 +352,7 @@ exports.start = function (storage) {
 							message: browser.i18n.getMessage('startDaemonMessage')
 						});
 						console.log('Scrobbly daemon unlock!');
+						browser.browserAction.setBadgeText({text: ''});
 						resolve('started');
 					} else {
 						stopScrobble();
@@ -363,6 +364,8 @@ exports.start = function (storage) {
 							message: browser.i18n.getMessage('stopDaemonMessage')
 						});
 						console.log('Scrobbly daemon lock!');
+						browser.browserAction.setBadgeText({text: 'X'});
+						browser.browserAction.setBadgeBackgroundColor({color: '#cc1414'});
 						resolve('stopped');
 					}
 					break;
