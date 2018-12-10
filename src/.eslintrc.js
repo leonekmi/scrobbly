@@ -25,7 +25,7 @@ module.exports = {
     "extends": "eslint:recommended",
     "rules": {
         "no-console": [
-            "warn"
+            "off"
         ],
         "linebreak-style": [
             "error",

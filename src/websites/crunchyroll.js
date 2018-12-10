@@ -43,4 +43,4 @@ exports.api = class Crunchyroll {
         });
         return true;
     }
-}
+};

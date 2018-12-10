@@ -184,7 +184,7 @@ exports.start = function (storage) {
 					console.log('Processing timer');
 					operation.attempt(currAtt => {
 						if (durProcessed != llibList.length) {
-							console.log('Wait for data loop');
+							console.log('Wait for data loop, attempt ' + currAtt, durations);
 							operation.retry({message: 'Wait for all data', obj: durations});
 						} else {
 							if (durations.length > 0) {
@@ -206,6 +206,7 @@ exports.start = function (storage) {
 								timer.addEventListener('targetAchieved', ctimer => {
 									console.log('End of the timer');
 									scrobble();
+									ctimer.stop();
 								});
 							} else {
 								console.warn('No duration from all sources, fallback on data providers');
@@ -227,6 +228,7 @@ exports.start = function (storage) {
 											console.log('Processing fallback timer');
 											operation2.attempt(currAtt => {
 												if (dpProcessed != ldpList.length) {
+													console.log('Wait for dataproviders loop, attempt ' + currAtt, dpDurations);
 													operation2.retry({message: 'Wait for dataproviders dataloop', obj: dpDurations});
 												} else {
 													var durationAverage = 0;
@@ -246,6 +248,7 @@ exports.start = function (storage) {
 													timer.addEventListener('targetAchieved', ctimer => {
 														console.log('End of the timer');
 														scrobble();
+														ctimer.stop();
 													});
 												}
 											});
@@ -436,7 +439,7 @@ exports.start = function (storage) {
 		}
 	}
 	function removeTabListener(tabId, removeInfo) {
-		if (tabId == activeTab && typeof timer == 'object') {
+		if (tabId == activeTab && typeof timer == 'object' && !removeInfo.isWindowClosing) { // Avoid to call function when not necessary
 			console.log('destroy countdown');
 			stopScrobble();
 		}

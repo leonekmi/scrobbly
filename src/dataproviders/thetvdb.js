@@ -45,7 +45,7 @@ module.exports = class TheTvDB {
                 if (!options.headers) options.headers = this.headers;
                 options.mode = 'cors';
                 fetch(url, options).then(response => {
-                    response.json().then(jsondata => resolve(jsondata)).catch(error => {throw new Error('TheTVDB api failed')});
+                    response.json().then(jsondata => resolve(jsondata)).catch(error => {throw new Error('TheTVDB api failed' + error.toString())}); // eslint-disable-line semi
                 });
             });
         };

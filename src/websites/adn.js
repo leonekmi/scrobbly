@@ -34,4 +34,4 @@ exports.api = class AnimeDigitalNetwork {
         if (!episodeNumber) return;
         this.browser.runtime.sendMessage({action: 'start', animeName: title, episode: parseInt(episodeNumber[1])});
     }
-}
+};

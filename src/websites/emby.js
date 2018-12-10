@@ -56,4 +56,4 @@ exports.api = class Emby {
             }
         }, 6500);
     }
-}
+};

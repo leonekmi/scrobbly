@@ -39,7 +39,7 @@ module.exports = class Kitsu {
     }
 
     diag() {
-        return new Promise((resolve, reject) => {
+        return new Promise(resolve => {
             this.api.get('users', {
                 filter: {
                     self: true
