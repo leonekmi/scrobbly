@@ -128,6 +128,9 @@
     "aboutText": {
         "message": "Scrobbly is an extension created by a teenager alone in his room, it is open-source thanks to GPLv3 license. Everyone can contribute, ask modifications with the Git technology."
     },
+    "starRepo": {
+        "message": "Please star my repo if you like this!"
+    },
     "deleteModalTitle": {
         "message": "Delete connection to $SITE$",
         "placeholders": {

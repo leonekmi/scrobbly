@@ -128,6 +128,9 @@
     "aboutText": {
         "message": "Scrobbly est une extension dévelopée par un jeune ado tout seul dans sa chambre, elle est open-source grâce à la licence GPLv3. N'importe qui peut donc y contribuer, demander des modifications grâce à la technologie Git."
     },
+    "starRepo": {
+        "message": "N'hésitez pas à lâcher une étoile sur mon repo !"
+    },
     "deleteModalTitle": {
         "message": "Supprimer la connexion à $SITE$",
         "placeholders": {
