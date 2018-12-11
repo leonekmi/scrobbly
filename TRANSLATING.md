@@ -5,7 +5,7 @@ You can do that using the Weblate platform, available at https://translate.leone
 
 ## Already existing languages
 
-The Weblate is open for everyone! Just register and start to translate.
+The Weblate is open for everyone! Just register and start to translate [here](https://translate.leonekmi.fr/engage/scrobbly/).
 
 ## New language
 
