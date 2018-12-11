@@ -1,8 +1,8 @@
 # Scrobbly privacy policy / Politique de confidentialité de Scrobbly
 
-Scrobbly is an extension for navigators, with it, you can automate the anime adding and the updates on compatible anime list websites when you watch anime on the compatible websites.
-
 ## English (en)
+
+Scrobbly is an extension for navigators, with it, you can automate the anime adding and the updates on compatible anime list websites when you watch anime on the compatible websites.
 
 ### Disclaimer
 

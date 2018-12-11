@@ -6,7 +6,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the release tag isn't in release version but in release name._
 
-## [Unreleased]
+## [2.1.0] (release 2.1-rc1)
 ### Added
 - Anime Digital Network support
 - HiDive support
@@ -43,7 +43,7 @@ _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the 
 - Kitsu / AniList support
 - UI rework from v1
 
-[Unreleased]: https://github.com/leonekmi/scrobbly/compare/v2.0-epsilon...master
+[2.1.0]: https://github.com/leonekmi/scrobbly/compare/v2.0-epsilon...v2.1-rc1
 [2.0.2]: https://github.com/leonekmi/scrobbly/compare/v2.0-rc2...v2.0-epsilon
 [2.0.1]: https://github.com/leonekmi/scrobbly/compare/v2.0-rc1...v2.0-rc2
 [2.0.0]: https://github.com/leonekmi/scrobbly/compare/v1.12.2-delta...v2.0-rc1
