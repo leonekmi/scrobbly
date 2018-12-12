@@ -15,7 +15,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 ### Install
 
 - Chrome, Vivaldi and other Chromium-based browsers : [Scrobbly is available on the Chrome Web Store](https://chrome.google.com/webstore/detail/scrobbly/bghcjdikmfopmhpgcocpgfefjppkfjpn)
-- Firefox (all editions) : [Scrobbly is available on my website](https://scrobbly.leonekmi.fr/firefox/scrobbly-2.0.2-fx.xpi)
+- Firefox (all editions) : [Scrobbly is available on my website](https://scrobbly.leonekmi.fr/firefox/scrobbly-2.1.1-fx.xpi)
 
 ### Roadmap
 
@@ -30,7 +30,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 | -                         | UI improvments                                                                  | **done**                                                                                                                                                 |
 | -                         | Get feedback from first release                                                 | **you can always send me feedback on [Twitter](https://twitter.com/leonekmi)**                                                                           |
 |                           | **[Released!](https://github.com/leonekmi/scrobbly/releases/tag/v2.1-epsilon)** |                                                                                                                                                          |
-| v2.2 (functions)          | Manual scrobbling                                                               | **planned**                                                                                                                                              |
+| v2.2 (functions)          | Manual scrobbling                                                               | **in progress**                                                                                                                                              |
 | -                         | Title Preference (English / Romaji / Native)                                    | **planned**                                                                                                                                              |
 | -                         | Choose details to show on popup                                                 | **planned**                                                                                                                                              |
 | -                         | Get data from other sources (like ImDB)                                         | **project: not planned**                                                                                                                                 |
@@ -41,6 +41,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 | -                         | Another streaming websites support                                              | **you can [create an issue](https://github.com/leonekmi/scrobbly/issues/new)**                                                                           |
 | -                         | Bug fixes                                                                       | **planned** reports are appreciated :)                                                                                                                   |
 |                           | **Deadline : February 2019**                                                    |                                                                                                                                                          |
+
 More to come later... stay tuned!
 
 ### Donate
