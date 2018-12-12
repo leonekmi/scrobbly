@@ -50,6 +50,9 @@
     "wronganime": {
         "message": "Wrong anime?"
     },
+    "changeScrobblingFail": {
+        "message": "Sorry, something bad happened. It might be your input (only numbers!) or an internal problem."
+    },
     "settings": {
         "message": "Settings"
     },

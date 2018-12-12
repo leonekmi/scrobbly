@@ -50,6 +50,9 @@
     "wronganime": {
         "message": "Mauvais anime ?"
     },
+    "changeScrobblingFail": {
+        "message": "Désolé, quelquechose n'a pas fonctionné. Cela peut être dû au nombre entré (que des nombres !) ou à un problème interne."
+    },
     "settings": {
         "message": "Paramètres"
     },
