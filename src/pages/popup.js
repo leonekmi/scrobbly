@@ -34,15 +34,15 @@ browser.storage.local.get(null).then(result => {
                 trans: function(id, ...args) {
                     return browser.i18n.getMessage(id, args);
                 },
-                stop: function(e) {
+                stop: function() {
                     browser.runtime.sendMessage({action: 'stop'});
                     window.close();
                 },
-                scrNow: function(e) {
+                scrNow: function() {
                     browser.runtime.sendMessage({action: 'scrobble'});
                     window.close();
                 },
-                toggleScrobbling: function(e) {
+                toggleScrobbling: function() {
                     browser.runtime.sendMessage({action: 'toggleScrobble'}).then(result => {
                         if (result == 'stopped') {
                             this.working = false;
@@ -59,6 +59,7 @@ browser.storage.local.get(null).then(result => {
                     var aid = window.prompt(message);
                     if (!aid) return;
                     browser.runtime.sendMessage({action: 'change', lib: e.srcElement.attributes.lib.value, aid: aid}).then(res => {
+                        if (!res) window.alert(browser.i18n.getMessage('changeScrobblingFail'));
                         browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(res => {
                             this.workingdb = res;
                         });
@@ -80,7 +81,7 @@ browser.storage.local.get(null).then(result => {
                     this.workingdblist = [];
                     return;
                 }
-                $.each(this.workingdb, (i, val) => {
+                $.each(this.workingdb, (i) => {
                     this.workingdblist.push(i);
                 });
             }

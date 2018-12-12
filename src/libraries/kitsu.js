@@ -106,7 +106,8 @@ module.exports = class Kitsu {
                         id: this.uid.toString()
                     }
                 }).then(result => {
-                    resolve(true);
+                    if (result.errors) resolve(false);
+                    else resolve(true);
                 });
             } else {
                 this.api.patch('library-entries', {
@@ -122,7 +123,8 @@ module.exports = class Kitsu {
                         id: this.uid.toString()
                     }
                 }).then(result => {
-                    resolve(true);
+                    if (result.errors) resolve(false);
+                    else resolve(true);
                 });
             }
         });

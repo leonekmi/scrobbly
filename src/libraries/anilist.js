@@ -48,9 +48,10 @@ module.exports = class AniList {
                 }
             }`;
             this.api.request(query, {}).then(result => {
-                console.log(result);
-                resolve(true);
+                if (!result.Viewer) resolve(false);
+                else resolve(true);
             }).catch(error => {
+                console.warn('anilist diag failed :', error.toString());
                 resolve(false);
             });
         });
@@ -110,7 +111,8 @@ module.exports = class AniList {
                 status: 'CURRENT'
             };
             this.api.request(query, variables).then(result => {
-                resolve(true);
+                if (result.errors) resolve(false);
+                else resolve(true);
             });
         });
     }

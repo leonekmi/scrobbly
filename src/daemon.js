@@ -418,7 +418,7 @@ exports.start = function (storage) {
 			//resolve(true);
 		});
 	}
-	function tabListener(tabId, changeInfo, tab) {
+	function tabListener(tabId, changeInfo) {
 		if (tabId == activeTab && typeof timer == 'object') {
 			if (typeof changeInfo.url == 'string') {
 				console.log('destroy countdown');

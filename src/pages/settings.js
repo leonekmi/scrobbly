@@ -49,10 +49,10 @@ browser.storage.local.get(null).then(result => {
                 showModal: function(modal) {
                     $('#' + modal + 'modal').modal('show');
                 },
-                save: function(e) {
+                save: function() {
                     browser.storage.local.set(pendingChanges);
                 },
-                loginKitsu: function(e) {
+                loginKitsu: function() {
                     var email = $('#emailkitsu').val();
                     var passwd = $('#passwordkitsu').val();
                     browser.runtime.sendMessage({action: 'auth', service: 'kitsu', email: email, passwd: passwd}).then(result => {
@@ -71,7 +71,7 @@ browser.storage.local.get(null).then(result => {
                         }
                     });
                 },
-                loginTheTVDB: function(e) {
+                loginTheTVDB: function() {
                     var uname = $('#usernamethetvdb').val();
                     var uid = $('#uidthetvdb').val();
                     browser.runtime.sendMessage({action: 'auth', service: 'thetvdb', uname, uid}).then(result => {
@@ -109,7 +109,7 @@ browser.storage.local.get(null).then(result => {
                 }
             }
         });
-        browser.runtime.onMessage.addListener((message, sender) => {
+        browser.runtime.onMessage.addListener((message) => {
             return new Promise(resolve => {
                 if (message.auth == 'success') {
                     switch (message.service) {
