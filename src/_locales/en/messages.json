@@ -129,10 +129,43 @@
         "message": "About"
     },
     "aboutText": {
-        "message": "Scrobbly is an extension created by a teenager alone in his room, it is open-source thanks to GPLv3 license. Everyone can contribute, ask modifications with the Git technology."
+        "message": "Scrobbly is an extension created by a teenager alone in his room, it is open-source thanks to GPLv3 license. Everyone can contribute, ask modifications with the Git technology. Click on me for details."
     },
     "starRepo": {
         "message": "Please star my repo if you like this!"
+    },
+    "translateInfo": {
+        "message": "You can translate Scrobbly in other languages if you want to help the project. With that, you can help me to make Scrobbly available for more people."
+    },
+    "patreonInfo": {
+        "message": "If you like Scrobbly, please consider to donate via Patreon if you want and you can, cool from you :)."
+    },
+    "githubInfo": {
+        "message": "Scrobbly is available on GitHub, you can open issues or pull requests if you want to contribute."
+    },
+    "langChoose": {
+        "message": "Choose a writing way"
+    },
+    "langPreference": {
+        "message": "I prefer animes with"
+    },
+    "englishName": {
+        "message": "English"
+    },
+    "englishText": {
+        "message": "an English-translated title"
+    },
+    "romajiName": {
+        "message": "Rōmaji"
+    },
+    "romajiText": {
+        "message": "a title in Rōmaji"
+    },
+    "nativeName": {
+        "message": "Native"
+    },
+    "nativeText": {
+        "message": "a title in its native language"
     },
     "deleteModalTitle": {
         "message": "Delete connection to $SITE$",
@@ -163,5 +196,17 @@
     },
     "episode": {
         "message": "Episode"
+    },
+    "close": {
+        "message": "Close"
+    },
+    "manualScrobble": {
+        "message": "Manual mode"
+    },
+    "animeName": {
+        "message": "Anime name"
+    },
+    "start": {
+        "message": "Start"
     }
 }

@@ -23,9 +23,16 @@
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/button.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/icon.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/form.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/input.min.css">
 </head>
 <body>
-    <content>
+    <loading>
+        <center>
+            <img src="img/radio-loading.gif">
+            <p><a href="https://scrobbly.leonekmi.fr/wat.html" target="_blank" class="blanklink">?</a></p>
+        </center>
+    </loading>
+    <content style="display: none;">
         <div class="header">
             <div class="logo">
                 <img src="../logos/logo128.png" width="78px" height="78px">
@@ -39,7 +46,7 @@
         <br>
         <div class="content">
             <div v-if="workingdb == 'notready'" class="firstrun">
-                <h3>{{ trans('notready') }}</h3>
+                <h2>{{ trans('notready') }}</h2>
                 <a href="settings.html" target="_blank" class="ui green button">{{ trans('login') }}</a>
             </div>
             <div v-if="workingdblist.length == 0">
@@ -58,6 +65,12 @@
                         <li><em>{{ trans('moretocome') }}</em></li>
                     </ul>
                 </p>
+                <div v-if="working">
+                    <h3>{{ trans('manualScrobble') }}</h3>
+                    <div class="ui input fleft"><input id="aName" :placeholder="trans('animeName')" v-model="animename" type="text"></div>
+                    <div class="ui input fright"><input id="eNumb" v-model="animeep" type="number" min="1"></div>
+                    <center><a class="ui green button" @click="manualScrobble">{{ trans('start') }}</a></center><br/>
+                </div>
             </div>
             <div v-else>
                 <center>

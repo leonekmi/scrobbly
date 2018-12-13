@@ -53,3 +53,20 @@ body {
 .subheader {
     text-align: center;
 }
+
+.fleft {
+    float: left;
+    width: 75%;
+    margin-bottom: 0.5em;
+}
+
+.fright {
+    float: right;
+    width: 12.5%;
+    padding-right: 10%;
+    margin-bottom: 0.5em;
+}
+
+.blanklink {
+    color: white;
+}

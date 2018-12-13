@@ -21,14 +21,30 @@ var browser = require('webextension-polyfill');
 
 browser.storage.local.get(null).then(result => {
     browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(result2 => {
-        new Vue({
+        var vm = new Vue({
             el: 'content',
             data: {
                 browserstorage: result,
                 workingdb: result2,
                 workingdblist: [],
                 libchoose: 'none',
-                working: true
+                working: true,
+                animename: '',
+                animeep: 1
+            },
+            watch: {
+                workingdb: function(newWDB) {
+                    this.workingdblist = [];
+                    if (newWDB == 'daemonstopped') {
+                        this.working = false;
+                    }
+                    if (typeof newWDB == 'string') {
+                        return;
+                    }
+                    $.each(newWDB, (i) => {
+                        this.workingdblist.push(i);
+                    });
+                }
             },
             methods: {
                 trans: function(id, ...args) {
@@ -71,6 +87,11 @@ browser.storage.local.get(null).then(result => {
                         active: true,
                         url: browser.runtime.getURL('pages/settings.html')
                     });
+                },
+                manualScrobble: function() {
+                    var animeName = this.animename;
+                    var episode = this.animeep;
+                    browser.runtime.sendMessage({action: 'start', animeName, episode}).catch(error => console.log(error));
                 }
             },
             created: function() {
@@ -78,13 +99,19 @@ browser.storage.local.get(null).then(result => {
                     this.working = false;
                 }
                 if (typeof this.workingdb == 'string') {
-                    this.workingdblist = [];
                     return;
                 }
                 $.each(this.workingdb, (i) => {
                     this.workingdblist.push(i);
                 });
+                $('loading').hide();
+                $('content').show();
             }
         });
+        setInterval(function() {
+            browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(res => {
+                vm.workingdb = res;
+            });
+        }, 3500);
     });
 });

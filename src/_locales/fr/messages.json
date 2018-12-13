@@ -129,10 +129,49 @@
         "message": "À propos"
     },
     "aboutText": {
-        "message": "Scrobbly est une extension dévelopée par un jeune ado tout seul dans sa chambre, elle est open-source grâce à la licence GPLv3. N'importe qui peut donc y contribuer, demander des modifications grâce à la technologie Git."
+        "message": "Scrobbly est une extension dévelopée par un jeune ado tout seul dans sa chambre, elle est open-source grâce à la licence GPLv3. N'importe qui peut donc y contribuer, demander des modifications grâce à la technologie Git. Cliquez sur moi pour avoir des détails."
     },
     "starRepo": {
         "message": "N'hésitez pas à lâcher une étoile sur mon repo !"
+    },
+    "translateInfo": {
+        "message": "Vous pouvez traduire Scrobbly dans d'autres langues si vous avez envie de soutenir le projet. Avec ça, vous m'aidez à rendre Scrobbly plus accessible à ceux qui ne parlent pas le français ou l'anglais."
+    },
+    "patreonInfo": {
+        "message": "Si vous aimez Scrobbly, vous pouvez faire un don grâce à Patreon si vous en avez l'envie et les moyens, ce serait sympa :)."
+    },
+    "githubInfo": {
+        "message": "Scrobbly est disponible sur GitHub, vous pouvez ouvrir des tickets ou des pull requests si vous souhaitez contribuer."
+    },
+    "langChoose": {
+        "message": "Choisissez un moyen d'écriture"
+    },
+    "langPreference": {
+        "message": "Je préfère les animes avec un nom"
+    },
+    "englishName": {
+        "message": "Anglais"
+    },
+    "englishText": {
+        "message": "traduit en anglais"
+    },
+    "romajiName": {
+        "message": "Rōmaji"
+    },
+    "romajiText": {
+        "message": "en écriture rōmaji"
+    },
+    "nativeName": {
+        "message": "Natif"
+    },
+    "nativeText": {
+        "message": "dans sa langue native"
+    },
+    "searchPrecision": {
+        "message": "Je veux que Scrobbly"
+    },
+    "precisionChoose": {
+        "message": "Choisissez un comportement"
     },
     "deleteModalTitle": {
         "message": "Supprimer la connexion à $SITE$",
@@ -163,5 +202,17 @@
     },
     "episode": {
         "message": "Épisode"
+    },
+    "close": {
+        "message": "Fermer"
+    },
+    "manualScrobble": {
+        "message": "Mode manuel"
+    },
+    "animeName": {
+        "message": "Nom de l'anime"
+    },
+    "start": {
+        "message": "Commencer"
     }
 }
