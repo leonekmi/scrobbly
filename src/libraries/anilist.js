@@ -16,8 +16,9 @@
 */
 
 module.exports = class AniList {
-    constructor (atoken) {
+    constructor (atoken, settings = {}) {
         this.atoken = atoken;
+        this.settings = settings;
         this.aclient = require('graphql-request').GraphQLClient;
         this.browser = require('webextension-polyfill');
         if (this.atoken) {
@@ -81,9 +82,24 @@ module.exports = class AniList {
             this.api.request(query, variables).then(data => {
                 var ret = [];
                 data.Page.media.forEach(el => {
+                    var title;
+                    switch (this.settings.langPreference) {
+                        case 'english':
+                            title = el.title.english;
+                            break;
+                        case 'romaji':
+                            title = el.title.romaji;
+                            break;
+                        case 'native':
+                            title = el.title.native;
+                            break;
+                        default:
+                            title = el.title.romaji; // developer preference :)
+                            break;
+                    }
                     ret.push({
                         id: el.id,
-                        title: el.title.romaji, // title preference will be a setting in a next release
+                        title,
                         episodeDuration: (el.duration) ? el.duration:'none',
                         cover: (el.bannerImage) ? el.bannerImage:this.browser.runtime.getURL('pages/img/none.png'),
                         synopsis: el.description

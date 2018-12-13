@@ -26,7 +26,8 @@ exports.start = function (storage) {
 	var retry = require('retry');
 	// var $ = require('jquery');
 	// init
-	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid), new lanilist(storage.anilist_at)];
+	var settings = {langPreference: storage.langPreference};
+	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid, storage.kitsu_rt, settings), new lanilist(storage.anilist_at, settings)];
 	var dataProviders = [new dptvdb(storage.thetvdb_at)];
 	var llibList = [];
 	var ldpList = [];
@@ -135,7 +136,7 @@ exports.start = function (storage) {
 		});
 	}
 
-	function startScrobble(animeName, episode, senderId) {
+	function startScrobble(animeName, episode, senderId = -1) {
 		lastRequestStorage = {animeName, episode, senderId};
 		if (workingdb == 'daemonstopped') return;
 		var operation = retry.operation({forever: true});
@@ -312,7 +313,7 @@ exports.start = function (storage) {
 			switch (message.action) {
 				case 'start':
 					console.log('Starting !');
-					startScrobble(message.animeName, message.episode, sender.tab.id);
+					startScrobble(message.animeName, message.episode, (sender.tab) ? sender.tab.id:-1);
 					resolve(true);
 					break;
 				case 'change':

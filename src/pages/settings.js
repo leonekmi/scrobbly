@@ -107,6 +107,15 @@ browser.storage.local.get(null).then(result => {
                     console.log(this.deletevar + 'account deleted!');
                     console.log(pendingChanges);
                 }
+            },
+            mounted: function() {
+                $('.ui.inline.dropdown').dropdown({
+                    onChange: function(val) {
+                        pendingChanges.langPreference = val;
+                        console.log(pendingChanges);
+                    }
+                });
+                $('.ui.inline.dropdown').dropdown('set selected', this.browserstorage.langPreference);
             }
         });
         browser.runtime.onMessage.addListener((message) => {

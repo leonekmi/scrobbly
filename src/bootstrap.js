@@ -26,7 +26,11 @@ browser.browserAction.setBadgeText({text: ''});
 browser.browserAction.setBadgeBackgroundColor({color: '#595959'});
 
 browser.storage.local.get(null).then(result => {
-    require('./daemon').start(result);
+    if (!result.langPreference) {
+        browser.storage.local.set({langPreference: 'english'}); // Storage migration - 2.2
+    } else {
+        require('./daemon').start(result);
+    }
 });
 
 browser.storage.onChanged.addListener((changes, location) => {

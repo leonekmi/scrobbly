@@ -29,6 +29,13 @@
         #title {
             color: white;
         }
+        .lfloat {
+            float: left;
+            margin-right: 0.5em;
+        }
+        .octocat {
+            width: 15%;
+        }
     </style>
     <title>Scrobbly</title>
 </head>
@@ -81,8 +88,31 @@
                 </a>
             </div>
             <div class="ui segment">
+                <h2>{{ trans('settings') }}</h2>
+                <h3 class="ui header">
+                    <i class="language icon"></i>
+                    <div class="content">
+                        {{ trans('langPreference') }}
+                        <div class="ui inline dropdown">
+                            <div class="text"></div>
+                            <i class="dropdown icon"></i>
+                            <div class="menu">
+                                <div class="header">{{ trans('langChoose') }}</div>
+                                <div class="item" data-value="english" :data-text="trans('englishText')">{{ trans('englishName') }}</div>
+                                <div class="item" data-value="romaji" :data-text="trans('romajiText')">{{ trans('romajiName') }}</div>
+                                <div class="item" data-value="native" :data-text="trans('nativeText')">{{ trans('nativeName') }}</div>
+                            </div>
+                        </div>
+                    </div>
+                </h3>
+                <a href="#" @click="save" class="ui green labeled icon button" id="save">
+                    <i class="save icon"></i>
+                    {{ trans('save') }}
+                </a>
+            </div>
+            <div class="ui segment">
                 <h3>{{ trans('aboutTitle') }}</h3>
-                <p>{{ trans('aboutText') }}</p>
+                <p @click="showModal('about')">{{ trans('aboutText') }}</p>
                 <a href="https://github.com/leonekmi/scrobbly">{{ trans('starRepo') }}</a>
             </div>
         </div>
@@ -175,6 +205,41 @@
                     <i class="trash icon"></i>
                     {{ trans('delete') }}
                 </a>
+            </div>
+        </div>
+
+        <div id="aboutmodal" class="ui basic modal">
+            <div class="ui icon header">
+              <i class="file icon"></i>
+              {{ trans('aboutTitle') }}
+            </div>
+            <div class="content">
+                <p>Copyright (C) 2018  leonekmi & Scrobbly contributors</p>
+                <p>This program is free software: you can redistribute it and/or modify
+                it under the terms of the GNU General Public License as published by
+                the Free Software Foundation, either version 3 of the License, or
+                (at your option) any later version.</p>
+                <p>This program is distributed in the hope that it will be useful,
+                but WITHOUT ANY WARRANTY; without even the implied warranty of
+                MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+                GNU General Public License for more details.</p>
+                <p>You should have received a copy of the GNU General Public License
+                along with this program.  If not, see &lt;<a href="https://www.gnu.org/licenses/">https://www.gnu.org/licenses/</a>&gt;.</p>
+                <p>Project maintainer can receive e-mails at <a href="mailto:me@leonekmi.fr">me@leonekmi.fr</a>.</p>
+                <p>Loading glyphs are <a href="https://loading.io/">powered by loading.io</a>.</p>
+                <hr>
+                <p><a href="https://translate.leonekmi.fr/engage/scrobbly/"><img class="lfloat" src="https://translate.leonekmi.fr/widgets/scrobbly/-/287x66-grey.png" /></a>
+                    {{ trans('translateInfo') }}</p><br/>
+                <p><a href="https://www.patreon.com/bePatron?u=15097322"><img class="lfloat" src="https://c5.patreon.com/external/logo/become_a_patron_button.png"></a>
+                    {{ trans('patreonInfo') }}</p><br/>
+                <p><a href="https://github.com/leonekmi/scrobbly"><img class="lfloat octocat" src="https://github.githubassets.com/images/modules/logos_page/Octocat.png"></a>
+                    {{ trans('githubInfo') }}</p>
+            </div>
+            <div class="actions">
+                <div class="ui red basic cancel inverted button">
+                    <i class="close icon"></i>
+                    {{ trans('close') }}
+                </div>
             </div>
         </div>
     </content>

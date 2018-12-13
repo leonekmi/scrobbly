@@ -16,12 +16,13 @@
 */
 
 module.exports = class Kitsu {
-    constructor (at, uid, rt = null) {
+    constructor (at, uid, rt = null, settings = {}) {
         this.browser = require('webextension-polyfill');
         this.Kitsu = require('kitsu');
         this.at = at;
         this.uid = uid;
         this.rt = rt;
+        this.settings = settings;
         if (at && uid) {
             this.ready = true;
         } else {
@@ -78,9 +79,24 @@ module.exports = class Kitsu {
             }).then(data => {
                 var animes = [];
                 data.data.forEach(el => {
+                    var title;
+                    switch (this.settings.langPreference) {
+                        case 'english':
+                            title = el.titles.en;
+                            break;
+                        case 'romaji':
+                            title = el.titles.en_jp;
+                            break;
+                        case 'native':
+                            title = el.titles.ja_jp;
+                            break;
+                        default:
+                            title = el.canonicalTitle;
+                            break;
+                    }
                     animes.push({
                         id: el.id,
-                        title: el.canonicalTitle,
+                        title,
                         episodeDuration: (el.episodeLength != 0 && typeof el.episodeLength == 'number') ? el.episodeLength:'none',
                         cover: (el.coverImage) ? el.coverImage.original:this.browser.runtime.getURL('pages/img/none.png'),
                         synopsis: el.synopsis
