@@ -33,6 +33,7 @@ exports.start = function (storage) {
 	var ldpList = [];
 	var workingdb = {};
 	var cache = {};
+	var ignoreCache = {};
 	var activeTab = -1;
 	var ready = false;
 	var timer = null;
@@ -139,6 +140,7 @@ exports.start = function (storage) {
 	function startScrobble(animeName, episode, senderId = -1) {
 		lastRequestStorage = {animeName, episode, senderId};
 		if (workingdb == 'daemonstopped') return;
+		if (ignoreCache[animeName]) return;
 		var operation = retry.operation({forever: true});
 		var operation2 = retry.operation({forever: true});
 		scrobbled = false;
@@ -301,8 +303,12 @@ exports.start = function (storage) {
 		timer = null;
 		durationStorage = {};
 		activeTab = -1;
-		lastRequestStorage = {};
 		browser.browserAction.setBadgeText({text: ''});
+	}
+
+	function ignoreScrobble() {
+		console.log(lastRequestStorage.animeName + ' is now ignored!');
+		ignoreCache[lastRequestStorage.animeName] = true;
 	}
 
 	// ?
@@ -328,6 +334,13 @@ exports.start = function (storage) {
 				case 'stop':
 					console.log('Stopping !');
 					stopScrobble();
+					if (message.ignore) ignoreScrobble();
+					resolve(true);
+					break;
+				case 'clearCache':
+					console.log('Clearing caches!');
+					cache = {};
+					ignoreCache = {};
 					resolve(true);
 					break;
 				case 'storage':

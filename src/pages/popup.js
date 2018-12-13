@@ -18,6 +18,7 @@
 var Vue = require('vue/dist/vue');
 var $ = require('jquery');
 var browser = require('webextension-polyfill');
+var Konami = require('konami');
 
 browser.storage.local.get(null).then(result => {
     browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(result2 => {
@@ -52,6 +53,10 @@ browser.storage.local.get(null).then(result => {
                 },
                 stop: function() {
                     browser.runtime.sendMessage({action: 'stop'});
+                    window.close();
+                },
+                ignore: function() {
+                    browser.runtime.sendMessage({action: 'stop', ignore: true});
                     window.close();
                 },
                 scrNow: function() {
@@ -94,7 +99,7 @@ browser.storage.local.get(null).then(result => {
                     browser.runtime.sendMessage({action: 'start', animeName, episode}).catch(error => console.log(error));
                 }
             },
-            created: function() {
+            mounted: function() {
                 if (this.workingdb == 'daemonstopped') {
                     this.working = false;
                 }
@@ -106,6 +111,9 @@ browser.storage.local.get(null).then(result => {
                 });
                 $('loading').hide();
                 $('content').show();
+                new Konami(() => {
+                    browser.runtime.sendMessage({action: 'clearCache'});
+                });
             }
         });
         setInterval(function() {
