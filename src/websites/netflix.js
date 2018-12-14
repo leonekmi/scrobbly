@@ -43,7 +43,7 @@ exports.api = class Netflix {
                 }
             } else {
                 var seriesTitle = episodeInfo[0].children[0].innerText;
-                var episodeRegex = /S([0-9]+):E([0-9]+)/;
+                var episodeRegex = /[S|P]([0-9]+):E([0-9]+)/;
                 var episodeData = episodeRegex.exec(episodeInfo[0].children[1].innerText);
                 var episodeNumber = episodeData[2];
                 var title;
