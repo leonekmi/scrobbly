@@ -116,6 +116,21 @@ browser.storage.local.get(null).then(result => {
                     }
                 });
                 $('.ui.inline.dropdown').dropdown('set selected', this.browserstorage.langPreference);
+                $('.ui.checkbox').checkbox({
+                    onChange: function() {
+                        var id = this.id;
+                        var status = (this.parentElement.classList.contains('checked')) ? true:false;
+                        pendingChanges['popup_' + id] = status;
+                        console.log(pendingChanges);
+                    }
+                });
+                var optBoxes = ['desc', 'img', 'epCount'];
+                optBoxes.forEach(val => {
+                    if (this.browserstorage['popup_' + val]) {
+                        console.log(val + ' yes');
+                        $('#'+val).parent().checkbox('set checked');
+                    }
+                });
             }
         });
         browser.runtime.onMessage.addListener((message) => {

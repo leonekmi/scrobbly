@@ -94,8 +94,9 @@
                         <a class="ui labeled icon yellow button" @click="changeScrobbling" :lib="key"><i class="exchange icon" :lib="key"></i> {{ trans('wronganime') }}</a>
                     </center>
                     <br>
-                    <img :src="status.anime.cover" width="275">
-                    <h2>{{ status.anime.title }} - {{ trans('episode') }} {{ status.ep }}</h2>
+                    <img :src="status.anime.cover" width="275" v-if="browserstorage.popup_img">
+                    <h2>{{ status.anime.title }} - {{ trans('episode') }} {{ status.ep }}<span v-if="browserstorage.popup_epCount">/{{ status.anime.episodes }}</span></h2>
+                    <p v-if="browserstorage.popup_desc">{{ status.anime.synopsis }}</p>
                 </div>
             </div>
             <div>

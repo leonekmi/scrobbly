@@ -167,6 +167,21 @@
     "nativeText": {
         "message": "dans sa langue native"
     },
+    "popupCustomization": {
+        "message": "Je souhaite que ces éléments apparaissent dans la popup :"
+    },
+    "description": {
+        "message": "Description"
+    },
+    "bannerImage": {
+        "message": "Bannière"
+    },
+    "title": {
+        "message": "Titre"
+    },
+    "episodeCount": {
+        "message": "Nombre d'épisodes"
+    },
     "searchPrecision": {
         "message": "Je veux que Scrobbly"
     },

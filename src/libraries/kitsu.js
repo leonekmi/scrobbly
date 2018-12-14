@@ -97,6 +97,7 @@ module.exports = class Kitsu {
                     animes.push({
                         id: el.id,
                         title,
+                        episodes: (el.episodeCount) ? el.episodeCount:'none',
                         episodeDuration: (el.episodeLength != 0 && typeof el.episodeLength == 'number') ? el.episodeLength:'none',
                         cover: (el.coverImage) ? el.coverImage.original:this.browser.runtime.getURL('pages/img/none.png'),
                         synopsis: el.synopsis

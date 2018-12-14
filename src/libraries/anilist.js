@@ -65,7 +65,8 @@ module.exports = class AniList {
                     media (id: $id, search: $search, type: ANIME) {
                         id
                         duration
-                        description(asHtml: true)
+                        description(asHtml: false)
+                        episodes
                         bannerImage
                         title {
                             romaji
@@ -100,6 +101,7 @@ module.exports = class AniList {
                     ret.push({
                         id: el.id,
                         title,
+                        episodes: (el.episodes) ? el.episodes:'none',
                         episodeDuration: (el.duration) ? el.duration:'none',
                         cover: (el.bannerImage) ? el.bannerImage:this.browser.runtime.getURL('pages/img/none.png'),
                         synopsis: el.description

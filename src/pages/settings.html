@@ -105,6 +105,28 @@
                         </div>
                     </div>
                 </h3>
+                <h3 class="ui header">
+                    <i class="object group outline icon"></i>
+                    <div class="content">
+                        {{ trans('popupCustomization') }}
+                    </div>
+                </h3>
+                <div class="ui disabled checkbox">
+                    <input type="checkbox" id="noChange" disabled="disabled" checked="checked">
+                    <label>{{ trans('title') }}</label>
+                </div><br>
+                <div class="ui checkbox">
+                    <input type="checkbox" id="desc">
+                    <label>{{ trans('description') }}</label>
+                </div><br>
+                <div class="ui checkbox">
+                    <input type="checkbox" id="img">
+                    <label>{{ trans('bannerImage') }}</label>
+                </div><br>
+                <div class="ui checkbox">
+                    <input type="checkbox" id="epCount">
+                    <label>{{ trans('episodeCount') }}</label>
+                </div><br><br>
                 <a href="#" @click="save" class="ui green labeled icon button" id="save">
                     <i class="save icon"></i>
                     {{ trans('save') }}
