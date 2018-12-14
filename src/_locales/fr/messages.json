@@ -147,7 +147,7 @@
         "message": "Choisissez un moyen d'écriture"
     },
     "langPreference": {
-        "message": "Je préfère les animes avec un nom"
+        "message": "Je préfère les animes avec son nom"
     },
     "englishName": {
         "message": "Anglais"
@@ -183,10 +183,25 @@
         "message": "Nombre d'épisodes"
     },
     "searchPrecision": {
-        "message": "Je veux que Scrobbly"
+        "message": "Mode de recherche"
     },
-    "precisionChoose": {
-        "message": "Choisissez un comportement"
+    "strict": {
+        "message": "Mode strict"
+    },
+    "strictDesc": {
+        "message": "Le mode strict ajoute une condition de similarité, si l'anime proposé par les sites d'anime lists semble trop différent de celui trouvé, Scrobbly interrompra le processsus."
+    },
+    "semistrict": {
+        "message": "Mode semi-strict"
+    },
+    "semistrictDesc": {
+        "message": "Le mode semi-strict fonctionne de la même façon que le mode strict mais est plus souple sur la notion de similarité."
+    },
+    "free": {
+        "message": "Mode libre"
+    },
+    "freeDesc": {
+        "message": "Le mode libre n'ajoute aucune condition, l'anime est ajouté sans vérification supplémentaire."
     },
     "deleteModalTitle": {
         "message": "Supprimer la connexion à $SITE$",
