@@ -6,6 +6,15 @@ and this project **doesn't** adheres to [Semantic Versioning](https://semver.org
 
 _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the release tag isn't in release version but in release name._
 
+## [Unreleased]
+### Added
+- Manual scrobbling
+- Customization options : popup customization, writing way (Rōmaji, English, Native)
+- Ignore an anime
+
+### Fixed
+- Netflix support improved
+
 ## [2.1] (release 2.1-rc1 / 2.1-epsilon)
 ### Added
 - Anime Digital Network support
@@ -43,6 +52,7 @@ _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the 
 - Kitsu / AniList support
 - UI rework from v1
 
+[Unreleased]: https://github.com/leonekmi/scrobbly/compare/v2.1-epsilon...master
 [2.1]: https://github.com/leonekmi/scrobbly/compare/v2.0-epsilon...v2.1-epsilon
 [2.0.2]: https://github.com/leonekmi/scrobbly/compare/v2.0-rc2...v2.0-epsilon
 [2.0.1]: https://github.com/leonekmi/scrobbly/compare/v2.0-rc1...v2.0-rc2
