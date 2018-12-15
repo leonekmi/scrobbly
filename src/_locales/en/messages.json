@@ -167,6 +167,21 @@
     "nativeText": {
         "message": "a title in its native language"
     },
+    "popupCustomization": {
+        "message": "I want these elements on the popup :"
+    },
+    "description": {
+        "message": "Description"
+    },
+    "bannerImage": {
+        "message": "Banner"
+    },
+    "title": {
+        "message": "Title"
+    },
+    "episodeCount": {
+        "message": "Episodes count"
+    },
     "deleteModalTitle": {
         "message": "Delete connection to $SITE$",
         "placeholders": {
