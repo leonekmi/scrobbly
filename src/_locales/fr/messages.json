@@ -1,6 +1,6 @@
 {
     "slogan": {
-        "message": "Mettez à jour en même tous vos sites d'anime list rien qu'en regardant sur votre site préféré."
+        "message": "Mettez à jour en même tous vos sites d'anime list juste en regardant sur votre site préféré."
     },
     "firstRunTitle": {
         "message": "Bienvenue sur Scrobbly !"
@@ -15,7 +15,7 @@
         "message": "Scrobbly s'est arrêté !"
     },
     "stopDaemonMessage": {
-        "message": "Parfait pour regarder des anime en toute intimité, l'extension ne mettra pas sur vos listes ce que vous regardez."
+        "message": "Parfait pour regarder des anime en toute intimité, l'extension ne mettra pas sur vos listes ce que vous regardez !"
     },
     "startDaemon": {
         "message": "Activer"
@@ -24,7 +24,7 @@
         "message": "Scrobbly refonctionne !"
     },
     "startDaemonMessage": {
-        "message": "Scrobbly va recommencer à mettre sur vos listes ce que vous regardez."
+        "message": "Scrobbly va recommencer à mettre sur vos listes ce que vous regardez !"
     },
     "notready": {
         "message": "Scrobbly n'est pas prêt !"
@@ -89,14 +89,14 @@
     "loginInfoTheTVDB": {
         "message": "Pour vous connecter avec TheTVDB, vous devez entrer votre nom d'utilisateur et votre ID unique, si vous ne le savez pas, vous pouvez les obtenir en accèdant à la page \"API Access\". Vos identifiants sont échangés avec un jeton d'accès que Scrobbly utilisera pour obtenir des données de TheTVDB. Pour en savoir plus, consultez la politique de confidentialité de Scrobbly."
     },
-    "loginLinkTheTVDB" : {
+    "loginLinkTheTVDB": {
         "message": "Api :: TheTVDB"
     },
     "save": {
         "message": "Sauvegarder"
     },
     "youCanClose": {
-        "message": "Bravo ! Votre compte $SITE$ est relié à Scrobbly. Vous pouvez fermer et revenir en arrière",
+        "message": "Bravo ! Votre compte $SITE$ est relié à Scrobbly. Vous pouvez fermer et revenir en arrière.",
         "placeholders": {
             "site": {
                 "content": "$1",
