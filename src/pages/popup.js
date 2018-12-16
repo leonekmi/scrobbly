@@ -79,7 +79,8 @@ browser.storage.local.get(null).then(result => {
                     });
                     var aid = window.prompt(message);
                     if (!aid) return;
-                    browser.runtime.sendMessage({action: 'change', lib: e.srcElement.attributes.lib.value, aid: aid}).then(res => {
+                    if (!parseInt(aid)) window.alert(browser.i18n.getMessage('changeScrobblingFail'));
+                    else browser.runtime.sendMessage({action: 'change', lib: e.srcElement.attributes.lib.value, aid: aid}).then(res => {
                         if (!res) window.alert(browser.i18n.getMessage('changeScrobblingFail'));
                         browser.runtime.sendMessage({action: 'storage', get: 'workingdb'}).then(res => {
                             this.workingdb = res;
@@ -100,6 +101,11 @@ browser.storage.local.get(null).then(result => {
                 }
             },
             mounted: function() {
+                $('loading').hide();
+                $('content').show();
+                new Konami(() => {
+                    browser.runtime.sendMessage({action: 'clearCache'});
+                });
                 if (this.workingdb == 'daemonstopped') {
                     this.working = false;
                 }
@@ -108,11 +114,6 @@ browser.storage.local.get(null).then(result => {
                 }
                 $.each(this.workingdb, (i) => {
                     this.workingdblist.push(i);
-                });
-                $('loading').hide();
-                $('content').show();
-                new Konami(() => {
-                    browser.runtime.sendMessage({action: 'clearCache'});
                 });
             }
         });
