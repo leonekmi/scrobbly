@@ -223,5 +223,17 @@
     },
     "start": {
         "message": "Commencer"
+    },
+    "ignore": {
+        "message": "Ne pas scrobbler cette série"
+    },
+    "stop": {
+        "message": "Arrêter"
+    },
+    "scrNow": {
+        "message": "Synchroniser maintenant"
+    },
+    "nextEp": {
+        "message": "Synchroniser et passer à l'épisode suivant"
     }
 }

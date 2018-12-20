@@ -24,6 +24,8 @@
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/icon.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/form.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/input.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/transition.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/popup.min.css">
 </head>
 <body>
     <loading>
@@ -73,11 +75,12 @@
                 </div>
             </div>
             <div v-else>
-                <center>
+                <center id="actions">
                     <!-- TODO : Learn CSS to know how to center :) -->
-                    <a class="ui icon yellow button" @click="ignore"><i class="exclamation triangle icon"></i></a>
-                    <a class="ui icon orange button" @click="stop"><i class="stop icon"></i></a>
-                    <a class="ui icon green button" @click="scrNow"><i class="fast forward icon"></i></a>
+                    <a class="ui icon yellow button" @click="ignore" :data-content="trans('ignore')"><i class="exclamation triangle icon"></i></a>
+                    <a class="ui icon orange button" @click="stop" :data-content="trans('stop')"><i class="stop icon"></i></a>
+                    <a class="ui icon green button" @click="scrNow" :data-content="trans('scrNow')"><i class="forward icon"></i></a>
+                    <a class="ui icon green button" @click="nextEp" :data-content="trans('nextEp')" v-if="lastRequest.src == 'manual'"><i class="step forward icon"></i></a>
                 </center>
                 <br>
                 <div class="ui form">

@@ -137,8 +137,8 @@ exports.start = function (storage) {
 		});
 	}
 
-	function startScrobble(animeName, episode, senderId = -1) {
-		lastRequestStorage = {animeName, episode, senderId};
+	function startScrobble(animeName, episode, senderId = -1, src) {
+		lastRequestStorage = {animeName, episode, senderId, src};
 		if (workingdb == 'daemonstopped') return;
 		if (ignoreCache[animeName]) return;
 		var operation = retry.operation({forever: true});
@@ -319,7 +319,7 @@ exports.start = function (storage) {
 			switch (message.action) {
 				case 'start':
 					console.log('Starting !');
-					startScrobble(message.animeName, message.episode, (sender.tab) ? sender.tab.id:-1);
+					startScrobble(message.animeName, message.episode, (sender.tab) ? sender.tab.id:-1, message.src);
 					resolve(true);
 					break;
 				case 'change':
@@ -348,6 +348,9 @@ exports.start = function (storage) {
 					switch (message.get) {
 						case 'workingdb':
 							resolve((ready) ? workingdb:'notready');
+							break;
+						case 'lastRequest':
+							resolve(lastRequestStorage);
 							break;
 						default:
 							console.warn('Unknown data element !', message.get, message, sender);

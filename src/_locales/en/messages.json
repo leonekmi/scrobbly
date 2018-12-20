@@ -223,5 +223,17 @@
     },
     "start": {
         "message": "Start"
+    },
+    "ignore": {
+        "message": "Do not scrobble this series"
+    },
+    "stop": {
+        "message": "Stop"
+    },
+    "scrNow": {
+        "message": "Scrobble now"
+    },
+    "nextEp": {
+        "message": "Scrobble now and move on to the next episode"
     }
 }
