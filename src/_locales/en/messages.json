@@ -89,7 +89,7 @@
     "loginInfoTheTVDB": {
         "message": "To login with TheTVDB, you need to type your username and your unique ID, if you ignore it, you can obtain it by going to TheTVDB \"API Access\" page. Your credentials are exchanged with a token that Scrobbly will use to get data directly on TheTVDB. To learn more, check the Scrobbly privacy policy."
     },
-    "loginLinkTheTVDB" : {
+    "loginLinkTheTVDB": {
         "message": "Api :: TheTVDB"
     },
     "save": {
@@ -144,7 +144,7 @@
         "message": "Scrobbly is available on GitHub, you can open issues or pull requests if you want to contribute."
     },
     "langChoose": {
-        "message": "Choose a writing way"
+        "message": "Choose a writing method"
     },
     "langPreference": {
         "message": "I prefer animes with"
