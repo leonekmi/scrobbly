@@ -27,7 +27,7 @@ browser.browserAction.setBadgeBackgroundColor({color: '#595959'});
 
 browser.storage.local.get(null).then(result => {
     if (typeof result.langPreference == 'undefined' || typeof result.popup_img == 'undefined') {
-        browser.storage.local.set({langPreference: 'english', popup_img: true}); // Storage migration - 2.2
+        browser.storage.local.set({langPreference: 'english', popup_img: true, noReload: false}); // Storage migration - 2.2
     } else {
         require('./daemon').start(result);
     }

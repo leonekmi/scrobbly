@@ -333,8 +333,8 @@ exports.start = function (storage) {
 					break;
 				case 'stop':
 					console.log('Stopping !');
-					stopScrobble();
 					if (message.ignore) ignoreScrobble();
+					stopScrobble();
 					resolve(true);
 					break;
 				case 'clearCache':
