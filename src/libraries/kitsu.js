@@ -94,6 +94,7 @@ module.exports = class Kitsu {
                             title = el.canonicalTitle;
                             break;
                     }
+                    if (!title) title = el.canonicalTitle;
                     animes.push({
                         id: el.id,
                         title,
