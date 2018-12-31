@@ -6,6 +6,10 @@ and this project **doesn't** adheres to [Semantic Versioning](https://semver.org
 
 _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the release tag isn't in release version but in release name._
 
+## [2.2.1] (release 2.2.1-epsilon)
+### Fixed
+- Fallback for title preference (if user-preferred title is not available)
+
 ## [2.2] (release 2.2-epsilon)
 ### Added
 - Manual scrobbling
@@ -52,7 +56,8 @@ _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the 
 - Kitsu / AniList support
 - UI rework from v1
 
-[2.2]: https://github.com/leonekmi/scrobbly/compare/v2.1-epsilon...master
+[2.2.1]: https://github.com/leonekmi/scrobbly/compare/v2.2-epsilon...v2.2.1-epsilon
+[2.2]: https://github.com/leonekmi/scrobbly/compare/v2.1-epsilon...v2.2-epsilon
 [2.1]: https://github.com/leonekmi/scrobbly/compare/v2.0-epsilon...v2.1-epsilon
 [2.0.2]: https://github.com/leonekmi/scrobbly/compare/v2.0-rc2...v2.0-epsilon
 [2.0.1]: https://github.com/leonekmi/scrobbly/compare/v2.0-rc1...v2.0-rc2
