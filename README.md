@@ -40,7 +40,7 @@ At the same time, **just by watching** on your favourite VoD website, this WebEx
 | -                         | Hulu support                                                                    | **project: not planned** (see [#16](https://github.com/leonekmi/scrobbly/issues/16#issue-385401883))                                                     |
 | -                         | Another streaming websites support                                              | **you can [create an issue](https://github.com/leonekmi/scrobbly/issues/new)**                                                                           |
 | -                         | Bug fixes                                                                       | **planned** reports are appreciated :)                                                                                                                   |
-|                           | **Deadline : February 2019**                                                    |                                                                                                                                                          |
+|                           | **Deadline : as soon of MAL API restoration**                                                    |                                                                                                                                                          |
 
 More to come later... stay tuned!
 
