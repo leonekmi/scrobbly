@@ -18,7 +18,7 @@
 exports.api = class Wakanim {
     constructor () {
         this.browser = require('webextension-polyfill');
-        this.urlregex = /https:\/\/www.wakanim.tv\/fr\/v2\/catalogue\/episode\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
+        this.urlregex = /https:\/\/www.wakanim.tv\/(?:[a-z]){2,}\/v2\/catalogue\/episode\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
         this.jquery = require('jquery');
         return true;
     }
