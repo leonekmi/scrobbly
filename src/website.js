@@ -24,9 +24,10 @@ var wemby = require('./websites/emby').api;
 var whidive = require('./websites/hidive').api;
 var wadn = require('./websites/adn').api;
 var waod = require('./websites/animeondemand').api;
+var wponimu = require('./websites/ponimu').api;
 //var $ = require('jquery');
 // init
-var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby(), new whidive(), new wadn(), new waod()];
+var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby(), new whidive(), new wadn(), new waod(), new wponimu()];
 var llibList = [];
 
 libraries.forEach(lib => {
