@@ -18,6 +18,7 @@
 module.exports = function(grunt) {
     var moment = require('moment');
     var cfgfile = grunt.file.readJSON('secret.json');
+    const webpackcfg = require('./webpack.config');
     // Project configuration.
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -41,6 +42,13 @@ module.exports = function(grunt) {
                     'src/auth/anilist.bundle.js': 'src/auth/anilist.js'
                 }
             }
+        },
+        webpack: {
+            oprions: {
+                stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
+            },
+            prod: Object.assign({ mode: 'production' }, webpackcfg),
+            dev: Object.assign({ watch: true, mode: 'development'}, webpackcfg)
         },
         copy: {
             dist: {
@@ -97,6 +105,7 @@ module.exports = function(grunt) {
     });
   
     grunt.loadNpmTasks('grunt-browserify');
+    grunt.loadNpmTasks('grunt-webpack');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-zip-to-crx');
