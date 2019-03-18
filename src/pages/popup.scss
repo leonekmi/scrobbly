@@ -15,7 +15,12 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-@import '~semantic-ui-css/semantic';
+@import '~semantic-ui-css/components/button';
+@import '~semantic-ui-css/components/icon';
+@import '~semantic-ui-css/components/form';
+@import '~semantic-ui-css/components/input';
+@import '~semantic-ui-css/components/transition';
+@import '~semantic-ui-css/components/popup';
 
 @import './al-icons/css/al-icons';
 
@@ -27,7 +32,6 @@ body {
     height: 580px;
     font-family: 'Open Sans', sans-serif;
     color: white !important;
-    padding: 5%;
 }
 
 .header {
@@ -59,18 +63,18 @@ body {
     text-align: center;
 }
 
-// .fleft {
-//     float: left;
-//     width: 75%;
-//     margin-bottom: 0.5em;
-// }
+.fleft {
+    float: left;
+    width: 75%;
+    margin-bottom: 0.5em;
+}
 
-// .fright {
-//     float: right;
-//     width: 12.5%;
-//     padding-right: 10%;
-//     margin-bottom: 0.5em;
-// }
+.fright {
+    float: right;
+    width: 12.5%;
+    padding-right: 10%;
+    margin-bottom: 0.5em;
+}
 
 .blanklink {
     color: white !important;

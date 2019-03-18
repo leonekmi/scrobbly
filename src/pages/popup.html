@@ -63,6 +63,7 @@
                         <li>AnimeOnDemand</li>
                         <li>Anime Digital Network</li>
                         <li>HiDive</li>
+                        <li>Ponimu</li>
                         <li>Plex (via app.plex.tv)</li>
                         <li>Emby (via app.emby.media)</li>
                         <li><em>{{ trans('moretocome') }}</em></li>
@@ -70,14 +71,8 @@
                 </p>
                 <div v-if="working">
                     <h3>{{ trans('manualScrobble') }}</h3>
-                    <div class="ui equal width grid">
-                        <div class="ui left floated column">
-                            <div class="ui input"><input id="aName" :placeholder="trans('animeName')" v-model="animename" type="text"></div>
-                        </div>
-                        <div class="ui right floated column">
-                            <div class="ui input"><input id="eNumb" v-model="animeep" type="number" min="1"></div>
-                        </div>
-                    </div>
+                    <div class="ui input fleft"><input id="aName" :placeholder="trans('animeName')" v-model="animename" type="text"></div>
+                    <div class="ui input fright"><input id="eNumb" v-model="animeep" type="number" min="1"></div>
                     <br>
                     <center><a class="ui green button" @click="manualScrobble">{{ trans('start') }}</a></center><br/>
                 </div>
