@@ -18,19 +18,20 @@
 -->
 <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="popup.css">
+    <!-- <link rel="stylesheet" href="popup.css">
     <link rel="stylesheet" href="al-icons/css/al-icons.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/button.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/icon.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/form.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/input.min.css">
     <link rel="stylesheet" href="../Semantic-UI-CSS/components/transition.min.css">
-    <link rel="stylesheet" href="../Semantic-UI-CSS/components/popup.min.css">
+    <link rel="stylesheet" href="../Semantic-UI-CSS/components/popup.min.css"> -->
+    <link rel="stylesheet" href="../popup.css">
 </head>
 <body>
     <loading>
         <center>
-            <img src="img/radio-loading.gif">
+            <img src="../img/radio-loading.gif">
             <p><a href="https://scrobbly.leonekmi.fr/wat.html" target="_blank" class="blanklink">?</a></p>
         </center>
     </loading>
@@ -69,8 +70,15 @@
                 </p>
                 <div v-if="working">
                     <h3>{{ trans('manualScrobble') }}</h3>
-                    <div class="ui input fleft"><input id="aName" :placeholder="trans('animeName')" v-model="animename" type="text"></div>
-                    <div class="ui input fright"><input id="eNumb" v-model="animeep" type="number" min="1"></div>
+                    <div class="ui equal width grid">
+                        <div class="ui left floated column">
+                            <div class="ui input"><input id="aName" :placeholder="trans('animeName')" v-model="animename" type="text"></div>
+                        </div>
+                        <div class="ui right floated column">
+                            <div class="ui input"><input id="eNumb" v-model="animeep" type="number" min="1"></div>
+                        </div>
+                    </div>
+                    <br>
                     <center><a class="ui green button" @click="manualScrobble">{{ trans('start') }}</a></center><br/>
                 </div>
             </div>
@@ -111,6 +119,6 @@
         </div>
     </content>
 
-    <script src="popup.bundle.js"></script>
+    <script src="../popup.js"></script>
 </body>
 </html>

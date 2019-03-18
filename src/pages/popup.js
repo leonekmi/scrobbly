@@ -15,8 +15,9 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
+require('./popup.scss');
 var Vue = require('vue/dist/vue');
-var $ = require('../Semantic-UI-CSS/semantic');
+require('./semantic');
 var browser = require('webextension-polyfill');
 var Konami = require('konami');
 

@@ -1,11 +1,11 @@
 @font-face {
   font-family: 'al-icons';
-  src: url('../font/al-icons.eot?43820742');
-  src: url('../font/al-icons.eot?43820742#iefix') format('embedded-opentype'),
-       url('../font/al-icons.woff2?43820742') format('woff2'),
-       url('../font/al-icons.woff?43820742') format('woff'),
-       url('../font/al-icons.ttf?43820742') format('truetype'),
-       url('../font/al-icons.svg?43820742#al-icons') format('svg');
+  src: url('./al-icons/font/al-icons.eot?43820742');
+  src: url('./al-icons/font/al-icons.eot?43820742#iefix') format('embedded-opentype'),
+       url('./al-icons/font/al-icons.woff2?43820742') format('woff2'),
+       url('./al-icons/font/al-icons.woff?43820742') format('woff'),
+       url('./al-icons/font/al-icons.ttf?43820742') format('truetype'),
+       url('./al-icons/font/al-icons.svg?43820742#al-icons') format('svg');
   font-weight: normal;
   font-style: normal;
 }

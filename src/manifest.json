@@ -12,8 +12,8 @@
     "name": "Scrobbly",
     "description": "__MSG_slogan__",
     "author": "Scrobbly contributors",
-    "version": "2.2.1",
-    "version_name": "2.2.1",
+    "version": "2.3.0",
+    "version_name": "2.3",
     "permissions": [
         "*://www.crunchyroll.com/*",
         "*://www.wakanim.tv/*",
@@ -41,16 +41,16 @@
     },
     "default_locale": "en",
     "background": {
-        "scripts": ["bootstrap.bundle.js"]
+        "scripts": ["daemon.js"]
     },
     "content_scripts": [
         {
             "matches": ["*://www.crunchyroll.com/*", "*://www.netflix.com/*", "*://app.plex.tv/*", "*://www.wakanim.tv/*", "*://app.emby.media/*", "*://www.hidive.com/*", "*://animedigitalnetwork.fr/*", "*://www.anime-on-demand.de/*", "*://ponimu.com/*"],
-            "js": ["website.bundle.js"]
+            "js": ["website.js"]
         },
         {
             "matches": ["*://scrobbly.leonekmi.fr/anilist/*"],
-            "js": ["auth/anilist.bundle.js"]
+            "js": ["anilist.js"]
         }
     ],
     "browser_action": {

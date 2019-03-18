@@ -15,7 +15,8 @@
     along with Scrobbly.  If not, see <https://www.gnu.org/licenses/>.
 */
 
-var $ = require('../Semantic-UI-CSS/semantic');
+require('./settings.scss');
+require('./semantic');
 var Vue = require('vue/dist/vue');
 var browser = require('webextension-polyfill');
 var pendingChanges = {noReload: false};

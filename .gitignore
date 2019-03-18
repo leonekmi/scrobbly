@@ -6,7 +6,8 @@ tokens.txt
 src/*.bundle.js
 src/*/*.bundle.js
 build/*
-!build/.gitkeep
+dist/*
+!dist/.gitkeep
 target/*
 !target/.gitkeep
 # Config files for Grunt

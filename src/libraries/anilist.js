@@ -104,7 +104,7 @@ module.exports = class AniList {
                         title,
                         episodes: (el.episodes) ? el.episodes:'none',
                         episodeDuration: (el.duration) ? el.duration:'none',
-                        cover: (el.bannerImage) ? el.bannerImage:this.browser.runtime.getURL('pages/img/none.png'),
+                        cover: (el.bannerImage) ? el.bannerImage:this.browser.runtime.getURL('img/none.png'),
                         synopsis: el.description
                     });
                 });
