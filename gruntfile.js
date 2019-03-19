@@ -23,26 +23,6 @@ module.exports = function(grunt) {
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         buildTime: grunt.template.today('yyyy-mm-dd HH-MM-ss'),
-        browserify: {
-            dist: {
-                files: {
-                    'build/bootstrap.bundle.js': 'src/bootstrap.js',
-                    'build/website.bundle.js': 'src/website.js',
-                    'build/pages/popup.bundle.js': 'src/pages/popup.js',
-                    'build/pages/settings.bundle.js': 'src/pages/settings.js',
-                    'build/auth/anilist.bundle.js': 'src/auth/anilist.js'
-                }
-            },
-            dev: {
-                files: {
-                    'src/bootstrap.bundle.js': 'src/bootstrap.js',
-                    'src/website.bundle.js': 'src/website.js',
-                    'src/pages/popup.bundle.js': 'src/pages/popup.js',
-                    'src/pages/settings.bundle.js': 'src/pages/settings.js',
-                    'src/auth/anilist.bundle.js': 'src/auth/anilist.js'
-                }
-            }
-        },
         webpack: {
             oprions: {
                 stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
@@ -50,22 +30,13 @@ module.exports = function(grunt) {
             prod: Object.assign({ mode: 'production' }, webpackcfg),
             dev: Object.assign({ watch: true, mode: 'development'}, webpackcfg)
         },
-        copy: {
-            dist: {
-                files: [
-                    {expand: true, cwd: 'src/', src: ['**'], dest: 'build/', filter: function(filepath) {
-                        return !/bundle\.js/.test(filepath);
-                    }}
-                ]
-            }
-        },
         compress: {
             dist: {
                 options: {
                     archive: 'target/<%= pkg.name %> <%= pkg.version %> <%= buildTime %>.zip'
                 },
                 files: [
-                    {expand: true, cwd: 'build/', src: ['**'], dest: './'} 
+                    {expand: true, cwd: 'dist/', src: ['**'], dest: './'} 
                 ]
             }
         },
@@ -85,12 +56,6 @@ module.exports = function(grunt) {
                 dest: 'target/'
             }
         },
-        watch: {
-            js: {
-                files: ['src/*.js', 'src/websites/*.js', 'src/libraries/*.js', 'src/pages/settings.js'],
-                tasks: ['browserify:dev']
-            }
-        },
         webext_builder: {
             dist: {
                 targets: ['firefox-xpi', 'chrome-crx'],
@@ -104,18 +69,16 @@ module.exports = function(grunt) {
         }
     });
   
-    grunt.loadNpmTasks('grunt-browserify');
     grunt.loadNpmTasks('grunt-webpack');
-    grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-compress');
     grunt.loadNpmTasks('grunt-zip-to-crx');
-    grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-webext-builder');
     grunt.loadNpmTasks('grunt-eslint');
   
     // Default task(s).
-    grunt.registerTask('default', ['copy', 'browserify:dist', 'compress', 'zip_to_crx']);
+    grunt.registerTask('default', ['webpack:prod', 'compress', 'zip_to_crx']);
     grunt.registerTask('lint', ['eslint']);
-    grunt.registerTask('build', ['copy', 'browserify:dist', 'compress', 'webext_builder']);
+    grunt.registerTask('build', ['webpack:prod', 'compress', 'webext_builder']);
+    grunt.registerTask('watch', ['webpack:dev']);
   
   };
