@@ -17,6 +17,7 @@
 
 require('./settings.scss');
 require('./semantic');
+/* global $ */
 var Vue = require('vue/dist/vue');
 var browser = require('webextension-polyfill');
 var pendingChanges = {noReload: false};

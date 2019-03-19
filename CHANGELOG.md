@@ -6,9 +6,15 @@ and this project **doesn't** adheres to [Semantic Versioning](https://semver.org
 
 _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the release tag isn't in release version but in release name._
 
-## [Unreleased] (release 2.2.2-epsilon)
+## [2.3.0] (release 2.3-zeta)
+### Added
+- Ponimu website support
+
 ### Fixed
 - Wakanim other regions support (de, ru, etc...)
+
+### Misc
+- Change of bundler (Webpack)
 
 ## [2.2.1] (release 2.2.1-epsilon)
 ### Fixed
