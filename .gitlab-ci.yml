@@ -1,0 +1,26 @@
+# This file is a template, and might need editing before it works on your project.
+# Official framework image. Look for the different tagged releases at:
+# https://hub.docker.com/r/library/node/tags/
+image: node:lts-alpine
+
+# This folder is cached between builds
+# http://docs.gitlab.com/ce/ci/yaml/README.html#cache
+cache:
+  paths:
+  - node_modules/
+
+before_script:
+- openssl genrsa -out keys/signing.pem 2048
+- echo -n "{}" > secret.json
+- npm install
+
+test:
+  script:
+  - npx grunt lint
+
+run:
+  script:
+  - npx grunt
+  artifacts:
+    paths:
+    - target
