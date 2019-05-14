@@ -14,6 +14,10 @@ before_script:
 - echo -n "{}" > secret.json
 - npm install
 
+stages:
+- test
+- run
+
 test:
   script:
   - npx grunt lint
