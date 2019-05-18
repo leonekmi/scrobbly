@@ -2,7 +2,7 @@
 
 ![GitHub](https://img.shields.io/github/license/leonekmi/scrobbly.svg)
 ![shields.io](https://img.shields.io/badge/browsers-chromium--based%2C%20firefox-green.svg)
-[![shields.io](https://img.shields.io/jenkins/s/https/ci.leonekmi.fr/job/scrobbly/job/master.svg)](https://ci.leonekmi.fr/blue/organizations/jenkins/scrobbly/branches/)
+https://img.shields.io/gitlab/pipeline/leonekmi/scrobbly.svg?gitlab_url=https%3A%2F%2Flab.leonekmi.fr
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/bghcjdikmfopmhpgcocpgfefjppkfjpn.svg)](https://chrome.google.com/webstore/detail/scrobbly/bghcjdikmfopmhpgcocpgfefjppkfjpn)
 [![Translation status](https://translate.leonekmi.fr/widgets/scrobbly/-/svg-badge.svg)](https://translate.leonekmi.fr/engage/scrobbly/?utm_source=widget)
 
