@@ -2,11 +2,13 @@
 
 ![GitHub](https://img.shields.io/github/license/leonekmi/scrobbly.svg)
 ![shields.io](https://img.shields.io/badge/browsers-chromium--based%2C%20firefox-green.svg)
-![Gitlab pipeline status (self-hosted)](https://img.shields.io/gitlab/pipeline/leonekmi/scrobbly.svg?gitlab_url=https%3A%2F%2Flab.leonekmi.fr)
+[![Gitlab pipeline status (self-hosted)](https://img.shields.io/gitlab/pipeline/leonekmi/scrobbly.svg?gitlab_url=https%3A%2F%2Flab.leonekmi.fr)](https://lab.leonekmi.fr/leonekmi/scrobbly/pipelines)
 [![Chrome Web Store](https://img.shields.io/chrome-web-store/v/bghcjdikmfopmhpgcocpgfefjppkfjpn.svg)](https://chrome.google.com/webstore/detail/scrobbly/bghcjdikmfopmhpgcocpgfefjppkfjpn)
 [![Translation status](https://translate.leonekmi.fr/widgets/scrobbly/-/svg-badge.svg)](https://translate.leonekmi.fr/engage/scrobbly/?utm_source=widget)
 
 ![Banner](https://scrobbly.leonekmi.fr/banner_github.png)
+
+_This project is mirrored from my personal GitLab instance [here](https://lab.leonekmi.fr/leonekmi/scrobbly)._
 
 ## Update your anime lists
 

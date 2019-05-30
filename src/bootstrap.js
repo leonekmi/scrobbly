@@ -25,14 +25,6 @@ console.log('Project Scrobbly, bootstrap !');
 browser.browserAction.setBadgeText({text: ''});
 browser.browserAction.setBadgeBackgroundColor({color: '#595959'});
 
-browser.storage.local.get(null).then(result => {
-    if (typeof result.langPreference == 'undefined' || typeof result.popup_img == 'undefined') {
-        browser.storage.local.set({langPreference: 'english', popup_img: true, noReload: false}); // Storage migration - 2.2
-    } else {
-        require('./daemon').start(result);
-    }
-});
-
 browser.storage.onChanged.addListener((changes, location) => {
     // To avoid problems with not up-to-date storage in backgrond scripts, extension reloads after each change
     // The noReload exception is for some cases (like the TheTVDB refresh token)
@@ -41,4 +33,14 @@ browser.storage.onChanged.addListener((changes, location) => {
         if (result.noReload) return;
         if (location == 'local') browser.runtime.reload();
     });
+});
+
+browser.storage.local.get(null).then(result => {
+    if (typeof result.langPreference == 'undefined' || typeof result.popup_img == 'undefined') {
+        browser.storage.local.set({langPreference: 'english', popup_img: true, noReload: false}); // Storage migration - 2.2
+    } else if (typeof result.reScrobble == 'undefined') {
+        browser.storage.local.set({reScrobble: false, noReload: false}); // Storage migration - 2.4
+    } else {
+        require('./daemon').start(result);
+    }
 });

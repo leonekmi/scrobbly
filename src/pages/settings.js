@@ -122,15 +122,26 @@ browser.storage.local.get(null).then(result => {
                     onChange: function() {
                         var id = this.id;
                         var status = (this.parentElement.classList.contains('checked')) ? true:false;
-                        pendingChanges['popup_' + id] = status;
+                        if (id != 'reScrobble') {
+                            pendingChanges['popup_' + id] = status;
+                        } else {
+                            pendingChanges[id] = status;
+                        }
                         console.log(pendingChanges);
                     }
                 });
-                var optBoxes = ['desc', 'img', 'epCount'];
+                var optBoxes = ['desc', 'img', 'epCount', 'reScrobble'];
                 optBoxes.forEach(val => {
-                    if (this.browserstorage['popup_' + val]) {
-                        console.log(val + ' yes');
-                        $('#'+val).parent().checkbox('set checked');
+                    if (val != 'reScrobble') {
+                        if (this.browserstorage['popup_' + val]) {
+                            console.log(val + ' yes');
+                            $('#'+val).parent().checkbox('set checked');
+                        }
+                    } else {
+                        if (this.browserstorage[val]) {
+                            console.log(val + ' yes');
+                            $('#'+val).parent().checkbox('set checked');
+                        }
                     }
                 });
             }

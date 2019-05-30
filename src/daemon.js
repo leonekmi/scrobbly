@@ -26,7 +26,7 @@ exports.start = function (storage) {
 	var retry = require('retry');
 	// var $ = require('jquery');
 	// init
-	var settings = {langPreference: storage.langPreference};
+	var settings = {langPreference: storage.langPreference, reScrobble: storage.reScrobble};
 	var libraries = [new lkitsu(storage.kitsu_at, storage.kitsu_uid, storage.kitsu_rt, settings), new lanilist(storage.anilist_at, settings)];
 	var dataProviders = [new dptvdb(storage.thetvdb_at)];
 	var llibList = [];
@@ -116,6 +116,7 @@ exports.start = function (storage) {
 			return;
 		}
 		llibList.forEach(lib => {
+			if (workingdb[lib.info.name].ep < workingdb[lib.info.name].progress.progress && !settings.reScrobble) return;
 			lib.updateLibrary(workingdb[lib.info.name]);
 		});
 		timer.stop();

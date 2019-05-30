@@ -167,6 +167,12 @@
     "nativeText": {
         "message": "a title in its native language"
     },
+    "reScrobble": {
+        "message": "Scrobble an episode even if it's already saved on anime lists."
+    },
+    "reScrobbleExpln": {
+        "message": "If this option is activated, anime you will watch will be scrobbled even if it's already in your animelist (if the website supports it, as a rewatch)."
+    },
     "popupCustomization": {
         "message": "I want these elements on the popup :"
     },

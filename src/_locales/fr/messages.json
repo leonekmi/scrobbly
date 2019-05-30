@@ -167,6 +167,12 @@
     "nativeText": {
         "message": "dans sa langue native"
     },
+    "reScrobble": {
+        "message": "Scrobbler un épisode même si il est déjà enregistré."
+    },
+    "reScrobbleExpln": {
+        "message": "Si cette option est activée, les animes qui sont déjà marqués comme vu sur votre animelist seront quand même ajoutés (si le site le supporte, en tant que \"rewatch\")"
+    },
     "popupCustomization": {
         "message": "Je souhaite que ces éléments apparaissent dans la popup :"
     },
