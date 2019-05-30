@@ -10,6 +10,10 @@ _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the 
 ### Added
 - Add the ability to not scrobble already saved anime
 
+### Fixed
+- Crunchyroll support was broken
+- ADN support was broken
+
 ## [2.3.0] (release 2.3-zeta)
 ### Added
 - Ponimu website support

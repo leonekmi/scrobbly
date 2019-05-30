@@ -29,8 +29,8 @@ exports.api = class AnimeDigitalNetwork {
     }
 
     init() {
-        var title = this.jquery('.adn-big-title > h1 > a').text();
-        var episodeNumber = this.episoderegex.exec(this.jquery('.adn-big-title > h1 > span').text());
+        var title = this.jquery('.adn-player-header > h1 > a').text();
+        var episodeNumber = this.episoderegex.exec(this.jquery('.adn-player-header > h1 > span').text());
         if (!episodeNumber) return;
         this.browser.runtime.sendMessage({action: 'start', animeName: title, episode: parseInt(episodeNumber[1])});
     }

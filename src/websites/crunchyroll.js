@@ -18,13 +18,13 @@
 exports.api = class Crunchyroll {
     constructor () {
         this.browser = require('webextension-polyfill');
-        this.urlregex = /https:\/\/www.crunchyroll.com\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
+        this.urlregex = /https:\/\/www.crunchyroll.com\/([a-z-]+)\/([a-zA-Z0-9-]+)\/([a-zA-Z0-9-]+)/;
         this.jquery = require('jquery');
         return true;
     }
 
     isUsable() {
-        if (document.documentURI == 'https://www.crunchyroll.com/videos/anime') return false;
+        if (/https:\/\/www.crunchyroll.com\/([a-z-]+)\/videos\/anime/.test(document.documentURI)) return false;
         else return this.urlregex.test(document.documentURI);
     }
 
