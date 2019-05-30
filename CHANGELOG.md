@@ -6,7 +6,7 @@ and this project **doesn't** adheres to [Semantic Versioning](https://semver.org
 
 _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the release tag isn't in release version but in release name._
 
-## [Unreleased]
+## [2.4] (release 2.4-zeta)
 ### Added
 - Add the ability to not scrobble already saved anime
 
@@ -14,7 +14,7 @@ _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the 
 - Crunchyroll support was broken
 - ADN support was broken
 
-## [2.3.0] (release 2.3-zeta)
+## [2.3] (release 2.3-zeta)
 ### Added
 - Ponimu website support
 
@@ -74,7 +74,8 @@ _Warning : Since manifest.json cannot accept tags such as 'rc1' or 'alpha', the 
 - Kitsu / AniList support
 - UI rework from v1
 
-[Unreleased]: https://github.com/leonekmi/scrobbly/compare/v2.3-zeta...master
+[Unreleased]: https://github.com/leonekmi/scrobbly/compare/v2.4-zeta...master
+[2.4]: https://github.com/leonekmi/scrobbly/compare/v2.3-zeta...v2.4-zeta
 [2.3]: https://github.com/leonekmi/scrobbly/compare/v2.2.1-epsilon...v2.3-zeta
 [2.2.1]: https://github.com/leonekmi/scrobbly/compare/v2.2-epsilon...v2.2.1-epsilon
 [2.2]: https://github.com/leonekmi/scrobbly/compare/v2.1-epsilon...v2.2-epsilon
