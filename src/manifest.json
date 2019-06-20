@@ -12,8 +12,8 @@
     "name": "Scrobbly",
     "description": "__MSG_slogan__",
     "author": "Scrobbly contributors",
-    "version": "2.4.0",
-    "version_name": "2.4",
+    "version": "2.4.1",
+    "version_name": "2.4.1",
     "permissions": [
         "*://www.crunchyroll.com/*",
         "*://www.wakanim.tv/*",

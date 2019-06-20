@@ -1,7 +1,7 @@
 {
   "private": true,
   "name": "scrobbly",
-  "version": "2.4.0",
+  "version": "2.4.1",
   "description": "Scrobble anime from multiple sites to multiple sites.",
   "main": "none",
   "scripts": {
