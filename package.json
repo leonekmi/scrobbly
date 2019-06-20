@@ -23,7 +23,7 @@
   },
   "homepage": "https://github.com/leonekmi/scrobbly#readme",
   "dependencies": {
-    "easytimer.js": "^2.4.0",
+    "easytimer.js": "^3.2.0",
     "graphql-request": "^1.8.2",
     "jquery": "^3.4.1",
     "kitsu": "^7.0.4",

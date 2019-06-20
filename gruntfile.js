@@ -24,7 +24,7 @@ module.exports = function(grunt) {
         pkg: grunt.file.readJSON('package.json'),
         buildTime: grunt.template.today('yyyy-mm-dd HH-MM-ss'),
         webpack: {
-            oprions: {
+            options: {
                 stats: !process.env.NODE_ENV || process.env.NODE_ENV === 'development'
             },
             prod: Object.assign({ mode: 'production' }, webpackcfg),
@@ -43,7 +43,7 @@ module.exports = function(grunt) {
         eslint: {
             options: {
                 configFile: 'src/.eslintrc.js',
-                failOnError: false
+                failOnError: true
             },
             target: ['src/website.js', 'src/daemon.js', 'src/bootstrap.js', 'src/libraries/*.js', 'src/websites/*.js', 'src/dataproviders/*.js', 'src/pages/popup.js', 'src/pages/settings.js', 'src/auth/*.js']
         },
