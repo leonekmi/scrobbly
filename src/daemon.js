@@ -22,7 +22,7 @@ exports.start = function (storage) {
 	var lanilist = require('./libraries/anilist');
 	var dptvdb = require('./dataproviders/thetvdb');
 	var browser = require('webextension-polyfill');
-	var countdown = require('easytimer.js');
+	var countdown = require('easytimer.js').Timer;
 	var retry = require('retry');
 	// var $ = require('jquery');
 	// init
@@ -210,7 +210,7 @@ exports.start = function (storage) {
 								timer.addEventListener('targetAchieved', ctimer => {
 									console.log('End of the timer');
 									scrobble();
-									ctimer.stop();
+									ctimer.detail.timer.stop();
 								});
 							} else {
 								console.warn('No duration from all sources, fallback on data providers');
@@ -442,6 +442,7 @@ exports.start = function (storage) {
 				console.log('destroy countdown');
 				stopScrobble();
 			} else if (typeof changeInfo.audible == 'boolean') {
+				if (timer === null) return;
 				if (changeInfo.audible) {
 					if (!timer.isRunning()) {
 						console.log('resume countdown');
