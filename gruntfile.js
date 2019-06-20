@@ -45,7 +45,7 @@ module.exports = function(grunt) {
                 configFile: 'src/.eslintrc.js',
                 failOnError: false
             },
-            target: ['src/website.js', 'src/daemon.js', 'src/bootstrap.js', 'src/libraries/*.js', 'src/websites/*.js', 'src/dataproviders/*.js', 'src/pages/popup.js', 'src/pages/settings.js', 'src/auth/anilist.js']
+            target: ['src/website.js', 'src/daemon.js', 'src/bootstrap.js', 'src/libraries/*.js', 'src/websites/*.js', 'src/dataproviders/*.js', 'src/pages/popup.js', 'src/pages/settings.js', 'src/auth/*.js']
         },
         zip_to_crx: {
             dist: {

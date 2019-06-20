@@ -7,24 +7,26 @@ image: node:lts-stretch
 # http://docs.gitlab.com/ce/ci/yaml/README.html#cache
 cache:
   paths:
-  - node_modules/
+    - node_modules/
 
 before_script:
-- openssl genrsa -out keys/signing.pem 2048
-- echo -n "{}" > secret.json
-- npm install
+  - openssl genrsa -out keys/signing.pem 2048
+  - echo -n "{}" > secret.json
+  - npm install
 
 stages:
-- test
-- run
+  - test
+  - build
 
 test:
   script:
-  - npx grunt lint
+    - npx grunt lint
+  stage: test
 
-run:
+webpack:
   script:
-  - npx grunt
+    - npx grunt
+  stage: build
   artifacts:
     paths:
     - target
