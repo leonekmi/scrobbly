@@ -26,7 +26,7 @@
     "easytimer.js": "^2.4.0",
     "graphql-request": "^1.8.2",
     "jquery": "^3.4.1",
-    "kitsu": "^6.5.1",
+    "kitsu": "^7.0.4",
     "konami": "^1.6.2",
     "moment": "^2.24.0",
     "retry": "^0.12.0",
