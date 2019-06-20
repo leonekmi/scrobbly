@@ -18,7 +18,7 @@
 module.exports = class Kitsu {
     constructor (at, uid, rt = null, settings = {}) {
         this.browser = require('webextension-polyfill');
-        this.Kitsu = require('kitsu');
+        this.Kitsu = require('kitsu').default;
         this.at = at;
         this.uid = uid;
         this.rt = rt;

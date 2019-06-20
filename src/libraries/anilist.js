@@ -99,6 +99,7 @@ module.exports = class AniList {
                             break;
                     }
                     if (!title) title = el.title.english;
+                    if (!title) title = el.title.romaji;
                     ret.push({
                         id: el.id,
                         title,
