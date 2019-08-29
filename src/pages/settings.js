@@ -16,7 +16,7 @@
 */
 
 require('./settings.scss');
-require('./semantic');
+require('./fomantic');
 /* global $ */
 var Vue = require('vue/dist/vue');
 var browser = require('webextension-polyfill');

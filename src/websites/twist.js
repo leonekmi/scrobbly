@@ -42,7 +42,6 @@ exports.api = class Netflix {
             } else {
                 var seriesTitle = this.jquery('div.information h2 > span')[0].innerText;
                 var episodeNumber = /Episode ([0-9]+)/.exec(this.jquery('div.information > div > span')[0].innerText)[1];
-                console.log('scrobbly debug, shame on me if i forgot to delete this line', seriesTitle, episodeNumber);
                 if (seriesTitle == this.storage.seriesTitle && episodeNumber == this.storage.epNumber) return;
                 else {
                     console.log(seriesTitle);

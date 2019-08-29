@@ -17,7 +17,7 @@
 
 require('./popup.scss');
 var Vue = require('vue/dist/vue');
-require('./semantic');
+require('./fomantic');
 /* global $ */
 var browser = require('webextension-polyfill');
 var Konami = require('konami');
