@@ -25,8 +25,9 @@ var whidive = require('./websites/hidive').api;
 var wadn = require('./websites/adn').api;
 var waod = require('./websites/animeondemand').api;
 var wponimu = require('./websites/ponimu').api;
+var wtwist = require('./websites/twist').api;
 // init
-var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby(), new whidive(), new wadn(), new waod(), new wponimu()];
+var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby(), new whidive(), new wadn(), new waod(), new wponimu(), new wtwist()];
 var llibList = [];
 
 libraries.forEach(lib => {
@@ -36,4 +37,4 @@ libraries.forEach(lib => {
     }
 });
 
-console.log('Project Scrobbly : website init, websites scripts : ', llibList);
+console.log('Scrobbly : website init, websites scripts : ', llibList);
