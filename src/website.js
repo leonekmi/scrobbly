@@ -22,12 +22,13 @@ var wplex = require('./websites/plex').api;
 var wwakanim = require('./websites/wakanim').api;
 var wemby = require('./websites/emby').api;
 var whidive = require('./websites/hidive').api;
+var whulu = require('./websites/hulu').api;
 var wadn = require('./websites/adn').api;
 var waod = require('./websites/animeondemand').api;
 var wponimu = require('./websites/ponimu').api;
 var wtwist = require('./websites/twist').api;
 // init
-var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby(), new whidive(), new wadn(), new waod(), new wponimu(), new wtwist()];
+var libraries = [new wcrunchyroll(), new wnetflix(), new wplex(), new wwakanim(), new wemby(), new whidive(), new whulu(), new wadn(), new waod(), new wponimu(), new wtwist()];
 var llibList = [];
 
 libraries.forEach(lib => {
