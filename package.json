@@ -26,7 +26,7 @@
     "easytimer.js": "^3.2.0",
     "fomantic-ui-css": "^2.7.7",
     "graphql-request": "^1.8.2",
-    "jquery": "^3.4.1",
+    "jquery": "^3.5.0",
     "kitsu": "^7.0.4",
     "konami": "^1.6.2",
     "moment": "^2.24.0",
