@@ -29,7 +29,7 @@
     "jquery": "^3.4.1",
     "kitsu": "^7.0.4",
     "konami": "^1.6.2",
-    "moment": "^2.24.0",
+    "moment": "^2.29.4",
     "retry": "^0.12.0",
     "vue": "^2.6.10",
     "webextension-polyfill": "^0.3.1"
